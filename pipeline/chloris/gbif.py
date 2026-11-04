@@ -145,16 +145,95 @@ def iucn_and_names() -> pd.DataFrame:
 
     with ThreadPoolExecutor(4) as ex:
         res = list(ex.map(one, keys.accepted_key))
-    df = keys.reset_index(drop=True).merge(pd.DataFrame(res), on="accepted_key")
+    # two species can share one GBIF key; look the key up once, then join (one row per species)
+    df = keys.reset_index(drop=True).merge(pd.DataFrame(res).drop_duplicates("accepted_key"), on="accepted_key")
     df.to_parquet(GBIF_OUT)
     print("IUCN counts:\n", df.iucn.value_counts().to_string(), f"\nGreek name: {int(df.name_el_gbif.notna().sum())}; English name: {int(df.name_en_gbif.notna().sum())}")
     return df
 
 
-if __name__ == "__main__":
-    {"keys": match_keys, "request": request_download, "poll": poll, "iucn": iucn_and_names}[sys.argv[1]]()
+
+OCC = config.WORK_DIR / "occurrences.parquet"
+EFFORT = config.WORK_DIR / "effort.json"
+
+
+def fetch_zip() -> "Path":
+    """Download the finished GBIF zip into raw/gbif/ (git-ignored) and unzip it into work/ (git-ignored)."""
+    import zipfile
+    from pathlib import Path
+
+    info = json.loads(DL_INFO.read_text())
+    dest = config.RAW_DIR / "gbif" / f"{info['download_key']}.zip"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    if not dest.exists():
+        r = requests.get(f"{API}/occurrence/download/request/{info['download_key']}.zip", stream=True, timeout=120)
+        r.raise_for_status()
+        with open(dest, "wb") as f:
+            for chunk in r.iter_content(1 << 20):
+                f.write(chunk)
+    out = config.WORK_DIR / "gbif_csv"
+    if not list(out.glob("*.csv")):
+        zipfile.ZipFile(dest).extractall(out)
+    return next(out.glob("*.csv"))
+
+
+def clean_occurrences() -> pd.DataFrame:
+    """Step 4: clean the download and map records to Chloris species. Logs every drop."""
+    csv = fetch_zip()
+    cols = ["gbifID", "speciesKey", "decimalLatitude", "decimalLongitude", "coordinateUncertaintyInMeters",
+            "year", "eventDate", "basisOfRecord", "datasetKey"]
+    df = pd.read_csv(csv, sep="\t", usecols=cols, dtype={"gbifID": "int64"}, low_memory=False, quoting=3)
+    log = {"rows_in": len(df)}
+    bb = config.GREECE_BBOX
+
+    def drop(mask: pd.Series, why: str) -> None:
+        nonlocal df
+        log[why] = int(mask.sum())
+        df = df[~mask]
+
+    drop(df.coordinateUncertaintyInMeters > 10000, "dropped_uncertainty_gt_10km")
+    drop(df.basisOfRecord == "FOSSIL_SPECIMEN", "dropped_fossil")
+    drop(~df.decimalLatitude.between(bb["lat_min"], bb["lat_max"]) | ~df.decimalLongitude.between(bb["lon_min"], bb["lon_max"]), "dropped_outside_bbox")
+    # exact duplicates: same species, coordinates and date
+    drop(df.duplicated(["speciesKey", "decimalLatitude", "decimalLongitude", "eventDate"]), "dropped_duplicates")
+    log["records_without_year_kept_for_maps"] = int(df.year.isna().sum())
+
+    # map speciesKey -> Chloris species; shared keys go only to the species that GBIF accepts (flags.records_attributed)
+    keys = pd.read_parquet(config.WORK_DIR / "species_keys.parquet")[["plant_name_id", "accepted_key"]].dropna()
+    fl = pd.read_parquet(config.WORK_DIR / "species_flags.parquet")[["plant_name_id", "records_attributed"]]
+    keys = keys.merge(fl, on="plant_name_id")
+    keys = keys[keys.records_attributed][["plant_name_id", "accepted_key"]]
+    keys["accepted_key"] = keys.accepted_key.astype("int64")
+    df = df.dropna(subset=["speciesKey"]).astype({"speciesKey": "int64"})
+    df = df.merge(keys, left_on="speciesKey", right_on="accepted_key", how="inner")
+    log["rows_out"] = len(df)
+    log["species_with_records"] = int(df.plant_name_id.nunique())
+    df = df.drop(columns=["accepted_key", "eventDate", "basisOfRecord", "datasetKey", "coordinateUncertaintyInMeters"])
+    df.to_parquet(OCC)
+    print(json.dumps(log, indent=2))
+    (config.WORK_DIR / "log_occurrences.json").write_text(json.dumps(log, indent=2))
+    return df
+
+
+def effort_totals() -> dict:
+    """Total GBIF plant records in Greece per period (denominator for the sampling-effort-corrected decline)."""
+    sc = config.load_scoring()
+    out = {}
+    for name in ("old", "new"):
+        start, end = sc["periods"][name]
+        yr = f"{start},{end}" if end else f"{start},{time.gmtime().tm_year}"
+        _, r = cached_get(f"{API}/occurrence/search", {"country": "GR", "kingdomKey": 6, "year": yr, "hasCoordinate": "true", "limit": 0})
+        out[f"N_{name}"] = r["count"]
+        out[f"years_{name}"] = yr
+    EFFORT.write_text(json.dumps(out, indent=2))
+    print(out)
+    return out
 
 
 def run() -> None:
     match_keys()
     iucn_and_names()
+
+
+if __name__ == "__main__":
+    {"keys": match_keys, "request": request_download, "poll": poll, "iucn": iucn_and_names, "clean": clean_occurrences, "effort": effort_totals}[sys.argv[1]]()

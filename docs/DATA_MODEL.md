@@ -44,7 +44,7 @@ interface Species {
     records: number; cells: number;
     recordsOld: number; recordsNew: number;
     declineRatio: number | null;
-    protectedShare: number;  // 0–1
+    protectedShare: number | null;  // 0–1; null = Natura 2000 join not available
     fireShare: number | null;
     firstYear: number | null; lastYear: number | null;
   };
@@ -79,8 +79,8 @@ interface Species {
     id: string;                      // "382_237" → lat 38.2–38.3, lon 23.7–23.8
     s: number[];                     // indexes into species.json
     nAtRisk: number; nEndemic: number;
-    protected: number;               // 0–1 fraction of cell in Natura 2000
-    hotspot: boolean;                // has ≥1 at-risk species AND protected < 0.5
+    protected: number | null;        // 0–1 fraction of cell in Natura 2000; null = not available
+    hotspot: boolean | null;         // has ≥1 at-risk species AND protected < 0.5; null if protected is null
   }>;
 }
 ```

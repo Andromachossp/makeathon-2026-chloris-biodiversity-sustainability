@@ -24,13 +24,13 @@ Andro does the manual steps marked 👤 (accounts, downloads, phone tests). Ask 
 
 ## Phase 2 — Occurrences, cells, scores, export (Thu)
 
-- [ ] Step 4: GBIF download request, poll, fetch, clean; effort totals; record DOI
-- [ ] Step 5: cells
+- [x] Step 4: GBIF download request, poll, fetch, clean; effort totals; record DOI
+- [x] Step 5: cells
 - [ ] Step 6: Natura 2000 join + simplified `natura.geojson`
 - [ ] Step 7: fire (P1; skip cleanly if no data)
-- [ ] Step 8: scores with sanity checks (histogram, top 20, known threatened species)
+- [x] Step 8: scores with sanity checks (histogram, top 20, known threatened species)
 - [ ] Step 9: merge `featured_species.csv`, export all files to `web/public/data/`, size checks, `meta.json`
-- [ ] `web/lib/types.ts` matches DATA_MODEL.md; a tiny script validates the JSON against the types (zod)
+- [x] `web/lib/types.ts` matches DATA_MODEL.md; a tiny script validates the JSON against the types (zod)
 - **Checkpoint:** file sizes, counts, top-20 table; commit the data files.
 
 ## Phase 3 — Map and catalogue screens (Thu → Fri morning)
