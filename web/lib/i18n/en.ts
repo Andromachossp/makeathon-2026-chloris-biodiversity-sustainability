@@ -21,6 +21,17 @@ export const en = {
     species: { title: "Species card", placeholder: "The specimen card arrives in Phase 3." },
     home: { title: "Chloris", cta: "Open Chloris" },
   },
+  iucn: {
+    CR: "Critically endangered",
+    EN: "Endangered",
+    VU: "Vulnerable",
+    NT: "Near threatened",
+    LC: "Least concern",
+    DD: "Data deficient",
+    NE: "Not assessed",
+    label: "IUCN Red List",
+    note: "Not assessed means no IUCN assessment exists. It does not mean the plant is safe.",
+  },
   notMedicalAdvice: "Chloris is not medical advice. Documented uses are shown for information only.",
 } as const;
 

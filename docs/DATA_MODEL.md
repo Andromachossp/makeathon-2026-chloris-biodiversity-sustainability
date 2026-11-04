@@ -11,6 +11,8 @@ type IucnCode = "CR" | "EN" | "VU" | "NT" | "LC" | "DD" | "NE";
 type Harvest = "safe" | "careful" | "do-not-harvest" | "unknown";
 type EmaStatus = "well-established" | "traditional" | "none" | "unknown";
 type RiskLevel = "low" | "moderate" | "high" | "critical";
+type DataQualityFlag = "gbif_synonym_match" | "gbif_shared_key" | "gbif_no_match";   // automatic, see pipeline/chloris/flags.py
+type ReviewFlag = "name_only_match" | "native_status_check";                         // for the science lead
 
 interface Species {
   slug: string;              // "origanum-dictamnus"
@@ -23,7 +25,11 @@ interface Species {
   powoId: string | null;     // for POWO link and Pl@ntNet matching
   gbifKey: number | null;
   endemic: boolean;          // endemic to Greece (GRC/KRI/EAI)
-  iucn: IucnCode;
+  iucn: IucnCode;            // "NE" = not assessed; "DD" = data deficient. Neither is a low-risk category.
+  iucnLabel: { en: string; el: string };   // NE → "Not assessed" / "Δεν έχει αξιολογηθεί". Always show this, never the bare code.
+  dataQuality: DataQualityFlag[];   // [] when clean; the app shows a small "data note" and /about explains each flag
+  review: ReviewFlag[];             // [] when nothing to review
+  reviewNote: string | null;        // reason text from config/review_overrides.csv
   medicinalSource: "wcups" | "curated";
   risk: {
     score: number;           // 0–100 integer
@@ -99,6 +105,8 @@ Simplified polygons. Properties: Natura `{ code, name, type }`; fires `{ year }`
   counts: { greekNatives: number; medicinal: number; featured: number; records: number; cells: number; atRisk: number };
   scoring: object;                  // copy of scoring.yaml
   notes: string[];                  // e.g. "Fire layer skipped: no data"
+  flagLegend: Record<string, string>;  // text for every DataQualityFlag / ReviewFlag
+  iucnLabels: Record<IucnCode, { en: string; el: string }>;
 }
 ```
 

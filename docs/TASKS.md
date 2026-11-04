@@ -18,8 +18,8 @@ Andro does the manual steps marked 👤 (accounts, downloads, phone tests). Ask 
 - [x] Step 0 downloads: WCVP scripted; 👤 WCUPS, Natura 2000 (and fire data if possible) into `raw/`
 - [x] Step 1 `wcvp.py`: Greek natives + endemism + synonyms
 - [x] Step 2 `wcups.py`: medicinal filter (+ fallback path)
-- [ ] Step 3 `gbif.py`: backbone keys, IUCN, vernacular names (cached)
-- [ ] Notebook cells 1–3 with printed counts and a table of the first 20 species
+- [x] Step 3 `gbif.py`: backbone keys, IUCN, vernacular names (cached)
+- [x] Notebook cells 1–3 with printed counts and a table of the first 20 species
 - **Checkpoint:** report the number of Greek native species, endemic species, medicinal species, and match rates. Science lead sanity-checks a sample.
 
 ## Phase 2 — Occurrences, cells, scores, export (Thu)

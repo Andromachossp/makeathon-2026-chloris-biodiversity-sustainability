@@ -24,6 +24,19 @@ GREECE_BBOX = {"lat_min": 34.5, "lat_max": 42.0, "lon_min": 19.0, "lon_max": 30.
 GREEK_AREAS = ("GRC", "KRI", "EAI")
 
 
+# IUCN labels used in every export. NE ("not evaluated") must read "Not assessed" and DD "Data deficient":
+# neither is a low-risk category. Never export the bare code without a label.
+IUCN_LABELS = {
+    "CR": {"en": "Critically endangered", "el": "Κρισίμως κινδυνεύον"},
+    "EN": {"en": "Endangered", "el": "Κινδυνεύον"},
+    "VU": {"en": "Vulnerable", "el": "Τρωτό"},
+    "NT": {"en": "Near threatened", "el": "Σχεδόν απειλούμενο"},
+    "LC": {"en": "Least concern", "el": "Ελάχιστης ανησυχίας"},
+    "DD": {"en": "Data deficient", "el": "Ανεπαρκή δεδομένα"},
+    "NE": {"en": "Not assessed", "el": "Δεν έχει αξιολογηθεί"},
+}
+
+
 @dataclass(frozen=True)
 class Scoring:
     raw: dict

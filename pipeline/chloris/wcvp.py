@@ -56,7 +56,7 @@ def run() -> pd.DataFrame:
     log = {"greek_native_species": len(out), "endemic_gr": int(out.endemic_gr.sum()),
            "wcvp_names_rows": len(names), "wcvp_download_date": "2026-11-04"}
     (config.WORK_DIR / "log_wcvp.json").write_text(json.dumps(log, indent=2))
-    print(out.head(5).to_string())
+    print(out.drop(columns=["synonyms"]).head(5).to_string())
     return out
 
 
