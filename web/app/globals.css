@@ -91,3 +91,11 @@ body {
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* MapLibre controls in the night palette */
+.maplibregl-ctrl-attrib {
+  background: rgba(11, 20, 16, 0.85) !important;
+  color: var(--text-dim) !important;
+}
+.maplibregl-ctrl-attrib a { color: var(--text-dim) !important; }
+.maplibregl-ctrl-attrib-button { filter: invert(1); }

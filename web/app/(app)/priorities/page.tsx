@@ -1,5 +1,5 @@
-import { Placeholder } from "@/components/Placeholder";
+import { PrioritiesView } from "@/components/PrioritiesView";
 
 export default function Page() {
-  return <Placeholder page="priorities" />;
+  return <PrioritiesView />;
 }

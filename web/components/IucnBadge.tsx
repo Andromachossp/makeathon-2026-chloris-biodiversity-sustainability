@@ -15,12 +15,12 @@ const COLOUR: Record<IucnCode, string> = {
 };
 
 /** IUCN category: always icon + text. NE reads "Not assessed" and is visually neutral, never green. */
-export function IucnBadge({ code }: { code: IucnCode }) {
+export function IucnBadge({ code, onPaper = false }: { code: IucnCode; onPaper?: boolean }) {
   const { t } = useI18n();
   const Icon = ICON[code];
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs ${COLOUR[code]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs ${onPaper ? `border-parchment-ink/50 text-parchment-ink ${isIucnAssessed(code) ? "" : "border-dashed"}` : COLOUR[code]}`}
       title={isIucnAssessed(code) ? undefined : t.iucn.note}
     >
       <Icon className="h-4 w-4" />

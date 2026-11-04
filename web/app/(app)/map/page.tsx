@@ -1,5 +1,5 @@
-import { Placeholder } from "@/components/Placeholder";
+import { MapLoader } from "@/components/MapLoader";
 
 export default function Page() {
-  return <Placeholder page="map" />;
+  return <MapLoader />;
 }

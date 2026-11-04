@@ -31,3 +31,21 @@ export const OctagonIcon = ({ className }: P) => (
 export const HelpIcon = ({ className }: P) => (
   <svg {...base} className={className}><circle cx="12" cy="12" r="9" strokeDasharray="3 3" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01" /></svg>
 );
+export const CheckIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+);
+export const CrossIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M6 6l12 12M18 6 6 18" /></svg>
+);
+export const WarnIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M12 5v9M12 18.5h.01" /></svg>
+);
+export const LayersIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="m12 3 9 5-9 5-9-5 9-5Z" /><path d="m3 13 9 5 9-5" /></svg>
+);
+export const LocateIcon = ({ className }: P) => (
+  <svg {...base} className={className}><circle cx="12" cy="12" r="3" /><circle cx="12" cy="12" r="8" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></svg>
+);
+export const CloseIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M6 6l12 12M18 6 6 18" /></svg>
+);

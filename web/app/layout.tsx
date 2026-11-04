@@ -6,6 +6,7 @@ import "./globals.css";
 const robotoFlex = Roboto_Flex({
   variable: "--font-roboto-flex",
   subsets: ["latin", "greek"],
+  axes: ["wdth"], // condensed titles (font-stretch)
   display: "swap",
 });
 const literata = Literata({
