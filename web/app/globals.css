@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b1410;
+  --moss: #13241b;
+  --moss-2: #1c3326;
+  --line: rgba(233, 240, 228, 0.12);
+  --text: #e9f0e4;
+  --text-dim: #a9b8ac;
+  --chlorophyll: #7be495;
+  --pollen: #e9d98b;
+  --parchment: #f1ebdd;
+  --parchment-ink: #2a2418;
+  --risk-low: #8fb79a;
+  --risk-moderate: #e3b23c;
+  --risk-high: #e0653a;
+  --risk-critical: #e04848;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-moss: var(--moss);
+  --color-moss-2: var(--moss-2);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-dim: var(--text-dim);
+  --color-chlorophyll: var(--chlorophyll);
+  --color-pollen: var(--pollen);
+  --color-parchment: var(--parchment);
+  --color-parchment-ink: var(--parchment-ink);
+  --color-risk-low: var(--risk-low);
+  --color-risk-moderate: var(--risk-moderate);
+  --color-risk-high: var(--risk-high);
+  --color-risk-critical: var(--risk-critical);
+  --font-sans: var(--font-roboto-flex), system-ui, sans-serif;
+  --font-serif: var(--font-literata), Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --radius-card: 14px;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--chlorophyll);
+  outline-offset: 2px;
+}
+
+/* Skeleton shimmer (1.6 s linear); static under reduced motion */
+.skeleton {
+  background: linear-gradient(
+    115deg,
+    var(--moss-2) 30%,
+    rgba(233, 240, 228, 0.09) 50%,
+    var(--moss-2) 70%
+  );
+  background-size: 250% 100%;
+  animation: shimmer 1.6s linear infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--moss-2);
+  }
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.sr-only-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

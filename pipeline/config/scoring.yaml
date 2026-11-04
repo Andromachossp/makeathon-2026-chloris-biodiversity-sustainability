@@ -1,0 +1,46 @@
+# Chloris risk score configuration.
+# VERSION 0: placeholder weights. The science lead must review, change and justify these
+# before the numbers are shown in the pitch. The justification goes in the README.
+version: "v0-draft"
+
+cell_size_deg: 0.1          # ~10 km grid used for maps, rarity and privacy
+
+periods:
+  old: [1950, 1999]         # historical period for the decline signal
+  new: [2000, null]         # null = up to the current year
+min_old_records: 10         # fewer old records -> decline = "not enough data"
+
+# Points per component; must sum to 100.
+weights:
+  iucn: 35
+  endemic: 15
+  rarity: 15
+  decline: 15
+  unprotected: 15
+  fire: 5
+
+# Fraction of the IUCN weight per category (NE/DD = unknown, small weight).
+iucn_fraction:
+  CR: 1.0
+  EN: 0.8
+  VU: 0.6
+  NT: 0.35
+  LC: 0.0
+  DD: 0.2
+  NE: 0.2
+
+rarity_cells_cap: 150       # species in >= this many cells get 0 rarity points
+decline_full_at: 0.25       # ratio at or below this gets the full decline weight
+fire_years: 10              # burnt areas from the last N years
+
+at_risk:
+  iucn: [CR, EN, VU]
+  score_threshold: 55
+
+levels:                     # score thresholds for labels
+  moderate: 25
+  high: 45
+  critical: 65
+
+hotspot:
+  max_protected_fraction: 0.5   # a cell is a hotspot if it has an at-risk species and is < 50% protected

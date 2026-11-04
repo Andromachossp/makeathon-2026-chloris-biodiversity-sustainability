@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /sightings/{id} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(
+             ['slug', 'scientificName', 'confidence', 'note', 'lat', 'lng',
+              'generalised', 'uid', 'createdAt', 'capturedAt', 'verified'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.verified == false
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.lat is number
+        && request.resource.data.lng is number
+        && request.resource.data.lat >= 34.5 && request.resource.data.lat <= 42.0
+        && request.resource.data.lng >= 19.0 && request.resource.data.lng <= 30.0
+        && request.resource.data.generalised is bool
+        && (request.resource.data.note == null
+            || (request.resource.data.note is string && request.resource.data.note.size() <= 280));
+
+      allow update, delete: if false;
+    }
+  }
+}
