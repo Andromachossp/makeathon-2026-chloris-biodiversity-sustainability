@@ -31,7 +31,19 @@ def load_natura(path=RAW) -> gpd.GeoDataFrame:
         raise SystemExit(f"No Natura 2000 data in {path}. Download the EEA 'Natura 2000 spatial data' "
                          "(GeoPackage or Shapefile) into pipeline/raw/natura2000/ and rerun.")
     f = files[0]
-    gdf = gpd.read_file(f)
+    kwargs = {}
+    if f.suffix == ".gpkg":
+        import pyogrio
+
+        layers = [n for n, _ in pyogrio.list_layers(f)]
+        poly = [n for n in layers if "polygon" in n.lower()] or layers[:1]
+        print(f"{f.name}: layers {layers}; using '{poly[0]}'")
+        kwargs = {"layer": poly[0]}
+        fields = list(pyogrio.read_info(f, layer=poly[0])["fields"])
+        ms_col = _find(fields, COUNTRY_COLS)
+        if ms_col:  # filter inside the query: the file covers all of Europe (1+ GB)
+            kwargs["where"] = f"{ms_col} IN ('GR','EL')"
+    gdf = gpd.read_file(f, **kwargs)
     print(f"Natura file: {f.name}; rows {len(gdf):,}; CRS {gdf.crs}; columns {list(gdf.columns)}")
     ms = _find(list(gdf.columns), COUNTRY_COLS)
     if ms:
