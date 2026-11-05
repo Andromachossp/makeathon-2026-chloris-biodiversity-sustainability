@@ -27,7 +27,7 @@ if (species) {
   if (slugs.size !== species.length) errors.push("species.json: duplicate slugs");
   if (new Set(species.map((s) => s.cat)).size !== species.length) errors.push("species.json: duplicate catalogue numbers");
   for (const s of species) {
-    if (s.iucn === "NE" && s.iucnLabel.en !== "Not assessed") errors.push(`${s.slug}: NE must read "Not assessed"`);
+    if (s.iucn === "NE" && s.iucnLabel.en !== "Not assessed yet") errors.push(`${s.slug}: NE must read "Not assessed yet"`);
     for (const sub of s.curated?.substitutes ?? []) if (!slugs.has(sub)) errors.push(`${s.slug}: unknown substitute ${sub}`);
   }
 }

@@ -136,6 +136,16 @@ export const MetaSchema = z
       })
       .strict(),
     scoring: z.record(z.string(), z.unknown()),
+    verdicts: z
+      .object({
+        version: z.string(),
+        min_records: z.number().int().min(0),
+        protect_iucn: z.array(IucnCode),
+        protect_levels: z.array(RiskLevel),
+        care_levels: z.array(RiskLevel),
+        care_if_endemic: z.boolean(),
+      })
+      .strict(),
     effort: z.record(z.string(), z.union([z.number(), z.string()])),
     notes: z.array(z.string()),
     flagLegend: z.record(z.string(), z.string()),

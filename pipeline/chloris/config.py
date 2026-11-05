@@ -16,6 +16,7 @@ CACHE_DIR = WORK_DIR / "cache"
 EXPORT_DIR = REPO_DIR / "web" / "public" / "data"
 
 SCORING_YAML = CONFIG_DIR / "scoring.yaml"
+VERDICTS_YAML = CONFIG_DIR / "verdicts.yaml"
 FEATURED_CSV = CONFIG_DIR / "featured_species.csv"
 
 # Greece bounding box used to clean occurrences and validate sightings.
@@ -33,7 +34,7 @@ IUCN_LABELS = {
     "NT": {"en": "Near threatened", "el": "Σχεδόν απειλούμενο"},
     "LC": {"en": "Least concern", "el": "Ελάχιστης ανησυχίας"},
     "DD": {"en": "Data deficient", "el": "Ανεπαρκή δεδομένα"},
-    "NE": {"en": "Not assessed", "el": "Δεν έχει αξιολογηθεί"},
+    "NE": {"en": "Not assessed yet", "el": "Δεν έχει αξιολογηθεί ακόμη"},
 }
 
 
@@ -60,6 +61,16 @@ def load_scoring(path: Path = SCORING_YAML) -> Scoring:
     if total != 100:
         raise ValueError(f"scoring.yaml weights must sum to 100, got {total}")
     return Scoring(raw)
+
+
+def load_verdicts(path: Path = VERDICTS_YAML) -> dict:
+    """Thresholds for the plain-language verdicts (edited by the science lead); exported in meta.json."""
+    with open(path, encoding="utf-8") as f:
+        raw = yaml.safe_load(f)
+    for key in ("min_records", "protect_iucn", "protect_levels", "care_levels", "care_if_endemic"):
+        if key not in raw:
+            raise ValueError(f"verdicts.yaml is missing '{key}'")
+    return raw
 
 
 def load_env() -> None:

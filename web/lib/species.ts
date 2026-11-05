@@ -2,22 +2,25 @@ import type { Dictionary } from "./i18n/en";
 import type { Locale } from "./i18n";
 import type { Species } from "./types";
 
-/** Display name: Greek or English common name when we have one, else the scientific name. */
+const GREEK_LETTERS = /[\u0370-\u03FF\u1F00-\u1FFF]/;
+
+/** Display name: common name first (Greek in Greek mode when we have a Greek-script name, else English), Latin otherwise.
+    Some GBIF "Greek" names are written in Latin letters; those are not shown as Greek. We never invent names. */
 export function displayName(s: Species, locale: Locale): { title: string; isFallback: boolean; enTag: boolean } {
   if (locale === "el") {
-    if (s.nameEl) return { title: s.nameEl, isFallback: false, enTag: false };
+    if (s.nameEl && GREEK_LETTERS.test(s.nameEl)) return { title: s.nameEl, isFallback: false, enTag: false };
     if (s.nameEn) return { title: s.nameEn, isFallback: false, enTag: true };
   } else if (s.nameEn) return { title: s.nameEn, isFallback: false, enTag: false };
   return { title: s.name, isFallback: true, enTag: false };
 }
 
-export type HarvestState = "safe" | "careful" | "do-not-harvest" | "atRisk" | "unknown";
+export type HarvestState = "safe" | "careful" | "do-not-harvest" | "unknown";
 
-/** Harvest banner state: curated rule wins, otherwise at-risk species are "do not harvest". */
+/** Harvest advice exists ONLY for species with a reviewed rule in featured_species.csv (a harvest value and a reviewer).
+    Everything else is "not reviewed yet": we never infer advice from the risk score and never imply a plant is safe to pick. */
 export function harvestState(s: Species): HarvestState {
-  const h = s.curated?.harvest;
-  if (h && h !== "unknown") return h;
-  if (s.risk.atRisk) return "atRisk";
+  const c = s.curated;
+  if (c && c.reviewedBy && c.harvest !== "unknown") return c.harvest;
   return "unknown";
 }
 

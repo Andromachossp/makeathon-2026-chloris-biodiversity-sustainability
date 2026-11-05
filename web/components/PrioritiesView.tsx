@@ -4,9 +4,10 @@ import Link from "next/link";
 import { Suspense, useMemo, useRef, useState } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useI18n } from "@/lib/i18n";
-import { useSpecies } from "@/lib/data";
+import { useSpecies, useVerdictConfig } from "@/lib/data";
+import { verdictFor } from "@/lib/verdict";
 import { displayName } from "@/lib/species";
-import { RiskChip } from "./Risk";
+import { VerdictChip } from "./Verdict";
 import { IucnBadge } from "./IucnBadge";
 import { ClientOnly } from "./ClientOnly";
 import { RowsSkeleton } from "./Skeleton";
@@ -35,6 +36,7 @@ function List() {
   "use no memo"; // TanStack Virtual returns unmemoizable functions
   const { t, locale } = useI18n();
   const all = useSpecies();
+  const vcfg = useVerdictConfig();
   const [atRisk, setAtRisk] = useState(false);
   const [endemic, setEndemic] = useState(false);
   const [featured, setFeatured] = useState(false);
@@ -44,9 +46,9 @@ function List() {
   const rows = useMemo(
     () =>
       all
-        .filter((s) => (!atRisk || s.risk.atRisk) && (!endemic || s.endemic) && (!featured || s.featured) && (!family || s.family === family))
+        .filter((s) => (!atRisk || verdictFor(s, vcfg).key === "protect") && (!endemic || s.endemic) && (!featured || s.featured) && (!family || s.family === family))
         .sort((a, b) => b.risk.score - a.risk.score || a.name.localeCompare(b.name)),
-    [all, atRisk, endemic, featured, family],
+    [all, vcfg, atRisk, endemic, featured, family],
   );
 
   const scroller = useRef<HTMLDivElement>(null);
@@ -81,15 +83,15 @@ function List() {
                 <div key={s.slug} role="listitem" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: v.size, transform: `translateY(${v.start}px)` }} className="pb-2">
                   <Link href={`/species/${s.slug}`} className="flex h-full flex-col justify-center gap-1 rounded-[14px] border border-line bg-surface px-3 hover:bg-surface-2">
                     <span className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs text-dim">{s.cat}</span>
-                      <RiskChip level={s.risk.level} score={s.risk.score} />
+                      <VerdictChip verdict={verdictFor(s, vcfg)} />
+                      <span className="font-mono text-[11px] text-dim">{t.risk.scoreLabel} {s.risk.score}</span>
                     </span>
-                    <span className={`block truncate text-base ${n.isFallback ? "font-serif italic" : "font-medium"}`}>
+                    <span className={`block truncate text-base ${n.isFallback ? "font-display italic" : "font-medium"}`}>
                       {n.title}{n.enTag && <span className="ml-1 rounded border border-line px-1 font-mono text-[10px] text-dim">{t.species.enTag}</span>}
                     </span>
                     <span className="flex flex-wrap items-center gap-1.5">
                       {!n.isFallback && <span className="mr-1 max-w-full truncate font-serif text-sm italic text-dim">{s.name}</span>}
-                      {s.iucn !== "NE" && <IucnBadge code={s.iucn} />}
+                      {(s.iucn === "CR" || s.iucn === "EN" || s.iucn === "VU") && <IucnBadge code={s.iucn} />}
                       {s.endemic && <span className="rounded-full border border-lavender px-2 py-0.5 text-[11px] text-lavender">{t.species.endemic}</span>}
                     </span>
                   </Link>

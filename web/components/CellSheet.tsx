@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useMemo, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useI18n } from "@/lib/i18n";
+import { useVerdictConfig } from "@/lib/data";
 import { displayName } from "@/lib/species";
+import { verdictFor } from "@/lib/verdict";
 import type { Cell, Species } from "@/lib/types";
 import { CloseIcon } from "./Icons";
-import { RiskChip } from "./Risk";
+import { VerdictChip } from "./Verdict";
 
 /** "382_237" → "38.2–38.3°N, 23.7–23.8°E" */
 export function cellLabel(id: string, size: number): string {
@@ -19,6 +21,7 @@ export function cellLabel(id: string, size: number): string {
 export function CellSheet({ cell, size, species, onClose }: { cell: Cell; size: number; species: Species[]; onClose: () => void }) {
   "use no memo";
   const { t, locale } = useI18n();
+  const vcfg = useVerdictConfig();
   const rows = useMemo(() => cell.s.map((i) => species[i]).sort((a, b) => b.risk.score - a.risk.score), [cell, species]);
   const scroller = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -52,7 +55,7 @@ export function CellSheet({ cell, size, species, onClose }: { cell: Cell; size: 
                     <span className={`block truncate text-sm ${n.isFallback ? "font-serif italic" : "font-medium"}`}>{n.title}</span>
                     {!n.isFallback && <span className="block truncate font-serif text-xs italic text-dim">{s.name}</span>}
                   </span>
-                  <RiskChip level={s.risk.level} score={s.risk.score} />
+                  <span className="flex flex-col items-end gap-0.5"><VerdictChip verdict={verdictFor(s, vcfg)} /><span className="font-mono text-[10px] text-dim">{t.risk.scoreLabel} {s.risk.score}</span></span>
                 </Link>
               </div>
             );

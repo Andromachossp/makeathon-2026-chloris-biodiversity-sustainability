@@ -225,6 +225,7 @@ def run() -> None:
                    "featured": len(featured), "records": int(sum(s["stats"]["records"] for s in species)),
                    "cells": len(cells_out), "atRisk": len(at_risk)},
         "scoring": sc.raw,
+        "verdicts": config.load_verdicts(),
         "effort": eff,
         "notes": notes,
         "flagLegend": flags_mod.LEGEND,

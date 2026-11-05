@@ -31,14 +31,13 @@ const HARVEST_STYLE: Record<HarvestState, { Icon: typeof CheckIcon; cls: string 
   safe: { Icon: CheckIcon, cls: "border-ok bg-ok/15 text-ok" },
   careful: { Icon: WarnIcon, cls: "border-risk-moderate-line bg-risk-moderate-line/15 text-risk-moderate-line" },
   "do-not-harvest": { Icon: CrossIcon, cls: "border-risk-high-line bg-risk-high-line/15 text-risk-high-line" },
-  atRisk: { Icon: CrossIcon, cls: "border-risk-high-line bg-risk-high-line/15 text-risk-high-line" },
   unknown: { Icon: WarnIcon, cls: "border-line bg-surface text-dim border-dashed" },
 };
 
 export function HarvestBanner({ state }: { state: HarvestState }) {
   const { t } = useI18n();
   const { Icon, cls } = HARVEST_STYLE[state];
-  const label = state === "atRisk" ? t.harvest.atRisk : t.harvest[state];
+  const label = t.harvest[state];
   return (
     <div role="note" className={`flex items-center gap-3 rounded-[14px] border px-4 py-4 text-lg font-semibold ${cls}`}>
       <Icon className="h-7 w-7 shrink-0" />

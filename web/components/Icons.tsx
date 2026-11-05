@@ -49,3 +49,6 @@ export const LocateIcon = ({ className }: P) => (
 export const CloseIcon = ({ className }: P) => (
   <svg {...base} className={className}><path d="M6 6l12 12M18 6 6 18" /></svg>
 );
+export const ShieldIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" /><path d="M12 8v4M12 15h.01" /></svg>
+);

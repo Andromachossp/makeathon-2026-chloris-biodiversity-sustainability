@@ -9,7 +9,8 @@
     "lint": "eslint",
     "validate-data": "tsx scripts/validate-data.ts",
     "predev": "node scripts/copy-maplibre-worker.mjs",
-    "prebuild": "node scripts/copy-maplibre-worker.mjs"
+    "prebuild": "node scripts/copy-maplibre-worker.mjs",
+    "greek-review": "tsx scripts/greek-review.ts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",

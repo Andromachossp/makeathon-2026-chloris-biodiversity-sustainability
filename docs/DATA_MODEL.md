@@ -104,6 +104,7 @@ Simplified polygons. Properties: Natura `{ code, name, type }`; fires `{ year }`
   sources: Array<{ name: string; version: string; url: string; licence: string; doi?: string }>;
   counts: { greekNatives: number; medicinal: number; featured: number; records: number; cells: number; atRisk: number };
   scoring: object;                  // copy of scoring.yaml
+  verdicts: { version: string; min_records: number; protect_iucn: IucnCode[]; protect_levels: RiskLevel[]; care_levels: RiskLevel[]; care_if_endemic: boolean };  // copy of verdicts.yaml
   notes: string[];                  // e.g. "Fire layer skipped: no data"
   flagLegend: Record<string, string>;  // text for every DataQualityFlag / ReviewFlag
   iucnLabels: Record<IucnCode, { en: string; el: string }>;

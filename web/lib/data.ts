@@ -23,6 +23,7 @@ export function loadJson<T>(path: string): Promise<T> {
 export const useSpecies = () => use(loadJson<Species[]>("species.json"));
 export const useCells = () => use(loadJson<CellsFile>("cells.json"));
 export const useMeta = () => use(loadJson<Meta>("meta.json"));
+export const useVerdictConfig = () => useMeta().verdicts;
 export const useNames = () => use(loadJson<Names>("names.json"));
 export const loadOcc = (slug: string) => loadJson<OccRow[]>(`occ/${slug}.json`);
 export const loadNatura = () => loadJson<GeoJSON.FeatureCollection>("natura.geojson");

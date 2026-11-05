@@ -18,18 +18,20 @@ const COLOUR: Record<IucnCode, string> = {
   NE: "text-dim border-dim border-dashed",
 };
 
-/** IUCN category: always icon + text. NE reads "Not assessed" and is visually neutral, never green. */
+/** IUCN category in plain words: CR / EN / VU read "Threatened" with the category as a small detail.
+    NE reads "Not assessed yet" and is neutral and dashed, never a low-risk look. */
 export function IucnBadge({ code, onPaper = false }: { code: IucnCode; onPaper?: boolean }) {
   const { t } = useI18n();
   const Icon = ICON[code];
+  const threatened = code === "CR" || code === "EN" || code === "VU";
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs ${onPaper ? `border-paper-ink/50 text-paper-ink ${isIucnAssessed(code) ? "" : "border-dashed"}` : COLOUR[code]}`}
-      title={isIucnAssessed(code) ? undefined : t.iucn.note}
+      title={isIucnAssessed(code) ? t.iucn[code] : t.iucn.note}
     >
       <Icon className="h-4 w-4" />
-      <span className="font-mono">{code === "NE" ? "" : code}</span>
-      <span>{t.iucn[code]}</span>
+      <span>{threatened ? t.iucn.threatened : t.iucn[code]}</span>
+      {threatened && <span className="font-mono text-[10px] opacity-80">{code}</span>}
     </span>
   );
 }

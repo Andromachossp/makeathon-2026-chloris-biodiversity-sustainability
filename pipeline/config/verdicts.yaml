@@ -1,0 +1,18 @@
+# Plain-language verdicts shown first on every plant (science lead may edit; nothing here changes the risk score).
+# A verdict is NOT advice to pick or use a plant. Harvest advice only comes from reviewed rules in featured_species.csv.
+version: "v0-draft"
+
+# Species with fewer GBIF records than this are "Not enough data yet" (and are left out of the top of the plant ranking),
+# unless they are listed as threatened on the IUCN Red List.
+min_records: 5
+
+# Order of evaluation (first match wins):
+#   1. protect  : IUCN category in protect_iucn            -> "Protect it"
+#   2. nodata   : records < min_records                    -> "Not enough data yet"
+#   3. protect  : prototype risk level in protect_levels   -> "Protect it"
+#   4. care     : level in care_levels, or endemic         -> "Handle with care"
+#   5. otherwise                                           -> "Not known to be threatened"
+protect_iucn: [CR, EN, VU]
+protect_levels: [high, critical]
+care_levels: [moderate]
+care_if_endemic: true
