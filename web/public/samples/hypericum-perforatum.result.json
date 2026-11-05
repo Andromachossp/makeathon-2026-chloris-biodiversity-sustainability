@@ -1,0 +1,120 @@
+{
+ "source": "Pl@ntNet API (my-api.plantnet.org) identify/all",
+ "apiVersion": "2026-03-20 (7.5)",
+ "cached": true,
+ "candidates": [
+  {
+   "name": "Hypericum perforatum",
+   "score": 0.6429,
+   "commonNames": [
+    "Saint John's wort",
+    "Common Saint John's-wort",
+    "Perforate Saint John's-wort"
+   ],
+   "powoId": "433719-1",
+   "gbifKey": 3189486,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/9d040a0eee9eb4eceff23e49bb4f51ede63c4f8a",
+     "credit": "Andrew / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/74ceb98b811c27e60fcb30f18cdab76ac98d8269",
+     "credit": "bmd_online / Pl@ntNet, cc-by-sa",
+     "organ": "habit"
+    }
+   ]
+  },
+  {
+   "name": "Hypericum perfoliatum",
+   "score": 0.1763,
+   "commonNames": [
+    "St John's Wort"
+   ],
+   "powoId": "433717-1",
+   "gbifKey": 7678225,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/491bbf7c1c3aaf8d5f718d7eb4e497e061a35a05",
+     "credit": "Eric Souche / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/78806b342a90a35365b42718350a701a60cf0bdb",
+     "credit": "Dominique Vioux / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Hypericum maculatum",
+   "score": 0.0665,
+   "commonNames": [
+    "Imperforate Saint John's-wort",
+    "Imperforate St John's wort",
+    "Spotted St. Johnswort"
+   ],
+   "powoId": "325096-2",
+   "gbifKey": 6437017,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/25b1ad82130152f46f1fabe311d923819c79cb83",
+     "credit": "Zydos / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/76b7bf073a71d81b96fa72142e86ef80f1dd4b31",
+     "credit": "claudine kern / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Hypericum annulatum",
+   "score": 0.0244,
+   "commonNames": [
+    "Ticklewort",
+    "Ringed Saint John's Wort",
+    "Ringed St. John's wort"
+   ],
+   "powoId": "433193-1",
+   "gbifKey": 7329869,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/768f0d89af1d128c13139f4afd3268c7c3c0160e",
+     "credit": "Jens Werner / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/a32d62f64a7394c2353181cd6253226bb5c9f554",
+     "credit": "sierrayeowenxin / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Hypericum hirsutum",
+   "score": 0.0133,
+   "commonNames": [
+    "Hairy St John's wort",
+    "Hairy Saint John's-wort",
+    "Hairy St. John's wort"
+   ],
+   "powoId": "433492-1",
+   "gbifKey": 7921919,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/c3f4fa20d5a05f6284fc9ba2afeeebaa440b1d77",
+     "credit": "Akim Aouamri / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/d11d66100d2208a3165d37c4840fcccc4dcc23a9",
+     "credit": "Phan Korbal / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  }
+ ]
+}

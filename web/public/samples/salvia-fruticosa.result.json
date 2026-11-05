@@ -1,0 +1,75 @@
+{
+ "source": "Pl@ntNet API (my-api.plantnet.org) identify/all",
+ "apiVersion": "2026-03-20 (7.5)",
+ "cached": true,
+ "candidates": [
+  {
+   "name": "Salvia fruticosa",
+   "score": 0.9805,
+   "commonNames": [
+    "Greek oregano",
+    "Greek sage",
+    "Three lobed sage"
+   ],
+   "powoId": "456249-1",
+   "gbifKey": 6412283,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/5723776abdf3c0fcd1afacabe585c19a1b9f4880",
+     "credit": "donatosd / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/3585cdb2e340b07d3e92f062934bd729db194566",
+     "credit": "Kirsten Milthaler / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Salvia officinalis",
+   "score": 0.0107,
+   "commonNames": [
+    "Sage",
+    "Common Sage",
+    "Kitchen sage"
+   ],
+   "powoId": "456833-1",
+   "gbifKey": 2927004,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/add47461a3e589702955af40e87bb8ac0818346b",
+     "credit": "Siciliano / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/6a29d473ebe753d106e2a54732850f4a634952dd",
+     "credit": "rodon xavier / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Nepeta nepetella",
+   "score": 0.0025,
+   "commonNames": [
+    "Lesser Cat mint",
+    "Lesser catmint"
+   ],
+   "powoId": "452609-1",
+   "gbifKey": 7309064,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/342740d4869cb5624105f3292416eaba8346d3cc",
+     "credit": "Frédéric Andrieu / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/08baf27f00d145e7f42e3b6247e5cf0c4f1ea9ae",
+     "credit": "gonzalomontamarta / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  }
+ ]
+}

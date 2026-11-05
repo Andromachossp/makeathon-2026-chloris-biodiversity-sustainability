@@ -1,5 +1,5 @@
-import { Placeholder } from "@/components/Placeholder";
+import { ScanView } from "@/components/ScanView";
 
 export default function Page() {
-  return <Placeholder page="scan" />;
+  return <ScanView />;
 }

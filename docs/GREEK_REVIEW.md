@@ -7,7 +7,7 @@ Notes for the reviewer:
 - `{n}`, `{cat}`, `{level}` are placeholders filled by the app.
 - Terms chosen on purpose: *Φυτά* (Plants), *Φυτρώνει μόνο στην Ελλάδα* (Only grows in Greece), *Απειλούμενο* (Threatened), *Δεν έχει αξιολογηθεί ακόμη* (Not assessed yet), *Πρωτότυπος βαθμός* (Prototype score).
 
-228 strings.
+269 strings.
 
 | Key | English | Greek (to review) |
 | --- | --- | --- |
@@ -234,8 +234,49 @@ Notes for the reviewer:
 | `landing.keyColour` | Colour: average risk | Χρώμα: μέσος κίνδυνος |
 | `landing.keyLow` | Lower | Χαμηλότερος |
 | `landing.keyHigh` | Higher | Υψηλότερος |
+| `scan.title` | Scan a plant | Σάρωση φυτού |
+| `scan.intro` | Take a photo of one plant. A leaf, a flower or the whole plant works best. | Βγάλε φωτογραφία ενός φυτού. Ένα φύλλο, ένα λουλούδι ή ολόκληρο το φυτό δουλεύουν καλύτερα. |
+| `scan.takePhoto` | Take a photo | Βγάλε φωτογραφία |
+| `scan.choosePhoto` | Choose from gallery | Διάλεξε από τη συλλογή |
+| `scan.dropHere` | Drop a photo here, or choose a file | Σύρε μια φωτογραφία εδώ ή διάλεξε αρχείο |
+| `scan.chooseFile` | Choose a file | Διάλεξε αρχείο |
+| `scan.trySample` | Try a sample photo | Δοκίμασε μια δοκιμαστική φωτογραφία |
+| `scan.sampleNote` | Sample results are saved in the app, so they do not use the identification service. | Τα αποτελέσματα των δοκιμαστικών φωτογραφιών είναι αποθηκευμένα στην εφαρμογή, οπότε δεν χρησιμοποιούν την υπηρεσία αναγνώρισης. |
+| `scan.identifying` | Looking at your photo… | Εξετάζουμε τη φωτογραφία σου… |
+| `scan.tierLikely` | Likely match | Πιθανή αντιστοιχία |
+| `scan.tierPossible` | Possible match: compare with the photos | Πιθανόν: σύγκρινε με τις φωτογραφίες |
+| `scan.tierUnsure` | Not sure: try another photo (leaf, flower, whole plant) | Δεν είμαστε σίγουροι: δοκίμασε άλλη φωτογραφία (φύλλο, λουλούδι, ολόκληρο το φυτό) |
+| `scan.confidence` | {n}% confidence | {n}% βεβαιότητα |
+| `scan.warning` | A photo match can be wrong. Check with an expert before using any wild plant. | Η αναγνώριση από φωτογραφία μπορεί να είναι λάθος. Ρώτα έναν ειδικό πριν χρησιμοποιήσεις οποιοδήποτε άγριο φυτό. |
+| `scan.notInCatalogue` | This plant is not in our catalogue of {n} Greek medicinal plants, so we cannot say anything about it. | Αυτό το φυτό δεν υπάρχει στον κατάλογό μας με {n} ελληνικά φαρμακευτικά φυτά, οπότε δεν μπορούμε να πούμε κάτι γι' αυτό. |
+| `scan.notInCatalogueTitle` | Not in our catalogue | Δεν υπάρχει στον κατάλογό μας |
+| `scan.matchedAs` | Matched in our catalogue | Αντιστοιχία στον κατάλογό μας |
+| `scan.otherCandidates` | Other possibilities | Άλλες πιθανότητες |
+| `scan.referencePhotos` | Reference photos (from Pl@ntNet) | Φωτογραφίες αναφοράς (από το Pl@ntNet) |
+| `scan.seeFull` | See the full page | Δες ολόκληρη τη σελίδα |
+| `scan.saveSighting` | Save this sighting | Αποθήκευση παρατήρησης |
+| `scan.saving` | Saving… | Αποθήκευση… |
+| `scan.saved` | Saved on this device. | Αποθηκεύτηκε σε αυτή τη συσκευή. |
+| `scan.savedGeneralised` | This plant may be at risk, so we saved only a 10 km area, not the exact spot. | Το φυτό μπορεί να κινδυνεύει, γι' αυτό αποθηκεύσαμε μόνο μια περιοχή 10 χλμ και όχι το ακριβές σημείο. |
+| `scan.savedNoLocation` | No location was saved. | Δεν αποθηκεύτηκε τοποθεσία. |
+| `scan.scanAnother` | Scan another plant | Σάρωσε άλλο φυτό |
+| `scan.yourPhoto` | Your photo | Η φωτογραφία σου |
+| `scan.errOffline` | You are offline. Identifying a photo needs a connection. | Είσαι εκτός σύνδεσης. Η αναγνώριση φωτογραφίας χρειάζεται σύνδεση. |
+| `scan.errFailed` | We could not identify this photo right now. Please try again. | Δεν μπορέσαμε να αναγνωρίσουμε τη φωτογραφία αυτή τη στιγμή. Δοκίμασε ξανά. |
+| `scan.errRateLimited` | Too many photos at once. Wait a minute and try again. | Πολλές φωτογραφίες ταυτόχρονα. Περίμενε ένα λεπτό και δοκίμασε ξανά. |
+| `scan.errBadImage` | That file is too big or is not an image. | Το αρχείο είναι πολύ μεγάλο ή δεν είναι εικόνα. |
+| `scan.noPlant` | We could not recognise a plant in this photo. Try a closer photo of a leaf or flower. | Δεν αναγνωρίσαμε φυτό σε αυτή τη φωτογραφία. Δοκίμασε πιο κοντινή φωτογραφία ενός φύλλου ή λουλουδιού. |
+| `scan.sampleCredit` | Sample photo | Δοκιμαστική φωτογραφία |
+| `sightings.empty` | No sightings saved on this device yet. Scan a plant and tap Save this sighting. | Δεν υπάρχουν ακόμη παρατηρήσεις σε αυτή τη συσκευή. Σάρωσε ένα φυτό και πάτα Αποθήκευση παρατήρησης. |
+| `sightings.deviceOnly` | Saved on this device only. | Αποθηκεύτηκε μόνο σε αυτή τη συσκευή. |
+| `sightings.area` | Area | Περιοχή |
+| `sightings.noLocation` | No location | Χωρίς τοποθεσία |
+| `sightings.delete` | Delete | Διαγραφή |
+| `sightings.unknownPlant` | Plant not in our catalogue | Φυτό εκτός καταλόγου |
 | `credits.title` | Map and data credits | Πιστώσεις χάρτη και δεδομένων |
 | `credits.terrain` | Terrain: Mapzen / AWS Terrain Tiles (open data on AWS). Elevation from Copernicus EU-DEM (produced using Copernicus data and information funded by the European Union), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and ETOPO1 (U.S. National Oceanic and Atmospheric Administration). | Ανάγλυφο: Mapzen / AWS Terrain Tiles (ανοικτά δεδομένα στο AWS). Υψομετρικά δεδομένα από Copernicus EU-DEM (παράγονται με δεδομένα και πληροφορίες Copernicus που χρηματοδοτούνται από την Ευρωπαϊκή Ένωση), SRTM και GMTED2010 (ευγενική παραχώρηση της U.S. Geological Survey) και ETOPO1 (U.S. National Oceanic and Atmospheric Administration). |
 | `credits.vectors` | Basemap vectors: OpenFreeMap, OpenMapTiles, © OpenStreetMap contributors (ODbL). | Διανυσματικός χάρτης: OpenFreeMap, OpenMapTiles, © συνεισφέροντες του OpenStreetMap (ODbL). |
 | `credits.library` | Map rendering: MapLibre GL JS (BSD-3-Clause). | Απεικόνιση χάρτη: MapLibre GL JS (BSD-3-Clause). |
+| `credits.samples` | Sample photos (Wikimedia Commons; licence and author as listed): | Δοκιμαστικές φωτογραφίες (Wikimedia Commons· άδεια και δημιουργός όπως αναφέρονται): |
+| `credits.plantnet` | Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors. | Αναγνώριση φυτών: Pl@ntNet (plantnet.org). Οι φωτογραφίες αναφοράς που εμφανίζονται με ένα αποτέλεσμα αναφέρουν τους δημιουργούς τους. |
 | `notMedicalAdvice` | Chloris is not medical advice. Documented uses are shown for information only. | Το Chloris δεν αποτελεί ιατρική συμβουλή. Οι καταγεγραμμένες χρήσεις παρουσιάζονται μόνο ως πληροφορία. |

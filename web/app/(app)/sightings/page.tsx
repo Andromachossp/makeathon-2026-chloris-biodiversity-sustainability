@@ -1,5 +1,5 @@
-import { Placeholder } from "@/components/Placeholder";
+import { SightingsView } from "@/components/SightingsView";
 
 export default function Page() {
-  return <Placeholder page="sightings" />;
+  return <SightingsView />;
 }

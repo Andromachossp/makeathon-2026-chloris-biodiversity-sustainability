@@ -1,0 +1,74 @@
+{
+ "source": "Pl@ntNet API (my-api.plantnet.org) identify/all",
+ "apiVersion": "2026-03-20 (7.5)",
+ "cached": true,
+ "candidates": [
+  {
+   "name": "Origanum dictamnus",
+   "score": 0.9278,
+   "commonNames": [
+    "Cretan dittany",
+    "Dittany of Crete",
+    "Cretan Oregano"
+   ],
+   "powoId": "453239-1",
+   "gbifKey": 3894972,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/4bf1b2a19b8df407967537fe73d8df47ea4a0268",
+     "credit": "nicolas swirsky / Pl@ntNet, cc-by-sa",
+     "organ": "leaf"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/bc5fcc9851653aa879f6584d36f3e74856c8abde",
+     "credit": "Yvon REPÉRANT / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Origanum calcaratum",
+   "score": 0.0138,
+   "commonNames": [
+    "Dittany of Amorgos"
+   ],
+   "powoId": "453213-1",
+   "gbifKey": 3895180,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/e31f688c94853bdae82974d1d0fe7ff7c3e62ea8",
+     "credit": "William Coville / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/16ec3f8dca9ac8176e682d7934cac2ab20affdf1",
+     "credit": "Diego Alex / Pl@ntNet, cc-by-sa",
+     "organ": "flower"
+    }
+   ]
+  },
+  {
+   "name": "Salvia sclarea",
+   "score": 0.0024,
+   "commonNames": [
+    "Clary",
+    "Clary sage",
+    "Europe sage"
+   ],
+   "powoId": "457210-1",
+   "gbifKey": 2927000,
+   "images": [
+    {
+     "url": "https://bs.plantnet.org/image/m/2621934eb77a9c75c4bbe703705b127f94a661de",
+     "credit": "Matthias Kunz / Pl@ntNet, cc-by-sa",
+     "organ": "habit"
+    },
+    {
+     "url": "https://bs.plantnet.org/image/m/4670dde8dad276243a641e609aaa7df23b019fb5",
+     "credit": "M. Hedayat / Pl@ntNet, cc-by-sa",
+     "organ": "habit"
+    }
+   ]
+  }
+ ]
+}

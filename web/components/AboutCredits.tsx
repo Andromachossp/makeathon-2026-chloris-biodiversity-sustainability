@@ -1,6 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
+import { SAMPLES } from "@/lib/samples";
 
 /** Map and terrain credits required by the open data we use (Mapzen/AWS Terrain Tiles, OpenMapTiles, OSM). */
 export function AboutCredits() {
@@ -12,6 +13,17 @@ export function AboutCredits() {
         <li>{t.credits.terrain} <a className="underline" href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noreferrer">Attribution ↗</a></li>
         <li>{t.credits.vectors}</li>
         <li>{t.credits.library}</li>
+        <li>{t.credits.plantnet}</li>
+        <li>
+          {t.credits.samples}
+          <ul className="mt-1 list-disc space-y-1 pl-5">
+            {SAMPLES.map((x) => (
+              <li key={x.id}>
+                <a className="underline" href={x.source} target="_blank" rel="noreferrer">{x.title}</a>, {x.author}, <a className="underline" href={x.licenceUrl} target="_blank" rel="noreferrer">{x.licence}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
       </ul>
     </section>
   );

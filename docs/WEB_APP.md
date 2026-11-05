@@ -48,10 +48,14 @@ Check the installed Next.js version against Serwist's docs. If Serwist needs web
 2. Resize in a canvas to max 1000 px, JPEG 0.8. Get GPS (`navigator.geolocation`, 10 s timeout, optional).
 3. **Online:** POST `multipart/form-data` to `/api/identify`. Show the scan skeleton while waiting.
 4. **Offline:** save to `pendingScans` in IndexedDB; toast "Saved. We'll identify it when you're online." A `useOnline` hook processes the queue on reconnect and notifies the user.
-5. Result logic:
-   - Best score ≥ 0.3 and found in Chloris → portal transition into `/species/[slug]?from=scan`, which shows the harvest banner first.
-   - Best score < 0.3 → "Not sure" with top 3 candidates (name, score %, Chloris badge if known) + "Try a flower or leaf photo".
-   - Not in Chloris → "Not in Chloris yet" + "Add it as a new plant" → sighting with `slug: null`, Pl@ntNet name.
+5. Result logic (thresholds are constants in `web/lib/scan.ts`: `CONFIDENCE_LIKELY_MIN = 0.70`, `CONFIDENCE_POSSIBLE_MIN = 0.40`), verdict first:
+   - Score ≥ 0.70 → "Likely match". In our catalogue: verdict banner, common and Latin name, harvest advice (only if reviewed, else "not reviewed yet"), link to the plant page.
+   - 0.40 to 0.70 → "Possible match: compare with the photos", with up to two Pl@ntNet reference photos (credited) and the other candidates.
+   - Below 0.40 → "Not sure: try another photo (leaf, flower, whole plant)". Candidate names only: no verdict, no uses, no harvest content, no links, no save button.
+   - Not in the catalogue → says so plainly and shows the Pl@ntNet name; a sighting can still be saved.
+   - Always: "A photo match can be wrong. Check with an expert before using any wild plant."
+   - "Save this sighting" asks for location only at that moment. Plants that may be at risk (verdict "Protect it" or at-risk) and plants not in the catalogue are rounded to a 0.1° square before saving; others to 0.001°. Sightings are stored on the device only (IndexedDB) for now; Firestore sync is not built yet.
+   - "Try a sample photo": three CC0 / CC BY photos from Wikimedia Commons in `web/public/samples/` with their Pl@ntNet responses cached next to them, so samples never use the API quota. Credits on the page and on `/about`.
 6. Matching order: POWO id → GBIF key → normalised name (incl. synonyms) via `names.json`.
 
 ## `/api/identify` (route handler, Node runtime)
