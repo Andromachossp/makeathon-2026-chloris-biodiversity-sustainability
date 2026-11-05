@@ -78,6 +78,46 @@ export const SpeciesSchema = z
   })
   .strict();
 
+/** Evidence cards (featured species only): one lazy-loaded file per species. See docs/DATA_MODEL.md. */
+export const EvidenceKind = z.enum(["traditional_use", "human_research", "animal_or_lab", "review", "regulatory_monograph"]);
+export const EvidenceSourceType = z.enum(["pubmed", "doi", "ema_monograph", "other"]);
+export const VERIFIED_TEXT = "checked against linked source";
+export const EvidenceVerification = z.enum([VERIFIED_TEXT, "unverified"]);
+const nonEmpty = z.string().min(1); // an unknown field is written "unknown", never left empty
+/** Chloris never shows dosing: quantities with units, "daily dose", "times daily", "posology". */
+export const DOSING = /\b\d+(?:[.,]\d+)?\s*(?:mg|g|kg|ml|mcg|µg|iu)\b|\b(?:daily dose|single dose|dosage|dosing|posology)\b|\b(?:once|twice|\d+\s*times)\s+(?:a\s+|per\s+)?(?:day|daily)\b/i;
+
+export const EvidenceEntrySchema = z
+  .object({
+    kind: EvidenceKind,
+    title: nonEmpty,
+    finding: nonEmpty,
+    limitations: nonEmpty,
+    plantPart: nonEmpty,
+    preparation: nonEmpty,
+    design: nonEmpty,
+    sourceType: EvidenceSourceType,
+    sourceId: nonEmpty,
+    sourceUrl: nonEmpty,
+    verifiedAt: nonEmpty,
+    verification: EvidenceVerification,
+    specialistReview: nonEmpty,
+    safetyNote: nonEmpty.nullable(),
+  })
+  .strict()
+  .superRefine((e, ctx) => {
+    if (e.verification === VERIFIED_TEXT) {
+      if (!/^https?:\/\//.test(e.sourceUrl)) ctx.addIssue({ code: "custom", path: ["sourceUrl"], message: `verification "${VERIFIED_TEXT}" requires a source_url` });
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(e.verifiedAt)) ctx.addIssue({ code: "custom", path: ["verifiedAt"], message: "verified entries need a YYYY-MM-DD date" });
+    }
+    for (const k of ["title", "finding", "limitations", "plantPart", "preparation", "design", "safetyNote"] as const) {
+      const v = e[k];
+      if (typeof v === "string" && DOSING.test(v)) ctx.addIssue({ code: "custom", path: [k], message: "looks like dosing information" });
+    }
+  });
+
+export const EvidenceFileSchema = z.object({ version: nonEmpty, slug: nonEmpty, entries: z.array(EvidenceEntrySchema).min(1).max(2) }).strict();
+
 export const NamesSchema = z
   .object({
     byName: z.record(z.string(), z.string()),
@@ -148,6 +188,9 @@ export const MetaSchema = z
       .strict(),
     effort: z.record(z.string(), z.union([z.number(), z.string()])),
     notes: z.array(z.string()),
+    evidenceSlugs: z.array(z.string()),
+    evidenceCounts: z.record(z.string(), z.object({ entries: z.number().int().min(1), safetyNotes: z.number().int().min(0) }).strict()),
+    evidenceVersion: z.string().min(1),
     flagLegend: z.record(z.string(), z.string()),
     iucnLabels: z.record(IucnCode, LocalisedLabel),
   })

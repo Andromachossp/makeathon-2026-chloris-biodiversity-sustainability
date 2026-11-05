@@ -61,6 +61,74 @@ def load_featured(slug_by_name: dict[str, str]) -> dict[str, dict]:
     return out
 
 
+# ---- evidence cards (featured species only; config/evidence.csv is edited by the science lead) ----
+EVIDENCE_CSV = config.CONFIG_DIR / "evidence.csv"
+EVIDENCE_META = config.CONFIG_DIR / "evidence_meta.yaml"
+EVIDENCE_COLUMNS = ["slug", "kind", "title", "finding", "limitations", "plant_part", "preparation", "design", "source_type",
+                    "source_id", "source_url", "verified_at", "verification", "specialist_review", "safety_note"]
+EVIDENCE_KINDS = {"traditional_use", "human_research", "animal_or_lab", "review", "regulatory_monograph"}
+EVIDENCE_SOURCES = {"pubmed", "doi", "ema_monograph", "other"}
+VERIFIED = "checked against linked source"
+VERIFICATIONS = {VERIFIED, "unverified"}
+# no dosing anywhere: quantities with units, "daily dose", "times daily", "posology"
+DOSING = re.compile(r"\b\d+(?:[.,]\d+)?\s*(?:mg|g|kg|ml|mcg|µg|iu)\b|\b(?:daily dose|single dose|dosage|dosing|posology)\b|\b(?:once|twice|\d+\s*times)\s+(?:a\s+|per\s+)?(?:day|daily)\b", re.I)
+
+
+def sentences(text: str) -> int:
+    return len([x for x in re.split(r"(?<=[.!?])\s+(?=[A-Z0-9])", text.strip()) if x])
+
+
+def load_evidence(featured_slugs: set[str]) -> tuple[str, dict[str, list[dict]]]:
+    """Read and validate evidence.csv. Any problem stops the export: evidence must never be silently wrong."""
+    import yaml
+
+    version = yaml.safe_load(EVIDENCE_META.read_text(encoding="utf-8"))["version"]
+    if not EVIDENCE_CSV.exists():
+        return version, {}
+    df = pd.read_csv(EVIDENCE_CSV, dtype=str, keep_default_na=False)
+    errors: list[str] = []
+    if list(df.columns) != EVIDENCE_COLUMNS:
+        raise SystemExit(f"evidence.csv columns must be exactly: {EVIDENCE_COLUMNS}")
+    out: dict[str, list[dict]] = {}
+    for n, r in enumerate(df.to_dict("records"), start=2):
+        where = f"evidence.csv line {n} ({r['slug']})"
+        if r["slug"] not in featured_slugs:
+            errors.append(f"{where}: only featured species may have evidence")
+        if r["kind"] not in EVIDENCE_KINDS:
+            errors.append(f"{where}: invalid kind '{r['kind']}'")
+        if r["source_type"] not in EVIDENCE_SOURCES:
+            errors.append(f"{where}: invalid source_type '{r['source_type']}'")
+        if r["verification"] not in VERIFICATIONS:
+            errors.append(f"{where}: verification must be '{VERIFIED}' or 'unverified'")
+        for col in EVIDENCE_COLUMNS:
+            if col != "safety_note" and r[col].strip() == "":
+                errors.append(f"{where}: '{col}' is empty (write 'unknown' if the source does not state it)")
+        if r["verification"] == VERIFIED:
+            if not r["source_url"].startswith("http"):
+                errors.append(f"{where}: verification '{VERIFIED}' needs a source_url")
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", r["verified_at"]):
+                errors.append(f"{where}: verified_at must be a date (YYYY-MM-DD) when verified")
+        for col in ("finding", "limitations"):
+            if sentences(r[col]) > 2:
+                errors.append(f"{where}: '{col}' has more than 2 sentences")
+        for col in EVIDENCE_COLUMNS:
+            if DOSING.search(r[col]):
+                errors.append(f"{where}: '{col}' looks like dosing information, which Chloris never shows")
+        out.setdefault(r["slug"], []).append({
+            "kind": r["kind"], "title": r["title"], "finding": r["finding"], "limitations": r["limitations"],
+            "plantPart": r["plant_part"], "preparation": r["preparation"], "design": r["design"],
+            "sourceType": r["source_type"], "sourceId": r["source_id"], "sourceUrl": r["source_url"],
+            "verifiedAt": r["verified_at"], "verification": r["verification"], "specialistReview": r["specialist_review"],
+            "safetyNote": r["safety_note"].strip() or None,
+        })
+    for slug, entries in out.items():
+        if len(entries) > 2:
+            errors.append(f"evidence.csv: {slug} has {len(entries)} entries (maximum 2)")
+    if errors:
+        raise SystemExit("evidence.csv errors:\n  " + "\n  ".join(errors))
+    return version, out
+
+
 def run() -> None:
     sc = config.load_scoring()
     W = config.WORK_DIR
@@ -94,6 +162,7 @@ def run() -> None:
     df["cat"] = [f"CHL-{i + 1:04d}" for i in range(len(df))]
     slug_by_name = dict(zip(df.taxon_name.str.lower(), df.slug))
     featured = load_featured(slug_by_name)
+    evidence_version, evidence = load_evidence(set(featured))
     index_of = {s: i for i, s in enumerate(df.slug)}
 
     species = []
@@ -196,6 +265,14 @@ def run() -> None:
                           "hotspot": None if p is None else bool(n_risk >= 1 and p < sc["hotspot"]["max_protected_fraction"])})
     sizes["cells.json"] = dump({"size": sc["cell_size_deg"], "cells": cells_out}, out_dir / "cells.json")
 
+    # evidence cards: one lazy-loaded file per species with entries (not part of species.json)
+    ev_dir = out_dir / "evidence"
+    if ev_dir.exists():
+        shutil.rmtree(ev_dir)
+    for slug, entries in evidence.items():
+        dump({"version": evidence_version, "slug": slug, "entries": entries}, ev_dir / f"{slug}.json")
+    sizes["evidence/*.json"] = sum(f.stat().st_size for f in ev_dir.glob("*.json")) if evidence else 0
+
     notes = []
     if (W / "natura_simplified.geojson").exists():
         shutil.copy(W / "natura_simplified.geojson", out_dir / "natura.geojson")
@@ -228,6 +305,10 @@ def run() -> None:
         "verdicts": config.load_verdicts(),
         "effort": eff,
         "notes": notes,
+        "evidenceSlugs": sorted(evidence),
+        # how many cards / distinct safety notes each file has, so the page can show a skeleton of the right size
+        "evidenceCounts": {slug: {"entries": len(e), "safetyNotes": len({x["safetyNote"] for x in e if x["safetyNote"]})} for slug, e in evidence.items()},
+        "evidenceVersion": evidence_version,
         "flagLegend": flags_mod.LEGEND,
         "iucnLabels": config.IUCN_LABELS,
     }

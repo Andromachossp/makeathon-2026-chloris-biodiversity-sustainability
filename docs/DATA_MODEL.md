@@ -92,6 +92,40 @@ Array<{ c: string; n: number; f: number | null; l: number | null; o: number; w: 
 // c = cell id, n = records, f/l = first/last year, o = records in old period, w = records in new period
 ```
 
+## `evidence/<slug>.json` — evidence cards, featured species only
+
+Lazy-loaded per species (not part of `species.json`). Built from `pipeline/config/evidence.csv` (edited by the science lead; version label in `evidence_meta.yaml`). `meta.json` lists which species have a file (`evidenceSlugs`), the collection `evidenceVersion`, and `evidenceCounts` (cards and distinct safety notes per file, used to size the skeleton).
+
+```ts
+type EvidenceKind = "traditional_use" | "human_research" | "animal_or_lab" | "review" | "regulatory_monograph";
+type EvidenceSourceType = "pubmed" | "doi" | "ema_monograph" | "other";
+
+interface EvidenceFile { version: string; slug: string; entries: EvidenceEntry[] }  // 1 to 2 entries
+
+interface EvidenceEntry {
+  kind: EvidenceKind;
+  title: string;
+  finding: string;          // neutral, own words, at most 2 sentences, includes mixed or negative results
+  limitations: string;      // at most 2 sentences
+  plantPart: string;        // "unknown" when the source does not state it
+  preparation: string;      // "unknown" when not stated
+  design: string;           // "unknown" when not stated
+  sourceType: EvidenceSourceType;
+  sourceId: string;         // PMID, DOI or monograph reference
+  sourceUrl: string;
+  verifiedAt: string;       // YYYY-MM-DD, or "unknown" when unverified
+  verification: "checked against linked source" | "unverified";
+  specialistReview: string; // "pending" until the science lead changes it
+  safetyNote: string | null;
+}
+```
+
+Rules enforced by the pipeline and by `npm run validate-data`:
+- only featured species; at most 2 entries each; no empty field (write `unknown`); `safety_note` may be empty;
+- `verification` is `"checked against linked source"` only with a real `source_url` and a `verified_at` date, and may be set only after the source page was actually fetched and read;
+- no dosing anywhere (quantities with units, "daily dose", "times daily", "posology" are rejected).
+- Entry text stays in English; the UI labels it "Source text in English" in Greek.
+
 ## `natura.geojson`, `fires.geojson`
 
 Simplified polygons. Properties: Natura `{ code, name, type }`; fires `{ year }`.

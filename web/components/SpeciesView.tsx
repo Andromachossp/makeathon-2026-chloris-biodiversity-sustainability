@@ -10,6 +10,7 @@ import { fillText, verdictFor } from "@/lib/verdict";
 import { ClientOnly } from "./ClientOnly";
 import { IucnBadge } from "./IucnBadge";
 import { MiniMap } from "./MiniMap";
+import { EvidenceSection } from "./EvidenceSection";
 import { HarvestBanner } from "./Risk";
 import { SpeciesSkeleton } from "./Skeleton";
 import { VerdictBanner } from "./Verdict";
@@ -47,8 +48,6 @@ function Card({ slug }: { slug: string }) {
   const wsum = PART_KEYS.reduce((a, k) => a + (s.risk.parts[k] === null ? 0 : weights[k]), 0);
   const subs = harvest === "unknown" ? [] : (s.curated?.substitutes ?? []).map((sl) => all.find((x) => x.slug === sl)).filter((x): x is Species => !!x);
   const uses = s.curated ? (locale === "el" ? s.curated.usesEl || s.curated.usesEn : s.curated.usesEn) : "";
-  const usesIsEn = locale === "el" && s.curated && !s.curated.usesEl && !!s.curated.usesEn;
-  const ema = s.curated?.ema ?? "unknown";
   const years = s.stats.firstYear && s.stats.lastYear ? `${s.stats.firstYear}–${s.stats.lastYear}` : "—";
 
   return (
@@ -107,21 +106,7 @@ function Card({ slug }: { slug: string }) {
           {s.stats.cells > 0 ? <MiniMap slug={s.slug} /> : <p className="text-sm opacity-80">{t.species.noRecords}</p>}
         </div>
 
-        <h2 className="mt-6 font-display text-xl font-semibold">{t.species.usesTitle}</h2>
-        {uses ? (
-          <p className="mt-2 font-serif leading-relaxed">
-            {uses}{usesIsEn && <span className="ml-1 rounded border border-paper-ink/40 px-1 font-mono text-[10px]">{t.species.enTag}</span>}
-          </p>
-        ) : (
-          <p className="mt-2 text-sm">{t.species.usesNotReviewed}</p>
-        )}
-        {s.curated && (
-          <p className="mt-2 text-sm">
-            {t.species.ema}: <strong>{t.species.emaStatus[ema]}</strong>
-            {s.curated.emaUrl && <> · <a href={s.curated.emaUrl} className="underline" target="_blank" rel="noreferrer">EMA ↗</a></>}
-          </p>
-        )}
-        <p className="mt-2 rounded-[10px] bg-paper-ink/10 p-3 text-xs">{t.notMedicalAdvice}</p>
+        <EvidenceSection slug={s.slug} hasEvidence={meta.evidenceSlugs.includes(s.slug)} version={meta.evidenceVersion} counts={meta.evidenceCounts[s.slug]} legacyUses={uses ? uses : undefined} />
 
         {/* the prototype score is a small detail, tucked away */}
         <details className="mt-6 rounded-[10px] border border-paper-ink/30 p-3">

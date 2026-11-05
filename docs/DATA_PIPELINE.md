@@ -95,6 +95,7 @@ All numbers come from `config/scoring.yaml`. Each component is a fraction 0–1 
 
 1. Merge `featured_species.csv` (uses, EMA status/link, harvest, substitutes, names). Validate: unknown slugs in `substitutes`, invalid enums → error.
 1b. Carry `work/species_flags.parquet` (from `chloris/flags.py`) into `dataQuality`, `review`, `reviewNote`; write `iucnLabel` from `config.IUCN_LABELS` (NE → "Not assessed", never blank or "Low"); put the flag legend and IUCN labels in `meta.json`.
+1c. Evidence: read and validate `config/evidence.csv` (featured species only, no dosing, verification rules above), write `evidence/<slug>.json` per species, and add `evidenceSlugs`, `evidenceVersion`, `evidenceCounts` to `meta.json`.
 2. Slug: `genus-species` lowercase ASCII (`origanum-dictamnus`). Catalogue number: `CHL-0001`… ordered by family, then name.
 3. Photos (P1, featured only): one CC0/CC BY image per species from GBIF occurrence media (`mediaType=StillImage`, licence filter); store URL, creator, licence, source link. Never use unlicensed images.
 4. Write the files described in `docs/DATA_MODEL.md`. Round floats (scores to integers, shares to 2 decimals). Minify JSON.

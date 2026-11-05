@@ -7,7 +7,7 @@ Notes for the reviewer:
 - `{n}`, `{cat}`, `{level}` are placeholders filled by the app.
 - Terms chosen on purpose: *Φυτά* (Plants), *Φυτρώνει μόνο στην Ελλάδα* (Only grows in Greece), *Απειλούμενο* (Threatened), *Δεν έχει αξιολογηθεί ακόμη* (Not assessed yet), *Πρωτότυπος βαθμός* (Prototype score).
 
-282 strings.
+313 strings.
 
 | Key | English | Greek (to review) |
 | --- | --- | --- |
@@ -286,10 +286,41 @@ Notes for the reviewer:
 | `sightings.noLocation` | No location | Χωρίς τοποθεσία |
 | `sightings.delete` | Delete | Διαγραφή |
 | `sightings.unknownPlant` | Plant not in our catalogue | Φυτό εκτός καταλόγου |
+| `evidence.title` | What has been studied | Τι έχει μελετηθεί |
+| `evidence.version` | Collection version | Έκδοση συλλογής |
+| `evidence.notReviewed` | Uses not reviewed yet | Οι χρήσεις δεν έχουν ελεγχθεί ακόμη |
+| `evidence.notReviewedHelp` | Kew's useful-plants checklist records a medicinal use for this plant, but we have not reviewed what is known about it. | Ο κατάλογος χρήσιμων φυτών του Kew καταγράφει φαρμακευτική χρήση για αυτό το φυτό, αλλά δεν έχουμε ελέγξει τι είναι γνωστό γι' αυτό. |
+| `evidence.sourceEnglish` | Source text in English | Το κείμενο της πηγής είναι στα αγγλικά |
+| `evidence.safetyTitle` | Safety note | Σημείωση ασφάλειας |
+| `evidence.limitations` | Limitations | Περιορισμοί |
+| `evidence.details` | Study and source details | Λεπτομέρειες μελέτης και πηγής |
+| `evidence.design` | Design | Σχεδιασμός |
+| `evidence.plantPart` | Plant part | Μέρος του φυτού |
+| `evidence.preparation` | Preparation | Παρασκευή |
+| `evidence.source` | Source | Πηγή |
+| `evidence.verification` | Source verification | Έλεγχος πηγής |
+| `evidence.specialist` | Specialist review | Έλεγχος από ειδικό |
+| `evidence.readSource` | Read the original source | Διάβασε την αρχική πηγή |
+| `evidence.unknown` | Not stated by the source | Δεν αναφέρεται στην πηγή |
+| `evidence.kinds.traditional_use` | Traditional use | Παραδοσιακή χρήση |
+| `evidence.kinds.human_research` | Human research | Έρευνα σε ανθρώπους |
+| `evidence.kinds.animal_or_lab` | Lab study | Εργαστηριακή μελέτη |
+| `evidence.kinds.review` | Review | Ανασκόπηση |
+| `evidence.kinds.regulatory_monograph` | Official monograph | Επίσημη μονογραφία |
+| `evidence.sourceTypes.pubmed` | PubMed | PubMed ⚠ same as English |
+| `evidence.sourceTypes.doi` | DOI | DOI ⚠ same as English |
+| `evidence.sourceTypes.ema_monograph` | EMA herbal monograph | Μονογραφία βοτάνου EMA |
+| `evidence.sourceTypes.other` | Other source | Άλλη πηγή |
+| `evidence.verifiedOn` | Checked against the linked source on {date} | Ελέγχθηκε με τον σύνδεσμο της πηγής στις {date} |
+| `evidence.unverified` | Not checked against the source yet | Δεν έχει ελεγχθεί ακόμη με την πηγή |
+| `evidence.reviewPending` | Pending: a specialist has not reviewed this yet | Σε εκκρεμότητα: δεν το έχει εξετάσει ακόμη ειδικός |
+| `evidence.reviewed` | Reviewed: {text} | Εξετάστηκε: {text} |
+| `evidence.loadFailed` | We could not load this section. Please try again later. | Δεν μπορέσαμε να φορτώσουμε αυτή την ενότητα. Δοκίμασε ξανά αργότερα. |
 | `credits.title` | Map and data credits | Πιστώσεις χάρτη και δεδομένων |
 | `credits.terrain` | Terrain: Mapzen / AWS Terrain Tiles (open data on AWS). Elevation from Copernicus EU-DEM (produced using Copernicus data and information funded by the European Union), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and ETOPO1 (U.S. National Oceanic and Atmospheric Administration). | Ανάγλυφο: Mapzen / AWS Terrain Tiles (ανοικτά δεδομένα στο AWS). Υψομετρικά δεδομένα από Copernicus EU-DEM (παράγονται με δεδομένα και πληροφορίες Copernicus που χρηματοδοτούνται από την Ευρωπαϊκή Ένωση), SRTM και GMTED2010 (ευγενική παραχώρηση της U.S. Geological Survey) και ETOPO1 (U.S. National Oceanic and Atmospheric Administration). |
 | `credits.vectors` | Basemap vectors: OpenFreeMap, OpenMapTiles, © OpenStreetMap contributors (ODbL). | Διανυσματικός χάρτης: OpenFreeMap, OpenMapTiles, © συνεισφέροντες του OpenStreetMap (ODbL). |
 | `credits.library` | Map rendering: MapLibre GL JS (BSD-3-Clause). | Απεικόνιση χάρτη: MapLibre GL JS (BSD-3-Clause). |
 | `credits.samples` | Sample photos (Wikimedia Commons; licence and author as listed): | Δοκιμαστικές φωτογραφίες (Wikimedia Commons· άδεια και δημιουργός όπως αναφέρονται): |
+| `credits.evidence` | Evidence cards: PubMed (US National Library of Medicine) and European Medicines Agency (EMA) herbal monographs. Each card links to its original source. | Κάρτες τεκμηρίωσης: PubMed (Εθνική Βιβλιοθήκη Ιατρικής των ΗΠΑ) και μονογραφίες βοτάνων του Ευρωπαϊκού Οργανισμού Φαρμάκων (EMA). Κάθε κάρτα παραπέμπει στην αρχική της πηγή. |
 | `credits.plantnet` | Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors. | Αναγνώριση φυτών: Pl@ntNet (plantnet.org). Οι φωτογραφίες αναφοράς που εμφανίζονται με ένα αποτέλεσμα αναφέρουν τους δημιουργούς τους. |
 | `notMedicalAdvice` | Chloris is not medical advice. Documented uses are shown for information only. | Το Chloris δεν αποτελεί ιατρική συμβουλή. Οι καταγεγραμμένες χρήσεις παρουσιάζονται μόνο ως πληροφορία. |

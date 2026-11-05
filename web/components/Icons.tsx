@@ -58,3 +58,15 @@ export const HomeIcon = ({ className }: P) => (
 export const PinIcon = ({ className }: P) => (
   <svg {...base} className={className}><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.4" /></svg>
 );
+export const ClockIcon = ({ className }: P) => (
+  <svg {...base} className={className}><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg>
+);
+export const UserIcon = ({ className }: P) => (
+  <svg {...base} className={className}><circle cx="12" cy="8.5" r="3.5" /><path d="M5 20c.8-3.8 3.6-5.5 7-5.5s6.2 1.7 7 5.5" /></svg>
+);
+export const FlaskIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M9.5 3.5h5M10.5 3.5v5.2L5.2 18a1.8 1.8 0 0 0 1.6 2.7h10.4a1.8 1.8 0 0 0 1.6-2.7l-5.3-9.3V3.5" /><path d="M8 14h8" /></svg>
+);
+export const DocIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M7 3.5h7l4 4V20.5H7Z" /><path d="M14 3.5v4h4M9.5 12h6M9.5 15.5h6" /></svg>
+);

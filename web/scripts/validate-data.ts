@@ -2,7 +2,7 @@
    Run: npm run validate-data */
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { CellsSchema, MetaSchema, NamesSchema, OccSchema, SpeciesSchema } from "../lib/schemas";
+import { CellsSchema, EvidenceFileSchema, MetaSchema, NamesSchema, OccSchema, SpeciesSchema } from "../lib/schemas";
 import { z } from "zod";
 
 const dir = join(__dirname, "..", "public", "data");
@@ -20,7 +20,7 @@ const check = <T extends z.ZodTypeAny>(label: string, schema: T, data: unknown):
 const species = check("species.json", z.array(SpeciesSchema), read("species.json"));
 const names = check("names.json", NamesSchema, read("names.json"));
 const cells = check("cells.json", CellsSchema, read("cells.json"));
-check("meta.json", MetaSchema, read("meta.json"));
+const meta = check("meta.json", MetaSchema, read("meta.json"));
 
 const slugs = new Set(species?.map((s) => s.slug));
 if (species) {
@@ -46,8 +46,24 @@ if (existsSync(join(dir, "occ"))) {
   }
 }
 
+// evidence cards: every file must validate, belong to a featured species, and be listed in meta.json (and the reverse)
+let evidenceFiles = 0;
+const evDir = join(dir, "evidence");
+const evOnDisk = existsSync(evDir) ? readdirSync(evDir).filter((f) => f.endsWith(".json")).map((f) => f.replace(/\.json$/, "")).sort() : [];
+for (const slug of evOnDisk) {
+  evidenceFiles++;
+  const file = check(`evidence/${slug}.json`, EvidenceFileSchema, JSON.parse(readFileSync(join(evDir, `${slug}.json`), "utf8")));
+  const want = meta?.evidenceCounts[slug];
+  if (file && (!want || want.entries !== file.entries.length || want.safetyNotes !== new Set(file.entries.flatMap((e) => (e.safetyNote ? [e.safetyNote] : []))).size)) errors.push(`evidence/${slug}.json: meta.json evidenceCounts does not match the file`);
+  if (file && file.slug !== slug) errors.push(`evidence/${slug}.json: slug inside the file is ${file.slug}`);
+  const sp = species?.find((s) => s.slug === slug);
+  if (!sp) errors.push(`evidence/${slug}.json: no such species`);
+  else if (!sp.featured) errors.push(`evidence/${slug}.json: evidence is only allowed for featured species`);
+}
+if (meta && JSON.stringify([...meta.evidenceSlugs].sort()) !== JSON.stringify(evOnDisk)) errors.push(`meta.json evidenceSlugs (${meta.evidenceSlugs.join(",")}) does not match evidence/ files (${evOnDisk.join(",")})`);
+
 if (errors.length) {
   console.error(`Data validation FAILED (${errors.length}):\n- ${errors.slice(0, 25).join("\n- ")}`);
   process.exit(1);
 }
-console.log(`OK: ${species?.length} species, ${cells?.cells.length} cells, ${occFiles} occ files, names ${Object.keys(names!.byName).length} validated.`);
+console.log(`OK: ${species?.length} species, ${cells?.cells.length} cells, ${occFiles} occ files, ${evidenceFiles} evidence files, names ${Object.keys(names!.byName).length} validated.`);
