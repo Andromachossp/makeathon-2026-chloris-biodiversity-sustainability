@@ -62,7 +62,7 @@ function Loader({ ready, onDone }: { ready: boolean; onDone: () => void }) {
     <div className="fixed inset-0 z-50 flex flex-col justify-between bg-ink p-6" role="status">
       <button type="button" onClick={onDone} className="min-h-[44px] self-end rounded-full border border-line px-4 text-sm text-dim">Skip</button>
       <div>
-        <p className="font-mono text-7xl font-light tabular-nums text-chlorophyll md:text-9xl">{String(Math.round(n)).padStart(3, "0")}</p>
+        <p className="font-mono text-7xl font-light tabular-nums text-saffron md:text-9xl">{String(Math.round(n)).padStart(3, "0")}</p>
         <p className="mt-3 font-mono text-sm uppercase tracking-widest text-dim">{t.landing.loader}</p>
       </div>
     </div>
@@ -126,7 +126,7 @@ export function Landing() {
       <header className="fixed inset-x-0 top-0 z-30 flex items-center justify-between gap-2 px-4 py-3">
         <nav aria-label={t.nav.label} className="hidden gap-5 font-mono text-xs uppercase tracking-widest md:flex">
           {SECTIONS.map((s, i) => (
-            <a key={s} href={`#${s}`} className="text-dim hover:text-chlorophyll"><span className="text-chlorophyll">{String(i + 1).padStart(2, "0")}</span> {t.landing.menu[s]}</a>
+            <a key={s} href={`#${s}`} className="text-dim hover:text-saffron"><span className="text-saffron">{String(i + 1).padStart(2, "0")}</span> {t.landing.menu[s]}</a>
           ))}
         </nav>
         <span className="font-sans text-lg font-extrabold tracking-wide md:hidden">{t.appName}</span>
@@ -134,10 +134,10 @@ export function Landing() {
           <div role="group" aria-label={t.language} className="flex rounded-full border border-line bg-ink/60 p-0.5 backdrop-blur">
             {locales.map((l) => (
               <button key={l} type="button" aria-pressed={locale === l} onClick={() => setLocale(l)}
-                className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${locale === l ? "bg-chlorophyll text-ink" : "text-dim"}`}>{l}</button>
+                className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>{l}</button>
             ))}
           </div>
-          <Link href="/map" className="flex min-h-[44px] items-center rounded-full bg-chlorophyll px-5 text-sm font-semibold text-ink">{t.landing.openApp}</Link>
+          <Link href="/map" className="flex min-h-[44px] items-center rounded-full bg-saffron px-5 text-sm font-semibold text-ink">{t.landing.openApp}</Link>
         </div>
       </header>
 
@@ -153,12 +153,12 @@ export function Landing() {
         {/* 02 where */}
         <section id="where" className="flex min-h-dvh flex-col justify-between px-5 py-24 md:px-10">
           <div className="max-w-xl">
-            <p className="font-mono text-sm text-chlorophyll">02</p>
+            <p className="font-mono text-sm text-saffron">02</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.whereTitle}</h2>
             <p className="mt-3 text-dim">{t.landing.whereBody}</p>
           </div>
           <div>
-            <p className="font-mono text-6xl font-light tabular-nums text-pollen md:text-8xl">{medicinal?.toLocaleString(locale) ?? "—"}</p>
+            <p className="font-mono text-6xl font-light tabular-nums text-lavender md:text-8xl">{medicinal?.toLocaleString(locale) ?? "—"}</p>
             <p className="mt-1 text-dim">{t.landing.speciesCount}</p>
           </div>
         </section>
@@ -166,12 +166,12 @@ export function Landing() {
         {/* 03 risk */}
         <section id="risk" className="flex min-h-dvh flex-col justify-between px-5 py-24 md:px-10">
           <div className="max-w-xl rounded-[14px] bg-ink/60 p-1 backdrop-blur-sm">
-            <p className="font-mono text-sm text-risk-high">03</p>
+            <p className="font-mono text-sm text-risk-high-line">03</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.riskTitle}</h2>
             <p className="mt-3 text-dim">{t.landing.riskBody}</p>
           </div>
           <div className="rounded-[14px] bg-ink/60 p-1 backdrop-blur-sm">
-            <p className="font-mono text-6xl font-light tabular-nums text-risk-high md:text-8xl">{atRisk ?? "—"}</p>
+            <p className="font-mono text-6xl font-light tabular-nums text-risk-high-line md:text-8xl">{atRisk ?? "—"}</p>
             <p className="mt-1 text-dim">{t.landing.atRiskCount}</p>
             {hotspotsKnown && <p className="mt-1 font-mono text-sm text-dim">{hotspots} {t.map.hotspots.toLowerCase()}</p>}
           </div>
@@ -180,13 +180,13 @@ export function Landing() {
         {/* 04 keep: sideways panels */}
         <section id="keep" className="min-h-dvh py-24">
           <div className="px-5 md:px-10">
-            <p className="font-mono text-sm text-chlorophyll">04</p>
+            <p className="font-mono text-sm text-saffron">04</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.keepTitle}</h2>
           </div>
           <ul className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-10" tabIndex={0} aria-label={t.landing.keepTitle}>
             {t.landing.keep.map((k) => (
-              <li key={k.n} className="flex h-[22rem] w-[78vw] max-w-sm shrink-0 snap-start flex-col justify-between rounded-[14px] border border-line bg-moss/90 p-6 backdrop-blur">
-                <span className="font-mono text-6xl font-light text-chlorophyll">{k.n}</span>
+              <li key={k.n} className="flex h-[22rem] w-[78vw] max-w-sm shrink-0 snap-start flex-col justify-between rounded-[14px] border border-line bg-surface/90 p-6 backdrop-blur">
+                <span className="font-mono text-6xl font-light text-saffron">{k.n}</span>
                 <div>
                   <h3 className="font-serif text-2xl font-semibold">{k.t}</h3>
                   <p className="mt-2 text-dim">{k.d}</p>
@@ -200,15 +200,15 @@ export function Landing() {
         <section id="install" className="flex min-h-dvh flex-col justify-between px-5 py-24 md:px-10">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
-              <p className="font-mono text-sm text-chlorophyll">05</p>
+              <p className="font-mono text-sm text-saffron">05</p>
               <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.installTitle}</h2>
               <p className="mt-3 max-w-md text-dim">{t.landing.installBody}</p>
               <ul className="mt-4 space-y-1 text-sm text-dim"><li>{t.landing.ios}</li><li>{t.landing.android}</li></ul>
-              <Link href="/map" className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-chlorophyll px-6 py-3 font-semibold text-ink">{t.landing.openApp}</Link>
+              <Link href="/map" className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-saffron px-6 py-3 font-semibold text-ink">{t.landing.openApp}</Link>
             </div>
-            <div className="justify-self-start rounded-[14px] bg-parchment p-4 md:justify-self-center">
+            <div className="justify-self-start rounded-[14px] bg-paper p-4 md:justify-self-center">
               {siteUrl && <QRCodeSVG value={siteUrl} size={176} bgColor="#F1EBDD" fgColor="#2A2418" title={siteUrl} />}
-              <p className="mt-2 max-w-[11rem] break-all text-center font-mono text-[10px] text-parchment-ink">{siteUrl}</p>
+              <p className="mt-2 max-w-[11rem] break-all text-center font-mono text-[10px] text-paper-ink">{siteUrl}</p>
             </div>
           </div>
           <footer className="mt-16 text-xs text-dim">

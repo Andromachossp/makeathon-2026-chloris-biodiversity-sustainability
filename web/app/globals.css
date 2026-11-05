@@ -1,38 +1,79 @@
 @import "tailwindcss";
 
+/* "Night over the Aegean": ink-navy base, warm off-white text, Greek wildflower accents.
+   Contrast (WCAG) measured against --ink / --surface / --surface-2 is recorded in docs/DESIGN.md. */
 :root {
-  --ink: #0b1410;
-  --moss: #13241b;
-  --moss-2: #1c3326;
-  --line: rgba(233, 240, 228, 0.12);
-  --text: #e9f0e4;
-  --text-dim: #a9b8ac;
-  --chlorophyll: #7be495;
-  --pollen: #e9d98b;
-  --parchment: #f1ebdd;
-  --parchment-ink: #2a2418;
-  --risk-low: #8fb79a;
-  --risk-moderate: #e3b23c;
-  --risk-high: #e0653a;
-  --risk-critical: #e04848;
+  --ink: #0d1220;
+  --surface: #151b2e;
+  --surface-2: #1b2340;
+  --line: #232b45;
+  --text: #f4efe6;
+  --text-dim: #a7afc8;
+
+  /* wildflower accents */
+  --poppy: #f0533a;
+  --saffron: #f6b93b;
+  --lavender: #9b8cff;
+  --aegean: #2ea8d8;
+  --ok: #6bcb8b; /* the only green: small "OK" accents */
+
+  /* paper (species sheet) */
+  --paper: #f4efe6;
+  --paper-ink: #1a2036;
+
+  /* risk: colour-blind-safe sequential ramp, pale yellow -> orange -> crimson -> deep purple.
+     fill = background for chips (text uses -on); line = tone for strokes/text on dark (>= 4.5:1 on --surface) */
+  --risk-low: #f9e58a;       --risk-low-on: #1a1405;       --risk-low-line: #f9e58a;
+  --risk-moderate: #f5a04a;  --risk-moderate-on: #1a1005;  --risk-moderate-line: #f5a04a;
+  --risk-high: #c7303a;      --risk-high-on: #ffffff;      --risk-high-line: #e5545b;
+  --risk-critical: #7b2a8c;  --risk-critical-on: #ffffff;  --risk-critical-line: #b36bd1;
+
+  /* richness: separate cool ramp, ice blue -> indigo (never used for risk) */
+  --rich-1: #ddf1fb; --rich-2: #9ed6f2; --rich-3: #5fb0ea; --rich-4: #5b86ee; --rich-5: #6a5fe0; --rich-6: #5233b8;
+
+  /* one colour per score component */
+  --c-iucn: #f6b93b;
+  --c-endemic: #9b8cff;
+  --c-rarity: #2ea8d8;
+  --c-decline: #f0533a;
+  --c-unprotected: #e27db8;
+  --c-fire: #d97b2b;
 }
 
 @theme inline {
   --color-ink: var(--ink);
-  --color-moss: var(--moss);
-  --color-moss-2: var(--moss-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-line: var(--line);
   --color-text: var(--text);
   --color-dim: var(--text-dim);
-  --color-chlorophyll: var(--chlorophyll);
-  --color-pollen: var(--pollen);
-  --color-parchment: var(--parchment);
-  --color-parchment-ink: var(--parchment-ink);
+  --color-poppy: var(--poppy);
+  --color-saffron: var(--saffron);
+  --color-lavender: var(--lavender);
+  --color-aegean: var(--aegean);
+  --color-ok: var(--ok);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
   --color-risk-low: var(--risk-low);
+  --color-risk-low-on: var(--risk-low-on);
+  --color-risk-low-line: var(--risk-low-line);
   --color-risk-moderate: var(--risk-moderate);
+  --color-risk-moderate-on: var(--risk-moderate-on);
+  --color-risk-moderate-line: var(--risk-moderate-line);
   --color-risk-high: var(--risk-high);
+  --color-risk-high-on: var(--risk-high-on);
+  --color-risk-high-line: var(--risk-high-line);
   --color-risk-critical: var(--risk-critical);
+  --color-risk-critical-on: var(--risk-critical-on);
+  --color-risk-critical-line: var(--risk-critical-line);
+  --color-c-iucn: var(--c-iucn);
+  --color-c-endemic: var(--c-endemic);
+  --color-c-rarity: var(--c-rarity);
+  --color-c-decline: var(--c-decline);
+  --color-c-unprotected: var(--c-unprotected);
+  --color-c-fire: var(--c-fire);
   --font-sans: var(--font-roboto-flex), system-ui, sans-serif;
+  --font-display: var(--font-noto-display), Georgia, serif;
   --font-serif: var(--font-literata), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
   --radius-card: 14px;
@@ -45,22 +86,22 @@ html {
 body {
   background: var(--ink);
   color: var(--text);
-  font-family: var(--font-sans);
+  font-family: var(--font-roboto-flex), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--saffron);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--chlorophyll);
+  outline: 2px solid var(--aegean);
   outline-offset: 2px;
 }
 
 /* Skeleton shimmer (1.6 s linear); static under reduced motion */
 .skeleton {
-  background: linear-gradient(
-    115deg,
-    var(--moss-2) 30%,
-    rgba(233, 240, 228, 0.09) 50%,
-    var(--moss-2) 70%
-  );
+  background: linear-gradient(115deg, var(--surface-2) 30%, rgba(244, 239, 230, 0.09) 50%, var(--surface-2) 70%);
   background-size: 250% 100%;
   animation: shimmer 1.6s linear infinite;
   border-radius: 8px;
@@ -74,7 +115,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .skeleton {
     animation: none;
-    background: var(--moss-2);
+    background: var(--surface-2);
   }
   * {
     scroll-behavior: auto !important;
@@ -94,7 +135,7 @@ body {
 
 /* MapLibre controls in the night palette */
 .maplibregl-ctrl-attrib {
-  background: rgba(11, 20, 16, 0.85) !important;
+  background: rgba(13, 18, 32, 0.85) !important;
   color: var(--text-dim) !important;
 }
 .maplibregl-ctrl-attrib a { color: var(--text-dim) !important; }

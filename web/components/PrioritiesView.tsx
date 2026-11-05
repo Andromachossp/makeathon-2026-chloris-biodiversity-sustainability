@@ -24,7 +24,7 @@ export function PrioritiesView() {
 function Toggle({ on, onClick, children }: { on: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
     <button type="button" onClick={onClick} aria-pressed={on}
-      className={`min-h-[44px] whitespace-nowrap rounded-full border px-4 text-sm ${on ? "border-chlorophyll bg-chlorophyll text-ink" : "border-line text-text"}`}>
+      className={`min-h-[44px] whitespace-nowrap rounded-full border px-4 text-sm ${on ? "border-saffron bg-saffron text-ink" : "border-line text-text"}`}>
       {on && <span aria-hidden="true">✓ </span>}
       {children}
     </button>
@@ -55,7 +55,7 @@ function List() {
 
   return (
     <section className="mx-auto flex h-[calc(100dvh-3.5rem-6rem)] max-w-3xl flex-col px-4 pt-4 md:h-[calc(100dvh-3.5rem)]">
-      <h1 className="font-serif text-3xl font-semibold">{t.nav.priorities}</h1>
+      <h1 className="font-display text-4xl font-semibold">{t.nav.priorities}</h1>
       <p className="mt-1 text-sm text-dim">{t.priorities.sub}</p>
       <div role="group" aria-label={t.priorities.filters} className="mt-4 flex gap-2 overflow-x-auto pb-1">
         <Toggle on={atRisk} onClick={() => setAtRisk(!atRisk)}>{t.priorities.atRisk}</Toggle>
@@ -79,7 +79,7 @@ function List() {
               const n = displayName(s, locale);
               return (
                 <div key={s.slug} role="listitem" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: v.size, transform: `translateY(${v.start}px)` }} className="pb-2">
-                  <Link href={`/species/${s.slug}`} className="flex h-full flex-col justify-center gap-1 rounded-[14px] border border-line bg-moss px-3 hover:bg-moss-2">
+                  <Link href={`/species/${s.slug}`} className="flex h-full flex-col justify-center gap-1 rounded-[14px] border border-line bg-surface px-3 hover:bg-surface-2">
                     <span className="flex items-center justify-between gap-2">
                       <span className="font-mono text-xs text-dim">{s.cat}</span>
                       <RiskChip level={s.risk.level} score={s.risk.score} />
@@ -90,7 +90,7 @@ function List() {
                     <span className="flex flex-wrap items-center gap-1.5">
                       {!n.isFallback && <span className="mr-1 max-w-full truncate font-serif text-sm italic text-dim">{s.name}</span>}
                       {s.iucn !== "NE" && <IucnBadge code={s.iucn} />}
-                      {s.endemic && <span className="rounded-full border border-pollen px-2 py-0.5 text-[11px] text-pollen">{t.species.endemic}</span>}
+                      {s.endemic && <span className="rounded-full border border-lavender px-2 py-0.5 text-[11px] text-lavender">{t.species.endemic}</span>}
                     </span>
                   </Link>
                 </div>

@@ -18,7 +18,7 @@ export function TabBar() {
   return (
     <nav
       aria-label={t.nav.label}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-moss/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:inset-y-0 md:left-0 md:right-auto md:w-24 md:border-r md:border-t-0 md:pb-0"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:inset-y-0 md:left-0 md:right-auto md:w-24 md:border-r md:border-t-0 md:pb-0"
     >
       <ul className="mx-auto flex max-w-xl items-end justify-around md:h-full md:max-w-none md:flex-col md:items-center md:justify-start md:gap-6 md:pt-20">
         {tabs.map(({ href, label, Icon, raised }) => {
@@ -29,13 +29,13 @@ export function TabBar() {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={`flex min-h-[56px] min-w-[64px] flex-col items-center justify-center gap-1 px-2 text-xs ${
-                  active ? "text-chlorophyll" : "text-dim"
+                  active ? "text-saffron" : "text-dim"
                 }`}
               >
                 <span
                   className={
                     raised
-                      ? "flex h-14 w-14 items-center justify-center rounded-full bg-chlorophyll text-ink md:h-12 md:w-12"
+                      ? "flex h-14 w-14 items-center justify-center rounded-full bg-saffron text-ink md:h-12 md:w-12"
                       : ""
                   }
                 >

@@ -14,7 +14,7 @@ import { CellSheet } from "./CellSheet";
 import { CloseIcon, LocateIcon } from "./Icons";
 import { MapSkeleton } from "./Skeleton";
 
-const EMBER = "#E0653A";
+const EMBER = "#F0533A";
 setWorkerUrl("/maplibre/maplibre-gl-worker.mjs");
 
 export default function MapView() {
@@ -55,7 +55,7 @@ function hatchImage(): ImageData {
 function Pill({ on, onClick, children, disabled, title }: { on: boolean; onClick: () => void; children: React.ReactNode; disabled?: boolean; title?: string }) {
   return (
     <button type="button" onClick={onClick} aria-pressed={on} disabled={disabled} title={title}
-      className={`min-h-[44px] whitespace-nowrap rounded-full border px-4 text-sm backdrop-blur ${disabled ? "border-dashed border-line bg-ink/80 text-dim" : on ? "border-chlorophyll bg-chlorophyll text-ink" : "border-line bg-ink/80 text-text"}`}>
+      className={`min-h-[44px] whitespace-nowrap rounded-full border px-4 text-sm backdrop-blur ${disabled ? "border-dashed border-line bg-ink/80 text-dim" : on ? "border-saffron bg-saffron text-ink" : "border-line bg-ink/80 text-text"}`}>
       {on && !disabled && <span aria-hidden="true">✓ </span>}{children}
     </button>
   );
@@ -168,7 +168,7 @@ function MapInner() {
             {period === "now" && <Layer id="species-lost" type="line" filter={["all", ["==", ["get", "then"], 1], ["==", ["get", "now"], 0]]} paint={{ "line-color": "#E9D98B", "line-width": 2, "line-dasharray": [2, 2] }} />}
           </Source>
         )}
-        {me && <Marker longitude={me.lng} latitude={me.lat}><div className="h-4 w-4 rounded-full border-2 border-ink bg-pollen" aria-hidden="true" /></Marker>}
+        {me && <Marker longitude={me.lng} latitude={me.lat}><div className="h-4 w-4 rounded-full border-2 border-ink bg-lavender" aria-hidden="true" /></Marker>}
       </MapGL>
 
       {/* layer toggles */}
@@ -184,19 +184,19 @@ function MapInner() {
         className="absolute right-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-ink/85 backdrop-blur">
         <LocateIcon className="h-5 w-5" />
       </button>
-      {locError && <p role="status" className="absolute right-3 top-16 z-10 rounded-lg bg-ink/90 px-3 py-1.5 text-xs text-pollen">{t.map.locateFail}</p>}
+      {locError && <p role="status" className="absolute right-3 top-16 z-10 rounded-lg bg-ink/90 px-3 py-1.5 text-xs text-lavender">{t.map.locateFail}</p>}
 
       {/* selected species: Then / Now */}
       {focus && (
         <div className="absolute left-3 right-3 top-[4.25rem] z-10 flex items-center gap-2 rounded-[14px] border border-line bg-ink/90 p-1.5 backdrop-blur md:right-auto md:top-20">
           <span className="min-w-0 flex-1 truncate pl-2 text-sm">
             <span className="hidden text-dim sm:inline">{t.map.speciesLayer}: </span>
-            <Link className="font-serif italic text-chlorophyll" href={`/species/${focus.slug}`}>{displayName(focus, locale).isFallback ? focus.name : displayName(focus, locale).title}</Link>
+            <Link className="font-serif italic text-saffron" href={`/species/${focus.slug}`}>{displayName(focus, locale).isFallback ? focus.name : displayName(focus, locale).title}</Link>
           </span>
           <div role="radiogroup" aria-label={t.species.mapTitle} className="inline-flex shrink-0 rounded-full border border-line p-0.5 text-sm">
             {(["then", "now"] as const).map((p) => (
               <button key={p} type="button" role="radio" aria-checked={period === p} onClick={() => setPeriod(p)}
-                className={`min-h-[44px] rounded-full px-4 ${period === p ? "bg-chlorophyll text-ink" : "text-text"}`}>{t.species[p]}</button>
+                className={`min-h-[44px] rounded-full px-4 ${period === p ? "bg-saffron text-ink" : "text-text"}`}>{t.species[p]}</button>
             ))}
           </div>
           <Link href="/map" aria-label={t.map.clearSpecies} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line"><CloseIcon className="h-5 w-5" /></Link>

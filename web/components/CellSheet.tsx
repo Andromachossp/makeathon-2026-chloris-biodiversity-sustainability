@@ -26,7 +26,7 @@ export function CellSheet({ cell, size, species, onClose }: { cell: Cell; size: 
 
   return (
     <section aria-label={t.map.list}
-      className="absolute inset-x-0 bottom-0 z-20 flex max-h-[55%] flex-col rounded-t-[14px] border-t border-line bg-moss md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-96 md:rounded-none md:border-l md:border-t-0">
+      className="absolute inset-x-0 bottom-0 z-20 flex max-h-[55%] flex-col rounded-t-[14px] border-t border-line bg-surface md:inset-y-0 md:left-auto md:right-0 md:max-h-none md:w-96 md:rounded-none md:border-l md:border-t-0">
       <div className="mx-auto mt-2 h-1.5 w-12 rounded-full bg-line md:hidden" aria-hidden="true" />
       <header className="flex items-start justify-between gap-3 px-4 pb-2 pt-3">
         <div>
@@ -46,7 +46,7 @@ export function CellSheet({ cell, size, species, onClose }: { cell: Cell; size: 
             const n = displayName(s, locale);
             return (
               <div key={s.slug} role="listitem" className="pb-1.5" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: v.size, transform: `translateY(${v.start}px)` }}>
-                <Link href={`/species/${s.slug}`} className="flex h-full items-center gap-3 rounded-[10px] border border-line px-3 hover:bg-moss-2">
+                <Link href={`/species/${s.slug}`} className="flex h-full items-center gap-3 rounded-[10px] border border-line px-3 hover:bg-surface-2">
                   <span className="min-w-0 flex-1">
                     <span className={`block truncate text-sm ${n.isFallback ? "font-serif italic" : "font-medium"}`}>{n.title}</span>
                     {!n.isFallback && <span className="block truncate font-serif text-xs italic text-dim">{s.name}</span>}

@@ -24,7 +24,7 @@ export function TopBar() {
               onClick={() => setLocale(l)}
               aria-pressed={locale === l}
               className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${
-                locale === l ? "bg-chlorophyll text-ink" : "text-dim"
+                locale === l ? "bg-saffron text-ink" : "text-dim"
               }`}
             >
               {l}
@@ -33,7 +33,7 @@ export function TopBar() {
         </div>
       </div>
       {!online && (
-        <p role="status" className="flex items-center gap-2 bg-moss px-4 py-2 text-sm text-pollen">
+        <p role="status" className="flex items-center gap-2 bg-surface px-4 py-2 text-sm text-lavender">
           <OfflineIcon className="h-4 w-4 shrink-0" />
           {t.offlineBanner}
         </p>

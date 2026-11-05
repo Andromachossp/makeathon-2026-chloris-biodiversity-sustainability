@@ -1,8 +1,8 @@
 # Design
 
-## Concept: "Night herbarium"
+## Concept: "Night over the Aegean"
 
-Chloris looks like a botanical herbarium catalogue at night: dark forest ink, chlorophyll light, parchment specimen sheets with catalogue numbers. The landing page is a cinematic WebGL story. The app screens are calm and fast, with skeleton screens instead of spinners.
+Chloris looks like an editorial atlas printed at night: ink-navy paper, warm off-white type and the colours of Greek wildflowers (poppy, saffron, lavender, Aegean blue). Green is reserved for a small "OK" accent. The landing page is a cinematic WebGL story built from our own data; the app screens are calm and fast, with skeleton screens instead of spinners. The species card keeps its herbarium-sheet idea: an off-white specimen sheet with a catalogue number.
 
 **Inspiration (combine ideas that suit plants and conservation; don't copy any site's look):**
 
@@ -17,32 +17,61 @@ Chloris looks like a botanical herbarium catalogue at night: dark forest ink, ch
 
 ## Tokens
 
-Define as CSS variables in `app/globals.css` and map them into Tailwind's theme.
+Defined as CSS variables in `web/app/globals.css` and mapped into Tailwind's theme. Never use a raw hex in a component.
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `--ink` | `#0B1410` | Page background (night forest) |
-| `--moss` | `#13241B` | Raised surfaces, sheets |
-| `--moss-2` | `#1C3326` | Hover, skeleton base |
-| `--line` | `rgba(233,240,228,0.12)` | Hairlines |
-| `--text` | `#E9F0E4` | Primary text |
-| `--text-dim` | `#A9B8AC` | Secondary text |
-| `--chlorophyll` | `#7BE495` | Brand accent, primary buttons, focus ring |
-| `--pollen` | `#E9D98B` | Highlights, endemic badge |
-| `--parchment` | `#F1EBDD` | Specimen card paper |
-| `--parchment-ink` | `#2A2418` | Text on parchment |
-| Risk low | `#8FB79A` + leaf icon | |
-| Risk moderate | `#E3B23C` + triangle icon | |
-| Risk high | `#E0653A` + flame icon | |
-| Risk critical | `#E04848` + octagon icon | Always icon + label, never colour alone |
-| Harvest safe / careful / do-not | same as low / moderate / critical, with icons ✓ / ! / ✕ | |
+| `--ink` | `#0D1220` | Page background |
+| `--surface` | `#151B2E` | Cards, sheets, tab bar |
+| `--surface-2` | `#1B2340` | Hover, skeleton base |
+| `--line` | `#232B45` | Hairlines and borders |
+| `--text` | `#F4EFE6` | Primary text (warm off-white) |
+| `--text-dim` | `#A7AFC8` | Secondary text |
+| `--poppy` | `#F0533A` | Alerts, decline component |
+| `--saffron` | `#F6B93B` | Primary actions, large numerals, selected state |
+| `--lavender` | `#9B8CFF` | Endemic badge, endemic component |
+| `--aegean` | `#2EA8D8` | Focus ring, Natura 2000, rarity component |
+| `--ok` | `#6BCB8B` | The only green: "OK" / Least concern, small accents only |
+| `--paper` / `--paper-ink` | `#F4EFE6` / `#1A2036` | Specimen sheet |
 
-Radius 14 px cards, 999 px pills. Hairline borders, no heavy shadows. Check contrast for every text/background pair (AA).
+### Risk ramp (colour-blind safe, sequential, magma-like)
+
+Pale yellow → orange → crimson → deep purple. Lightness falls monotonically, so the order survives red-green and blue-yellow colour blindness and greyscale. Risk is **always** shown as icon + word + ramp colour. A chip uses the ramp colour as its fill and a label colour chosen for contrast.
+
+| Level | Fill | Label on fill | Line tone (strokes/text on dark) | Icon |
+| --- | --- | --- | --- | --- |
+| Low | `#F9E58A` | `#1A1405` (14.5:1) | `#F9E58A` | leaf |
+| Moderate | `#F5A04A` | `#1A1005` (8.9:1) | `#F5A04A` | triangle |
+| High | `#C7303A` | `#FFFFFF` (5.4:1) | `#E5545B` | flame |
+| Critical | `#7B2A8C` | `#FFFFFF` (8.2:1) | `#B36BD1` | octagon |
+
+Harvest states: safe = `--ok` + ✓, careful = Moderate + !, do not harvest = High line tone + ✕, not reviewed = dashed neutral. IUCN badges reuse the ramp (CR critical, EN high, VU moderate, NT low, LC `--ok`); **Not assessed (NE) and Data deficient (DD) are neutral and dashed, never on the ramp.**
+
+### Richness ramp (cool, separate from risk)
+
+Ice blue → indigo: `#DDF1FB · #9ED6F2 · #5FB0EA · #5B86EE · #6A5FE0 · #5233B8`. Used only for the number of medicinal species per cell. Never use it for risk.
+
+### Score components (one colour each, always labelled)
+
+| Component | Colour |
+| --- | --- |
+| IUCN category | saffron `#F6B93B` |
+| Endemic to Greece | lavender `#9B8CFF` |
+| Rarity | Aegean `#2EA8D8` |
+| Decline | poppy `#F0533A` |
+| Outside protected areas | orchid `#E27DB8` |
+| Burnt areas | burnt orange `#D97B2B` |
+
+### Contrast (WCAG 2.x, measured)
+
+Text `#F4EFE6` on `--ink` / `--surface` / `--surface-2`: 16.3 / 14.9 / 13.5. `--text-dim`: 8.5 / 7.8 / 7.1. Poppy 5.3 / 4.9 / 4.4 (use on `--ink` or `--surface`, not for small text on `--surface-2`). Saffron 10.6 / 9.7 / 8.8, lavender 6.7 / 6.2 / 5.6, Aegean 6.9 / 6.3 / 5.7, OK green 9.4 / 8.6 / 7.7. Component colours on `--surface`: 4.9–9.7. Not usable as text on dark: the Critical fill `#7B2A8C` (2.1:1 on `--surface`) and the deep end of the richness ramp; they appear only as fills behind a lighter label or next to an icon and word.
+
+Radius 14 px cards, 999 px pills. Hairline borders, no heavy shadows.
 
 ## Type (all support Greek)
 
-- **Display:** Roboto Flex, condensed (`wdth` 25–40, weight 800–900) for "CHLORIS" and section numbers.
-- **Botanical serif:** Literata for species names (italic for scientific names) and long text on cards.
+- **Display:** Noto Serif Display (has Greek) for headings and species names; Roboto Flex condensed (`wdth` 25–40, weight 800–900) for "CHLORIS" and large numerals.
+- **Text serif:** Literata (has Greek) for long text on cards; italic for scientific names.
 - **Specimen mono:** JetBrains Mono for catalogue numbers, coordinates, counts, labels.
 - UI text: Roboto Flex at normal width.
 Load with `next/font/google`, subsets `latin` + `greek`, `display: swap`.
@@ -71,9 +100,9 @@ Linear scroll story, numbered menu `01 Flora · 02 Where · 03 Risk · 04 Keep �
 
 **Specimen card** (`/species/[slug]`): a parchment sheet on the dark background, like a herbarium sheet. Top-left catalogue number in mono; top-right a round "seal" with the risk score; a bordered "label" block (family, records, cells, years, IUCN, endemic). Scientific name in Literata italic. Harvest banner sits above the sheet at full width.
 
-**Portal (scan):** the viewfinder is a circular mask over the camera image with a thin rotating chlorophyll ring while identifying. On success, the circle expands (`clip-path: circle()` animation, ~600 ms) and reveals the species card underneath. Pure CSS, no WebGL.
+**Portal (scan):** the viewfinder is a circular mask over the camera image with a thin rotating Aegean-blue ring while identifying. On success, the circle expands (`clip-path: circle()` animation, ~600 ms) and reveals the species card underneath. Pure CSS, no WebGL.
 
-**Then / Now:** a two-state segmented control on maps; "Then" shows old-period cells in pollen, "Now" new-period cells in chlorophyll; cells present then but not now get a dashed outline.
+**Then / Now:** a two-state segmented control on maps; "Then" shows old-period cells in saffron, "Now" new-period cells in Aegean blue; cells present then but not now get a dashed outline.
 
 **Motion:** 150–250 ms ease-out for UI; nothing bounces. Respect `prefers-reduced-motion` everywhere.
 
@@ -82,7 +111,7 @@ Linear scroll story, numbered menu `01 Flora · 02 Where · 03 Risk · 04 Keep �
 Every route that loads data shows a skeleton that matches the final layout, so nothing jumps when content arrives (CLS < 0.1). No full-screen spinners.
 
 - Build them with `loading.tsx` per route (navigation) **and** client skeleton components while JSON loads (`<Suspense>` boundaries around data-dependent parts).
-- One shared `<Skeleton>` primitive: `--moss-2` blocks with a slow diagonal shimmer (1.6 s, linear). With reduced motion: static blocks, no shimmer. Skeletons have `aria-busy="true"` on the container and a visually hidden "Loading…" label.
+- One shared `<Skeleton>` primitive: `--surface-2` blocks with a slow diagonal shimmer (1.6 s, linear). With reduced motion: static blocks, no shimmer. Skeletons have `aria-busy="true"` on the container and a visually hidden "Loading…" label.
 
 | Screen | Skeleton |
 | --- | --- |
@@ -97,6 +126,6 @@ Every route that loads data shows a skeleton that matches the final layout, so n
 ## Accessibility
 
 - All colour-coded things also have an icon and a text label.
-- Focus ring: 2 px `--chlorophyll`, offset 2 px.
+- Focus ring: 2 px `--aegean`, offset 2 px.
 - Map: list alternative for every map view (cell sheet and priorities), labelled controls.
 - Touch targets ≥ 44 px. Greek and English text both fit (test long Greek strings).

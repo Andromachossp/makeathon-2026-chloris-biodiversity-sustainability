@@ -23,7 +23,7 @@ export function RowsSkeleton({ rows = 10 }: { rows?: number }) {
     <SkeletonScreen className="flex flex-col gap-3 p-4">
       <Skeleton className="h-11 w-full rounded-full" />
       {Array.from({ length: rows }, (_, i) => (
-        <div key={i} className="flex items-center gap-3 rounded-[14px] border border-line bg-moss p-3">
+        <div key={i} className="flex items-center gap-3 rounded-[14px] border border-line bg-surface p-3">
           <Skeleton className="h-8 w-16" />
           <div className="flex flex-1 flex-col gap-2">
             <Skeleton className="h-4 w-2/3" />
@@ -49,7 +49,7 @@ export function MapSkeleton() {
         <Skeleton className="h-9 w-20 rounded-full" />
         <Skeleton className="h-9 w-28 rounded-full" />
       </div>
-      <div className="rounded-t-[14px] border-t border-line bg-moss p-4">
+      <div className="rounded-t-[14px] border-t border-line bg-surface p-4">
         <Skeleton className="mx-auto mb-4 h-1.5 w-12 rounded-full" />
         {[0, 1, 2].map((i) => (
           <Skeleton key={i} className="mb-2 h-10 w-full" />
@@ -63,7 +63,7 @@ export function SpeciesSkeleton() {
   return (
     <SkeletonScreen className="flex flex-col gap-4 p-4">
       <Skeleton className="h-16 w-full rounded-[14px]" />
-      <div className="rounded-[14px] bg-moss p-5">
+      <div className="rounded-[14px] bg-surface p-5">
         <div className="flex items-start justify-between">
           <Skeleton className="h-6 w-24" />
           <Skeleton className="h-16 w-16 rounded-full" />

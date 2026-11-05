@@ -33,7 +33,7 @@ const VERT = /* glsl */ `
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_PointSize = uSize * pulse * (1.0 + m * 0.25) * (5.2 / -mv.z);
     gl_Position = projectionMatrix * mv;
-    // keep the leaf stage separate in colour: m==0 -> pure chlorophyll
+    // keep the leaf stage separate in colour: m==0 -> pure saffron
     vBright = mix(0.5, aBright, m);
   }
 `;

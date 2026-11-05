@@ -39,15 +39,15 @@ function Inner({ slug }: { slug: string }) {
 
   return (
     <div>
-      <div role="radiogroup" aria-label={t.species.mapTitle} className="mb-3 inline-flex rounded-full border border-parchment-ink/40 p-0.5 text-sm">
+      <div role="radiogroup" aria-label={t.species.mapTitle} className="mb-3 inline-flex rounded-full border border-paper-ink/40 p-0.5 text-sm">
         {(["then", "now"] as const).map((p) => (
           <button key={p} type="button" role="radio" aria-checked={period === p} onClick={() => setPeriod(p)}
-            className={`min-h-[44px] rounded-full px-4 ${period === p ? "bg-parchment-ink text-parchment" : "text-parchment-ink"}`}>
+            className={`min-h-[44px] rounded-full px-4 ${period === p ? "bg-paper-ink text-paper" : "text-paper-ink"}`}>
             {t.species[p]} <span className="font-mono text-xs opacity-70">{t.species[p === "then" ? "thenHelp" : "nowHelp"]}</span>
           </button>
         ))}
       </div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg bg-parchment-ink/[0.07]" role="img"
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg bg-paper-ink/[0.07]" role="img"
         aria-label={`${t.species.mapTitle}: ${active.size} ${t.species.cells}`}>
         {cells.cells.map((c) => {
           const r = rect(c.id, size);
@@ -66,7 +66,7 @@ function Inner({ slug }: { slug: string }) {
           return <rect key={`l${c}`} x={r.x + 0.01} y={r.y + 0.01} width={r.w - 0.02} height={r.h - 0.02} fill="none" stroke="#a8861f" strokeWidth="0.03" strokeDasharray="0.06 0.05" />;
         })}
       </svg>
-      <p className="mt-2 font-mono text-xs text-parchment-ink/80">
+      <p className="mt-2 font-mono text-xs text-paper-ink/80">
         {active.size} {t.species.cells}
         {lostCells.length > 0 && <> · {lostCells.length} {t.species.gone}</>}
       </p>
