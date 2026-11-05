@@ -1,5 +1,5 @@
-import { Placeholder } from "@/components/Placeholder";
+import { NearView } from "@/components/NearView";
 
 export default function Page() {
-  return <Placeholder page="near" />;
+  return <NearView />;
 }

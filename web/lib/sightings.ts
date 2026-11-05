@@ -38,10 +38,7 @@ export async function listSightings(): Promise<Sighting[]> {
 
 export const deleteSighting = (id: string) => del(id, store());
 
-/** 0.1 degree cell id used by the map ("382_237"). */
-export function cellIdOf(lat: number, lng: number, size = 0.1): string {
-  return `${Math.floor(Math.round((lat / size) * 1e6) / 1e6)}_${Math.floor(Math.round((lng / size) * 1e6) / 1e6)}`;
-}
+export { cellIdOf } from "./geo";
 
 /** One-shot location lookup for saving a sighting. Resolves null if denied or unavailable. Not stored beyond the sighting. */
 export function getPosition(timeoutMs = 10_000): Promise<{ lat: number; lng: number } | null> {

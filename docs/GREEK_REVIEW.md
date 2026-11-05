@@ -7,7 +7,7 @@ Notes for the reviewer:
 - `{n}`, `{cat}`, `{level}` are placeholders filled by the app.
 - Terms chosen on purpose: *Φυτά* (Plants), *Φυτρώνει μόνο στην Ελλάδα* (Only grows in Greece), *Απειλούμενο* (Threatened), *Δεν έχει αξιολογηθεί ακόμη* (Not assessed yet), *Πρωτότυπος βαθμός* (Prototype score).
 
-269 strings.
+282 strings.
 
 | Key | English | Greek (to review) |
 | --- | --- | --- |
@@ -234,6 +234,19 @@ Notes for the reviewer:
 | `landing.keyColour` | Colour: average risk | Χρώμα: μέσος κίνδυνος |
 | `landing.keyLow` | Lower | Χαμηλότερος |
 | `landing.keyHigh` | Higher | Υψηλότερος |
+| `near.intro` | See which medicinal plants other people have recorded around you. | Δες ποια φαρμακευτικά φυτά έχουν καταγράψει άλλοι γύρω σου. |
+| `near.button` | Find plants near me | Βρες φυτά κοντά μου |
+| `near.privacy` | Your location stays on this phone. We do not store it or send it anywhere, and we only show the 10 km square you are in, never your exact spot. | Η τοποθεσία σου μένει σε αυτό το κινητό. Δεν την αποθηκεύουμε ούτε την στέλνουμε πουθενά και δείχνουμε μόνο το τετράγωνο 10 χλμ όπου βρίσκεσαι, ποτέ το ακριβές σημείο. |
+| `near.locating` | Finding your 10 km square… | Βρίσκουμε το τετράγωνο 10 χλμ σου… |
+| `near.yourSquare` | Your 10 km square | Το τετράγωνο 10 χλμ σου |
+| `near.count` | {n} plants recorded here | {n} φυτά έχουν καταγραφεί εδώ |
+| `near.note` | These are plants that people have recorded in this square. The list is not complete, and a plant being listed does not mean it is safe to pick. | Πρόκειται για φυτά που έχουν καταγράψει άνθρωποι σε αυτό το τετράγωνο. Η λίστα δεν είναι πλήρης και το ότι ένα φυτό αναφέρεται δεν σημαίνει ότι είναι ασφαλές να το κόψεις. |
+| `near.noData` | We have no plant records for your 10 km square yet. That does not mean no plants grow there. | Δεν έχουμε ακόμη καταγραφές φυτών για το τετράγωνο 10 χλμ σου. Αυτό δεν σημαίνει ότι δεν φυτρώνουν φυτά εκεί. |
+| `near.outside` | You seem to be outside Greece. Our records only cover Greece. | Φαίνεται ότι βρίσκεσαι εκτός Ελλάδας. Οι καταγραφές μας καλύπτουν μόνο την Ελλάδα. |
+| `near.denied` | We could not use your location. You can allow location for this site in your browser settings, or explore the map instead. | Δεν μπορέσαμε να χρησιμοποιήσουμε την τοποθεσία σου. Μπορείς να την επιτρέψεις για αυτόν τον ιστότοπο στις ρυθμίσεις του προγράμματος περιήγησης ή να εξερευνήσεις τον χάρτη. |
+| `near.unavailable` | Your device could not work out where you are (no GPS signal?). Try again, or explore the map instead. | Η συσκευή σου δεν κατάφερε να βρει πού βρίσκεσαι (χωρίς σήμα GPS;). Δοκίμασε ξανά ή εξερεύνησε τον χάρτη. |
+| `near.tryAgain` | Try again | Δοκίμασε ξανά |
+| `near.exploreMap` | Explore the map | Εξερεύνησε τον χάρτη |
 | `scan.title` | Scan a plant | Σάρωση φυτού |
 | `scan.intro` | Take a photo of one plant. A leaf, a flower or the whole plant works best. | Βγάλε φωτογραφία ενός φυτού. Ένα φύλλο, ένα λουλούδι ή ολόκληρο το φυτό δουλεύουν καλύτερα. |
 | `scan.takePhoto` | Take a photo | Βγάλε φωτογραφία |
