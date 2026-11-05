@@ -76,6 +76,14 @@ Radius 14 px cards, 999 px pills. Hairline borders, no heavy shadows.
 - UI text: Roboto Flex at normal width.
 Load with `next/font/google`, subsets `latin` + `greek`, `display: swap`.
 
+## Map (`/map`)
+
+- Slate-blue basemap built from OpenFreeMap vector tiles: land `#2A3552` is slightly lighter than sea `#131A2E`; roads are omitted, labels are muted (`#8590B0`). No cell outlines.
+- One layer at a time, chosen with chips: **Risk** (average risk score of the species recorded in a square, magma ramp, only squares with at least 5 species; others are muted slate with a legend note), **Richness** (species per square, cool ramp) and **Medicinal hotspots** (at-risk species and under 50% protected: poppy with a hatch pattern, never colour alone).
+- Natura 2000 is an Aegean-blue dashed outline (toggle).
+- **3D** toggle: pitch 48°, fill-extrusion columns, height = number of species (Risk, Richness) or at-risk species (Hotspots). Flat by default on low-end devices (fewer than 6 cores, under 4 GB memory, data saver or reduced motion). Choosing a species always switches to flat so its cells stay visible.
+- Legend shows the active ramp with its real numeric range. **Cell list** is a keyboard- and screen-reader-friendly alternative to the map: every square as a button.
+
 ## Landing page `/` (WebGL)
 
 Linear scroll story, numbered menu `01 Flora · 02 Where · 03 Risk · 04 Keep · 05 Install` + permanent "Open Chloris" button.
