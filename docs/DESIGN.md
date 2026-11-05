@@ -86,10 +86,11 @@ A 3D terrain map with flower pins. The map is deliberately light and natural (sa
 - **Attribution (required by the data licence):** Mapzen / AWS Terrain Tiles with Copernicus EU-DEM, USGS (SRTM, GMTED2010) and NOAA ETOPO1; short form in the map attribution control, full text on `/about`. Basemap: OpenFreeMap, OpenMapTiles, © OpenStreetMap contributors.
 - **Pins:** one flower per occupied 0.1° cell, at the exact cell centre (never jittered or offset), drawn by a GPU symbol layer from SVG icons registered with `map.addImage`. The stem's foot is the anchor, so pins stand on the terrain. Size grows with species count (small to medium).
 - **Colour and shape by layer:** **Risk** = magma ramp (average risk of the species in the cell; fewer than 5 species = small muted slate bud). **Richness** = cool ramp. **Medicinal hotspots** = poppy starburst (a different silhouette, never colour alone) against muted buds.
-- **Clusters:** zoomed out (below zoom 8), pins are grouped into round badges with the count; the ring takes the active ramp colour of the group's average. Tap a badge to zoom in and split it.
+- **Clusters and flowers:** below about zoom 6.5 nearby cells are grouped into small translucent round badges (radius 9–15 px, count in dark text with a light halo) coloured by the active layer's average, so the terrain shows through. From zoom 7 individual flowers appear with collision on, so crowded areas show fewer, larger flowers as you zoom in; icon size scales with zoom. Tap a badge to zoom in.
+- **Framing:** the map opens framed on Greece (lat 34.5–41.8, lng 19.3–28.4); the tilted camera is computed so all four corners stay on screen (50° and no rotation on phones, 60° and a slight rotation on wider screens).
 - **Selection:** the cell's square outline is drawn, the pin is enlarged, and the bottom sheet lists the species (name, risk, IUCN) with the note "Locations are generalised to about 10 km to protect plants."
 - **Species mode (`?species=`):** only that species' cells (Then/Now), the camera flies to them.
-- **Legend:** the active ramp with its real numeric range, plus an "about 10 km" note. **Cell list** is the keyboard- and screen-reader-friendly alternative: every square as a button.
+- **Legend:** a small "Legend" chip that opens on tap; the panel is plain text ("Each flower is a 10 km area. Redder means higher average risk. Grey means not enough data yet.") plus a thin ramp bar with the real range, and never covers more than a third of the map. **Cell list** is the keyboard- and screen-reader-friendly alternative: every square as a button.
 
 ## Landing page `/` (WebGL)
 

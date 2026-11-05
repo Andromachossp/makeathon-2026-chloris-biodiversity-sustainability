@@ -4,7 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import Link from "next/link";
 import { Suspense, use, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { setWorkerUrl, type GeoJSONSource, type StyleImageMetadata } from "maplibre-gl";
+import { LngLat, setWorkerUrl, type GeoJSONSource, type StyleImageMetadata } from "maplibre-gl";
 import MapGL, { Layer, Source, type MapLayerMouseEvent, type MapRef } from "react-map-gl/maplibre";
 import { deviceIsCapable } from "@/lib/device";
 import { iconBucket, iconDefs, rasterise, svgDataUrl } from "@/lib/flowers";
@@ -25,6 +25,33 @@ const MIN_SPECIES_FOR_RISK = 5;
 const EXAGGERATION = 1.3;
 const RING_MUTED = "#6B7694";
 const iconCache = new Map<string, ImageData>();
+
+/** Greece: lat 34.5 to 41.8, lng 19.3 to 28.4. The map opens framed on this box. */
+const GREECE: [[number, number], [number, number]] = [[19.3, 34.5], [28.4, 41.8]];
+const GREECE_CORNERS: [number, number][] = [[19.3, 34.5], [28.4, 34.5], [19.3, 41.8], [28.4, 41.8]];
+
+/** Camera (centre + zoom) that keeps all four corners of Greece on screen at the given pitch and bearing.
+    cameraForBounds only frames a flat map, so we project the corners and zoom out until they fit. */
+function frameGreece(map: import("maplibre-gl").Map, pitch: number, bearing: number) {
+  const w = map.getContainer().clientWidth, h = map.getContainer().clientHeight;
+  const pad = { top: w < 640 ? 150 : 80, bottom: 70, left: 14, right: w < 640 ? 14 : 110 };
+  const flat = map.cameraForBounds(GREECE, { padding: pad });
+  let center = LngLat.convert(flat?.center ?? map.getCenter());
+  let zoom = flat?.zoom ?? map.getZoom();
+  const mid = (a: number, b: number) => (a + b) / 2;
+  let recentred = 0;
+  for (let i = 0; i < 60; i++) {
+    map.jumpTo({ center, zoom, pitch, bearing });
+    const pts = GREECE_CORNERS.map((c) => map.project(c));
+    const fits = pts.every((p) => p.x >= pad.left && p.x <= w - pad.right && p.y >= pad.top && p.y <= h - pad.bottom);
+    const dy = mid(pad.top, h - pad.bottom) - mid(Math.min(...pts.map((p) => p.y)), Math.max(...pts.map((p) => p.y)));
+    const dx = mid(pad.left, w - pad.right) - mid(Math.min(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.x)));
+    if (fits && (Math.abs(dy) < 8 && Math.abs(dx) < 8 || recentred >= 6)) break;
+    if (Math.abs(dx) >= 8 || Math.abs(dy) >= 8) { center = map.unproject([w / 2 - dx, h / 2 - dy]); recentred++; } // centre the box on the usable area
+    if (!fits) zoom -= 0.06;
+  }
+  return { center: [center.lng, center.lat] as [number, number], zoom };
+}
 
 export default function MapView() {
   return (
@@ -70,6 +97,7 @@ function MapInner() {
   const speciesSlug = params.get("species");
   const mapRef = useRef<MapRef>(null);
   const baseView = useRef<{ lng: number; lat: number; zoom: number } | null>(null);
+  const tiltView = useRef<{ center: [number, number]; zoom: number; pitch: number; bearing: number } | null>(null);
 
   const [initialRelief] = useState(() => deviceIsCapable()); // low-end: no terrain, flat map, no intro move
   const [terrainOn, setTerrainOn] = useState(initialRelief);
@@ -83,6 +111,7 @@ function MapInner() {
   const [natura, setNatura] = useState<GeoJSON.FeatureCollection | null>(null);
   const [me, setMe] = useState<{ lng: number; lat: number } | null>(null);
   const [locError, setLocError] = useState(false);
+  const [legendOpen, setLegendOpen] = useState(false);
 
   const size = cells.size;
   const focus = species.find((s) => s.slug === speciesSlug);
@@ -122,8 +151,8 @@ function MapInner() {
     return { type: "FeatureCollection" as const, features };
   }, [stats, mode, riskLo, riskHi, maxN, size]);
 
-  // cluster badge: dark disc, ring coloured by the active layer's average for the group
-  const ringColour = useMemo(() => {
+  // cluster badge: small translucent disc coloured by the active layer's average for the group
+  const clusterColour = useMemo(() => {
     if (mode === "richness") return interpolateOn(["/", ["get", "sumN"], ["get", "point_count"]], richStops);
     if (mode === "hotspots") return ["case", [">", ["get", "hotN"], 0], POPPY, RING_MUTED];
     return ["case", [">", ["get", "cntM"], 0], interpolateOn(["/", ["get", "sumM"], ["max", 1, ["get", "cntM"]]], riskStops), RING_MUTED];
@@ -169,12 +198,18 @@ function MapInner() {
     if (!map) return;
     const c = map.getCenter();
     baseView.current = { lng: c.lng, lat: c.lat, zoom: map.getZoom() };
+    // narrow screens: a gentler tilt and no rotation, so Greece stays large; computed while the skeleton still covers the map
+    const narrow = map.getContainer().clientWidth < 640;
+    const pitch = narrow ? 50 : 60, bearing = narrow ? 0 : -10;
+    tiltView.current = { ...frameGreece(map, pitch, bearing), pitch, bearing };
+    map.jumpTo({ center: c, zoom: baseView.current.zoom, pitch: 0, bearing: 0 });
     // a style reload (language switch) drops images: re-add them from the cache
     map.on("styleimagemissing", (e) => {
       const img = iconCache.get(e.id);
       if (img && !map.hasImage(e.id)) map.addImage(e.id, img, { pixelRatio: 2 } as Partial<StyleImageMetadata>);
     });
     addIcons();
+    setTimeout(() => { const a = map.getContainer().querySelector(".maplibregl-ctrl-attrib"); a?.classList.remove("maplibregl-compact-show"); a?.removeAttribute("open"); }, 600);
     setReady(true);
   };
 
@@ -189,7 +224,8 @@ function MapInner() {
     if (terrainOn) {
       const slow = !introDone.current;
       introDone.current = true;
-      map.easeTo({ pitch: 60, bearing: -10, zoom: base.zoom + 0.3, center: [base.lng, base.lat - 0.2], duration: slow ? 6500 : 1200, easing: (x) => x * x * (3 - 2 * x) });
+      const tilt = tiltView.current;
+      map.easeTo({ pitch: tilt?.pitch ?? 60, bearing: tilt?.bearing ?? -10, zoom: tilt?.zoom ?? base.zoom, center: tilt?.center ?? [base.lng, base.lat], duration: slow ? 6500 : 1200, easing: (x) => x * x * (3 - 2 * x) });
     } else {
       map.easeTo({ pitch: 0, bearing: 0, zoom: base.zoom, center: [base.lng, base.lat], duration: 600 });
     }
@@ -253,8 +289,10 @@ function MapInner() {
   const modes: Mode[] = hotspotsAvailable ? ["risk", "richness", "hotspots"] : ["risk", "richness"];
   const panelOpen = !!selectedCell || listOpen;
   const spMode = !!focus && !!speciesPins;
-  // small to medium by species count; the muted bud is drawn a little larger so it stays visible
-  const iconSize = ["*", ["interpolate", ["linear"], ["get", "n"], 1, 0.34, 5, 0.4, 60, 0.56, 371, 0.78], ["case", ["==", ["get", "icon"], "nodata"], 1.45, 1]] as never;
+  // Icon size scales with zoom (flowers start at zoom 7, where clusters end); species count nudges it up a little,
+  // and the muted bud is drawn slightly larger so it stays visible. Collision hides overlapping flowers.
+  const sizeFactor = ["*", ["interpolate", ["linear"], ["get", "n"], 1, 0.85, 60, 1, 371, 1.25], ["case", ["==", ["get", "icon"], "nodata"], 1.3, 1]];
+  const iconSize = ["interpolate", ["linear"], ["zoom"], 7, ["*", 0.3, sizeFactor], 9, ["*", 0.5, sizeFactor], 11, ["*", 0.78, sizeFactor]] as never;
   const sampleIcon = (name: string) => iconDefs().find((d) => d.name === name)?.svg ?? "";
 
   return (
@@ -262,8 +300,8 @@ function MapInner() {
       {!ready && <div className="absolute inset-0 z-30 bg-ink"><MapSkeleton /></div>}
       <MapGL
         ref={mapRef}
-        initialViewState={{ bounds: [19.2, 34.6, 29.8, 41.9], fitBoundsOptions: { padding: { top: 70, bottom: 20, left: 12, right: 12 } } }}
-        maxBounds={[15, 30.5, 34, 45.5]}
+        initialViewState={{ bounds: [GREECE[0][0], GREECE[0][1], GREECE[1][0], GREECE[1][1]], fitBoundsOptions: { padding: { top: 70, bottom: 20, left: 12, right: 12 } } }}
+        maxBounds={[6, 24, 42, 52]}
         minZoom={4}
         maxPitch={75}
         mapStyle={style}
@@ -282,15 +320,15 @@ function MapInner() {
         )}
 
         {iconsReady && !spMode && (
-          <Source id="pins" type="geojson" data={pins} cluster clusterRadius={46} clusterMaxZoom={8}
+          <Source id="pins" type="geojson" data={pins} cluster clusterRadius={38} clusterMaxZoom={6}
             clusterProperties={{ sumM: ["+", ["get", "mv"]], cntM: ["+", ["get", "mc"]], sumN: ["+", ["get", "n"]], hotN: ["+", ["get", "hot"]] }}>
             <Layer id="clusters" type="circle" filter={["has", "point_count"]}
-              paint={{ "circle-color": "#151B2E", "circle-radius": ["step", ["get", "point_count"], 15, 10, 19, 50, 23], "circle-stroke-width": 4, "circle-stroke-color": ringColour as never, "circle-pitch-alignment": "viewport" }} />
+              paint={{ "circle-color": clusterColour as never, "circle-opacity": 0.6, "circle-radius": ["step", ["get", "point_count"], 9, 10, 12, 40, 15], "circle-stroke-width": 1.2, "circle-stroke-color": clusterColour as never, "circle-stroke-opacity": 0.9, "circle-pitch-alignment": "viewport" }} />
             <Layer id="cluster-count" type="symbol" filter={["has", "point_count"]}
-              layout={{ "text-field": ["get", "point_count_abbreviated"], "text-font": ["Noto Sans Bold"], "text-size": 12, "text-allow-overlap": true, "text-pitch-alignment": "viewport" }}
-              paint={{ "text-color": "#F4EFE6" }} />
+              layout={{ "text-field": ["get", "point_count_abbreviated"], "text-font": ["Noto Sans Bold"], "text-size": 10, "text-allow-overlap": true, "text-pitch-alignment": "viewport" }}
+              paint={{ "text-color": "#1A2036", "text-halo-color": "#F4EFE6", "text-halo-width": 1.6 }} />
             <Layer id="pins" type="symbol" filter={["!", ["has", "point_count"]]}
-              layout={{ "icon-image": ["get", "icon"], "icon-anchor": "bottom", "icon-size": iconSize, "icon-allow-overlap": true, "icon-ignore-placement": true, "icon-pitch-alignment": "viewport", "icon-rotation-alignment": "viewport", "symbol-z-order": "source" }} />
+              layout={{ "icon-image": ["get", "icon"], "icon-anchor": "bottom", "icon-size": iconSize, "icon-allow-overlap": false, "icon-ignore-placement": false, "icon-pitch-alignment": "viewport", "icon-rotation-alignment": "viewport", "symbol-sort-key": ["-", ["get", "n"]] }} />
           </Source>
         )}
 
@@ -358,42 +396,25 @@ function MapInner() {
         </div>
       )}
 
-      {/* legend: the active ramp with its real range, plus the 10 km note */}
+      {/* legend: a small chip that opens on tap; the panel never covers more than a third of the map */}
       {!panelOpen && (
-        <div className="absolute bottom-14 left-3 z-10 w-[16rem] md:bottom-8 rounded-[14px] border border-line bg-ink/90 p-3 text-xs backdrop-blur">
-          {!spMode && mode === "risk" && (
-            <>
-              <p className="text-text">{t.map.riskLegend}</p>
-              <div className="mt-2 h-2.5 rounded-full" style={{ background: gradientCss(RISK_RAMP) }} aria-hidden="true" />
-              <div className="mt-1 flex justify-between font-mono text-dim"><span>{riskLo.toFixed(0)}</span><span>{riskHi.toFixed(0)}</span></div>
-              <div className="flex justify-between text-dim"><span>{t.map.lowRisk}</span><span>{t.map.highRisk}</span></div>
-              <p className="mt-2 flex items-center gap-2 text-dim"><Sample svg={sampleIcon("nodata")} w={14} h={19} />{t.map.noData}</p>
-            </>
+        <div className="absolute bottom-14 left-3 z-10 w-[min(16rem,calc(100%-1.5rem))] md:bottom-8">
+          {legendOpen && (
+            <div id="map-legend" className="mb-2 max-h-[33vh] overflow-y-auto rounded-[14px] border border-line bg-ink/92 p-3 text-xs backdrop-blur">
+              <p className="text-text">{spMode ? (period === "then" ? t.species.thenHelp : t.species.nowHelp) : mode === "risk" ? t.map.legendRisk : mode === "richness" ? t.map.legendRichness : t.map.legendHotspots}</p>
+              {!spMode && mode !== "hotspots" && (
+                <>
+                  <div className="mt-2 h-2 rounded-full" style={{ background: gradientCss(mode === "risk" ? RISK_RAMP : RICH_RAMP) }} aria-hidden="true" />
+                  <div className="mt-1 flex justify-between font-mono text-dim"><span>{mode === "risk" ? riskLo.toFixed(0) : 1}</span><span>{mode === "risk" ? riskHi.toFixed(0) : maxN}</span></div>
+                </>
+              )}
+              {spMode && period === "now" && <p className="mt-2 flex items-center gap-2 text-dim"><Sample svg={sampleIcon("lost")} w={14} h={19} />{t.map.speciesGone}</p>}
+              {natura && showNatura && <p className="mt-2 flex items-center gap-2 text-dim"><span className="inline-block w-5 border-t-2 border-dashed" style={{ borderColor: AEGEAN }} aria-hidden="true" />{t.map.naturaLine}</p>}
+            </div>
           )}
-          {!spMode && mode === "richness" && (
-            <>
-              <p className="text-text">{t.map.richnessLegend}</p>
-              <div className="mt-2 h-2.5 rounded-full" style={{ background: gradientCss(RICH_RAMP) }} aria-hidden="true" />
-              <div className="mt-1 flex justify-between font-mono text-dim"><span>1</span><span>{maxN}</span></div>
-              <div className="flex justify-between text-dim"><span>{t.map.fewer}</span><span>{t.map.more}</span></div>
-            </>
-          )}
-          {!spMode && mode === "hotspots" && (
-            <>
-              <p className="flex items-center gap-2 text-text"><Sample svg={sampleIcon("hot")} w={18} h={25} />{t.map.hotspotLegend}</p>
-              <p className="mt-2 flex items-center gap-2 text-dim"><Sample svg={sampleIcon("nodata")} w={14} h={19} />{t.map.notHotspot}</p>
-            </>
-          )}
-          {spMode && (
-            <>
-              <p className="flex items-center gap-2 text-text"><Sample svg={sampleIcon(period)} w={18} h={25} />{period === "then" ? t.species.thenHelp : t.species.nowHelp}</p>
-              {period === "now" && <p className="mt-2 flex items-center gap-2 text-dim"><Sample svg={sampleIcon("lost")} w={18} h={25} />{t.map.speciesGone}</p>}
-            </>
-          )}
-          {natura && showNatura && (
-            <p className="mt-2 flex items-center gap-2 text-dim"><span className="inline-block w-5 border-t-2 border-dashed" style={{ borderColor: AEGEAN }} aria-hidden="true" />{t.map.naturaLine}</p>
-          )}
-          <p className="mt-2 text-dim">{t.map.legendNote}</p>
+          <Chip on={legendOpen} onClick={() => setLegendOpen(!legendOpen)} label={t.map.legend}>
+            <span aria-expanded={legendOpen} aria-controls="map-legend">{t.map.legend}</span>
+          </Chip>
         </div>
       )}
 
