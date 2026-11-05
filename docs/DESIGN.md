@@ -8,7 +8,7 @@ Chloris looks like an editorial atlas printed at night: ink-navy paper, warm off
 
 | Site | What we take | Where in Chloris |
 | --- | --- | --- |
-| [The New Mobile Workforce](https://thenewmobileworkforce.imm-g-prod.com) | Linear scroll story; every scroll step has a big visual change; WebGL particles morphing between shapes | Landing: particles morph leaf → Greece hotspots → at-risk glow |
+| [The New Mobile Workforce](https://thenewmobileworkforce.imm-g-prod.com) | Linear scroll story; every scroll step has a big visual change; a big visual change per scroll step | Landing: scroll-driven camera move through the 3D risk landscape of Greece |
 | [Persepolis Reimagined](https://persepolis.getty.edu) | Loading counter; "past vs present" reconstruction | Intro counter; "Then / Now" toggle on maps and cards |
 | [KPRverse](https://kprverse.com) | Portals: one world revealed through another | Scan viewfinder as a circular portal that opens into the species card |
 | [Byholm](https://byholm.co) | Numbered menu (01–05) with one permanent CTA; sideways-scrolling panels | Landing nav; "How we keep them" panels |
@@ -88,21 +88,18 @@ Load with `next/font/google`, subsets `latin` + `greek`, `display: swap`.
 
 Linear scroll story, numbered menu `01 Flora · 02 Where · 03 Risk · 04 Keep · 05 Install` + permanent "Open Chloris" button.
 
-0. **Intro loader** (first visit only, skippable, max 2.5 s): mono counter `000 → 100` tied to real loading of `cells.json` and the WebGL scene, label "Cataloguing the flora of Greece". Session-stored so it never repeats.
-1. **01 Flora — hero:** a leaf made of ~6,000 particles (3,000 on phones) breathing slowly in chlorophyll light. Huge condensed "CHLORIS" across the bottom edge. Subtitle: "Where Greece's medicinal plants grow, which are at risk, and how we keep them."
-2. **02 Where:** on scroll, particles fly from the leaf to the real cell centres from `cells.json`, forming Greece. Brightness = number of medicinal species. Counter shows the real number of species from `meta.json`.
-3. **03 Risk:** hotspot cells glow ember and pulse; the rest dim. Text: real count of at-risk species and how many hotspots are outside Natura 2000.
-4. **04 Keep:** sideways-scrolling panels (Byholm): Scan a plant → See if it's safe → Use a substitute → Record a sighting. Each panel has a phone mock with a real screenshot of the app.
+0. **Intro loader** (first visit only, skippable, max 2.5 s): mono counter `000 → 100` in saffron tied to the real loading of `cells.json`, `species.json` and the WebGL scene, label "Cataloguing the flora of Greece". Session-stored so it never repeats.
+1. **01 Flora — hero:** a 3D landscape built from the real `cells.json`: one column per occupied 10 km cell, height = number of medicinal species, colour = average risk of its species on the magma ramp (cells with fewer than 5 species are muted slate). Slow camera tilt, a warm saffron light sweeping across the columns. Huge condensed "CHLORIS" across the bottom edge. Subtitle: "Where Greece's medicinal plants grow, which are at risk, and how we keep them."
+2. **02 Where:** the camera moves closer and orbits over the mainland as you scroll; a small key explains height and colour. Large saffron numeral: the real number of species from `meta.json`.
+3. **03 Risk:** the camera skims low between the columns. Large saffron numeral: the real count of at-risk species, plus how many medicinal hotspots exist (only when the Natura 2000 join is present).
+4. **04 Keep:** sideways-scrolling panels (Byholm): Scan a plant → See if it's safe → Use a substitute → Record a sighting. Phone mock-ups with real screenshots come later.
 5. **05 Install:** QR code + "Open Chloris" + iPhone/Android install hint. Data credits line.
 6. **Footer (P2):** ASCII/dot-matrix rendering of a featured plant photo that reveals the real photo under the pointer (Suho), with the photo credit.
 
 **WebGL implementation rules**
-- `@react-three/fiber` `Points` with a custom `ShaderMaterial`: attributes `aStart` (leaf), `aMap` (cell position), `aRisk`; uniform `uProgress` (0–2) driven by GSAP ScrollTrigger + Lenis; mix positions in the vertex shader with per-particle delay and noise.
-- Leaf positions: sample points inside an SVG leaf path (or a simple parametric leaf) once at startup.
-- Map positions: project cell centres with an equirectangular projection fitted to the canvas; if there are more particles than cells, distribute extras around busy cells.
-- Load the scene with `next/dynamic` and `ssr: false` **only on `/`**. App routes never import Three.js, GSAP or Lenis.
-- Cap DPR at 1.5, pause the render loop when the tab is hidden or the canvas is offscreen, and dispose geometry on unmount.
-- No WebGL, or `prefers-reduced-motion`: show a static, pre-rendered poster image of the Greece hotspot map and normal scrolling. Same text, no motion.
+- `@react-three/fiber` with one `InstancedMesh` (a box per cell, per-instance colour) and `MeshStandardMaterial`; lights: ambient, a directional key light and one moving warm point light. Camera path = keyframes (azimuth, elevation, distance, target) interpolated by scroll progress, plus a slow sinusoidal tilt. Fog distance scales with the camera distance. On tall screens the camera backs off and looks slightly south so the map sits above the title.
+- Load the scene with `next/dynamic` and `ssr: false` **only on `/`**. App routes never import Three.js. Cap DPR at 1.5, dispose geometry on unmount, pause when the tab is hidden.
+- Animated only when the device is capable (6+ cores, 4 GB+ memory when reported, no data saver, no reduced motion). Otherwise the scene renders once as a still (`frameloop="demand"`). No WebGL at all: an SVG poster of the same cells on the same ramp.
 
 ## App screens
 

@@ -6,6 +6,7 @@ import { Suspense, use, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { setWorkerUrl } from "maplibre-gl";
 import MapGL, { Layer, Marker, Source, type MapLayerMouseEvent, type MapRef } from "react-map-gl/maplibre";
+import { deviceIsCapable } from "@/lib/device";
 import { useI18n } from "@/lib/i18n";
 import { loadNatura, loadOcc, useCells, useSpecies } from "@/lib/data";
 import { slateStyle } from "@/lib/mapStyle";
@@ -57,14 +58,6 @@ function hatchImage(): ImageData {
       d.data[k] = 244; d.data[k + 1] = 239; d.data[k + 2] = 230; d.data[k + 3] = on ? 210 : 0;
     }
   return d;
-}
-
-/** Flat by default on low-end devices: few cores, little memory, data saver or reduced motion. */
-function deviceIsCapable(): boolean {
-  const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const cores = nav.hardwareConcurrency ?? 4;
-  return !reduce && !nav.connection?.saveData && cores >= 6 && (nav.deviceMemory === undefined || nav.deviceMemory >= 4);
 }
 
 function Chip({ on, onClick, children, label }: { on: boolean; onClick: () => void; children: React.ReactNode; label?: string }) {

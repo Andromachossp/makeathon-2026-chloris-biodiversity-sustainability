@@ -1,13 +1,14 @@
-import type { CellsFile } from "@/lib/types";
+import { NODATA, RISK_RAMP, quantile, rampAt } from "@/lib/ramps";
+import type { CellsFile, Species } from "@/lib/types";
 
-/** Shared projection: equirectangular fitted to Greece, in "world" units (~3.4 tall). Used by the WebGL scene and the static poster. */
+/** Equirectangular projection fitted to Greece, in world units (x east, z south). Shared by the 3D scene and the poster. */
 export const LON_C = 24.6;
 export const LAT_C = 38.3;
 export const KX = Math.cos((38 * Math.PI) / 180);
-export const SCALE = 0.5; // world units per degree of latitude
+export const SCALE = 0.9; // world units per degree of latitude
 
 export function project(lon: number, lat: number): [number, number] {
-  return [(lon - LON_C) * KX * SCALE, (lat - LAT_C) * SCALE];
+  return [(lon - LON_C) * KX * SCALE, -(lat - LAT_C) * SCALE];
 }
 
 export function cellCentre(id: string, size: number): [number, number] {
@@ -15,81 +16,45 @@ export function cellCentre(id: string, size: number): [number, number] {
   return [(j + 0.5) * size, (i + 0.5) * size];
 }
 
-export interface ParticleData {
-  start: Float32Array; // leaf
-  map: Float32Array;   // cell positions
-  rand: Float32Array;
-  bright: Float32Array;
-  risk: Float32Array;
+export const MIN_SPECIES_FOR_RISK = 5;
+
+export interface Column {
+  x: number;
+  z: number;
+  h: number;
+  color: [number, number, number]; // linear-ish 0..1 rgb from the risk ramp
+  n: number;
+  mean: number | null;
 }
 
-/** Deterministic PRNG so server/client and reloads agree. */
-function mulberry32(a: number) {
-  return () => {
-    a |= 0; a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+export interface Landscape {
+  columns: Column[];
+  cell: number; // column footprint in world units
+  riskRange: [number, number];
+  maxN: number;
 }
 
-export function buildParticles(count: number, cells: CellsFile): ParticleData {
-  const rnd = mulberry32(42);
-  const start = new Float32Array(count * 3);
-  const map = new Float32Array(count * 3);
-  const rand = new Float32Array(count);
-  const bright = new Float32Array(count);
-  const risk = new Float32Array(count);
-
-  // cumulative weights: more species => more particles
-  const weights = cells.cells.map((c) => c.s.length);
-  const cum: number[] = [];
-  weights.reduce((a, w, i) => (cum[i] = a + w), 0);
-  const total = cum[cum.length - 1] || 1;
-  const maxN = Math.max(...weights, 1);
-  const pick = () => {
-    const r = rnd() * total;
-    let lo = 0, hi = cum.length - 1;
-    while (lo < hi) { const mid = (lo + hi) >> 1; if (cum[mid] < r) lo = mid + 1; else hi = mid; }
-    return lo;
-  };
-
-  for (let i = 0; i < count; i++) {
-    // leaf: ovate blade with a pointed tip, midrib, side veins and a short stem; rotated (not skewed)
-    const L = 3.0;
-    const width = (u: number) => 0.95 * Math.pow(Math.sin(Math.PI * Math.pow(u, 0.75)), 0.9);
-    const kind = rnd();
-    let x: number, y: number;
-    if (kind < 0.05) {            // stem
-      const u = rnd();
-      x = Math.sin(u * 2.2) * 0.07; y = -L / 2 - u * 0.45;
-    } else if (kind < 0.15) {     // midrib
-      const u = rnd();
-      x = (rnd() - 0.5) * 0.035; y = (u - 0.5) * L;
-    } else if (kind < 0.30) {     // side veins
-      const t0 = [0.18, 0.34, 0.5, 0.66][Math.floor(rnd() * 4)];
-      const u = t0 + rnd() * (0.95 - t0);
-      const side = rnd() < 0.5 ? -1 : 1;
-      x = side * Math.min((u - t0) * 0.95, width(u) * 0.92); y = (u - 0.5) * L;
-    } else {                      // blade fill, denser towards the edge so the outline reads
-      const u = rnd();
-      const e = Math.pow(rnd(), 0.6);
-      x = (rnd() < 0.5 ? -1 : 1) * width(u) * e; y = (u - 0.5) * L;
-    }
-    const tilt = -0.35, ct = Math.cos(tilt), st = Math.sin(tilt);
-    const LEAF = 0.8; // smaller and lifted, so the stem and blade clear the tagline on phones
-    start[i * 3] = (x * ct - y * st) * LEAF;
-    start[i * 3 + 1] = (x * st + y * ct) * LEAF + 0.6;
-    start[i * 3 + 2] = (rnd() - 0.5) * 0.12;
-
-    const k = pick();
-    const c = cells.cells[k];
-    const [lon, lat] = cellCentre(c.id, cells.size);
-    const [mx, my] = project(lon + (rnd() - 0.5) * cells.size, lat + (rnd() - 0.5) * cells.size);
-    map[i * 3] = mx; map[i * 3 + 1] = my; map[i * 3 + 2] = (rnd() - 0.5) * 0.05;
-    bright[i] = Math.pow(c.s.length / maxN, 0.5);
-    risk[i] = c.nAtRisk > 0 ? 1 : 0;
-    rand[i] = rnd();
-  }
-  return { start, map, rand, bright, risk };
+/** One column per occupied cell: height from species richness, colour from the average risk of its species. */
+export function buildLandscape(cells: CellsFile, species: Species[]): Landscape {
+  const stats = cells.cells.map((c) => ({
+    id: c.id,
+    n: c.s.length,
+    mean: c.s.length >= MIN_SPECIES_FOR_RISK ? c.s.reduce((a, i) => a + species[i].risk.score, 0) / c.s.length : null,
+  }));
+  const vals = stats.flatMap((s) => (s.mean === null ? [] : [s.mean])).sort((a, b) => a - b);
+  const lo = quantile(vals, 0.05), hi = quantile(vals, 0.98);
+  const maxN = Math.max(...stats.map((s) => s.n), 1);
+  const nodata: [number, number, number] = [0x46 / 255, 0x50 / 255, 0x6f / 255];
+  void NODATA;
+  const columns = stats.map((s) => {
+    const [lon, lat] = cellCentre(s.id, cells.size);
+    const [x, z] = project(lon, lat);
+    const t = s.mean === null ? 0 : (s.mean - lo) / Math.max(hi - lo, 1e-6);
+    return {
+      x, z, n: s.n, mean: s.mean,
+      h: 0.03 + Math.pow(s.n / maxN, 0.9) * 0.85,
+      color: s.mean === null ? nodata : rampAt(RISK_RAMP, t),
+    } satisfies Column;
+  });
+  return { columns, cell: cells.size * KX * SCALE * 0.9, riskRange: [lo, hi], maxN };
 }

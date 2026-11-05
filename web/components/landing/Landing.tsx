@@ -3,32 +3,27 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { canWebGL, deviceIsCapable, prefersReducedMotion } from "@/lib/device";
 import { useI18n, type Locale } from "@/lib/i18n";
 import { loadJson } from "@/lib/data";
-import type { CellsFile, Meta } from "@/lib/types";
+import { RISK_RAMP, gradientCss } from "@/lib/ramps";
+import type { CellsFile, Meta, Species } from "@/lib/types";
+import { buildLandscape } from "./geometry";
 import { Poster } from "./Poster";
 
 // Three.js is loaded only here, on "/", and only when the browser can run it.
-const LandingScene = dynamic(() => import("./LandingScene"), { ssr: false });
+const LandscapeScene = dynamic(() => import("./Landscape"), { ssr: false });
 
 const SECTIONS = ["flora", "where", "risk", "keep", "install"] as const;
-
-function canWebGL(): boolean {
-  try {
-    const c = document.createElement("canvas");
-    return !!(c.getContext("webgl2") || c.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
+const NUMERAL = { fontStretch: "30%" } as const;
 
 function useLandingData() {
-  const [data, setData] = useState<{ cells: CellsFile; meta: Meta } | null>(null);
+  const [data, setData] = useState<{ cells: CellsFile; meta: Meta; species: Species[] } | null>(null);
   useEffect(() => {
     let alive = true;
-    Promise.all([loadJson<CellsFile>("cells.json"), loadJson<Meta>("meta.json")])
-      .then(([cells, meta]) => alive && setData({ cells, meta }))
+    Promise.all([loadJson<CellsFile>("cells.json"), loadJson<Meta>("meta.json"), loadJson<Species[]>("species.json")])
+      .then(([cells, meta, species]) => alive && setData({ cells, meta, species }))
       .catch(() => {});
     return () => { alive = false; };
   }, []);
@@ -38,17 +33,13 @@ function useLandingData() {
 function Loader({ ready, onDone }: { ready: boolean; onDone: () => void }) {
   const { t } = useI18n();
   const [n, setN] = useState(0);
-  const start = useRef(0);
   useEffect(() => {
     let raf = 0;
-    start.current = performance.now();
+    const t0 = performance.now();
     const tick = (now: number) => {
-      const elapsed = now - start.current;
       // creep to 90 while loading, then finish quickly; never longer than 2.5 s in total
-      setN((v) => {
-        const target = ready || elapsed > 2200 ? 100 : 90;
-        return Math.min(target, v + (target === 100 ? 4 : 1.2));
-      });
+      const target = ready || now - t0 > 2200 ? 100 : 90;
+      setN((v) => Math.min(target, v + (target === 100 ? 4 : 1.2)));
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -73,16 +64,15 @@ export function Landing() {
   const { t, locale, setLocale } = useI18n();
   const data = useLandingData();
   const progress = useRef(0);
-  const [webgl, setWebgl] = useState<boolean | null>(null);
+  const [mode, setMode] = useState<"pending" | "animated" | "static" | "poster">("pending");
   const [intro, setIntro] = useState(false);
   const [dim, setDim] = useState(false);
   const [siteUrl, setSiteUrl] = useState("");
-  const canvasWrap = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // animated 3D only on capable devices without reduced motion; otherwise one still render; no WebGL: SVG poster
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setWebgl(!reduce && canWebGL());
+    setMode(!canWebGL() ? "poster" : !prefersReducedMotion() && deviceIsCapable() ? "animated" : "static");
     setSiteUrl(process.env.NEXT_PUBLIC_SITE_URL || window.location.origin);
     let seen = false;
     try { seen = sessionStorage.getItem("chloris.intro") === "1"; } catch { /* ignore */ }
@@ -92,14 +82,16 @@ export function Landing() {
   useEffect(() => {
     const onScroll = () => {
       const vh = window.innerHeight;
-      progress.current = Math.max(0, Math.min(window.scrollY / vh, 2));
-      setDim(window.scrollY > vh * 2.6);
+      progress.current = Math.max(0, Math.min(window.scrollY / vh, 3));
+      setDim(window.scrollY > vh * 3.3);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
   }, []);
+
+  const landscape = useMemo(() => (data ? buildLandscape(data.cells, data.species) : null), [data]);
 
   const finishIntro = () => {
     try { sessionStorage.setItem("chloris.intro", "1"); } catch { /* ignore */ }
@@ -111,15 +103,16 @@ export function Landing() {
   const hotspots = data ? data.cells.cells.filter((c) => c.hotspot === true).length : 0;
   const hotspotsKnown = data ? data.cells.cells.some((c) => c.hotspot !== null) : false;
   const locales: Locale[] = ["el", "en"];
+  const panel = "rounded-[14px] bg-ink/75 p-4 backdrop-blur-sm";
 
   return (
     <div className="relative bg-ink text-text">
-      {intro && <Loader ready={!!data && webgl !== null} onDone={finishIntro} />}
+      {intro && <Loader ready={!!data && mode !== "pending"} onDone={finishIntro} />}
 
-      {/* background scene */}
-      <div ref={canvasWrap} className={`fixed inset-0 z-0 transition-opacity duration-700 ${dim ? "opacity-20" : "opacity-100"}`}>
-        {data && webgl === true && <LandingScene cells={data.cells} progress={progress} />}
-        {data && webgl === false && <div className="flex h-full items-center justify-center p-6 opacity-80"><Poster cells={data.cells} label={t.landing.poster} /></div>}
+      {/* background: instanced 3D landscape, one column per occupied cell */}
+      <div className={`fixed inset-0 z-0 transition-opacity duration-700 ${dim ? "opacity-25" : "opacity-100"}`}>
+        {landscape && (mode === "animated" || mode === "static") && <LandscapeScene data={landscape} progress={progress} animate={mode === "animated"} />}
+        {data && mode === "poster" && <div className="flex h-full items-center justify-center p-6"><Poster cells={data.cells} species={data.species} label={t.landing.poster} /></div>}
       </div>
 
       {/* nav */}
@@ -131,7 +124,7 @@ export function Landing() {
         </nav>
         <span className="font-sans text-lg font-extrabold tracking-wide md:hidden">{t.appName}</span>
         <div className="flex items-center gap-2">
-          <div role="group" aria-label={t.language} className="flex rounded-full border border-line bg-ink/60 p-0.5 backdrop-blur">
+          <div role="group" aria-label={t.language} className="flex rounded-full border border-line bg-ink/70 p-0.5 backdrop-blur">
             {locales.map((l) => (
               <button key={l} type="button" aria-pressed={locale === l} onClick={() => setLocale(l)}
                 className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>{l}</button>
@@ -144,36 +137,41 @@ export function Landing() {
       <main className="relative z-10">
         {/* 01 hero */}
         <section id="flora" className="flex min-h-dvh flex-col justify-end px-5 pb-8 md:px-10">
-          <p className="max-w-md text-base text-dim md:text-lg">{t.tagline}</p>
+          <p className="max-w-md rounded-[14px] bg-ink/55 p-2 text-base text-text backdrop-blur-sm md:text-lg">{t.tagline}</p>
           <h1 className="mt-4 select-none font-sans font-black uppercase leading-[0.8] tracking-tighter text-text"
-            style={{ fontSize: "clamp(4rem, 24vw, 20rem)", fontStretch: "30%" }}>{t.appName}</h1>
+            style={{ fontSize: "clamp(4rem, 24vw, 20rem)", ...NUMERAL }}>{t.appName}</h1>
           <p className="mt-4 font-mono text-xs uppercase tracking-widest text-dim">↓ {t.landing.scroll}</p>
         </section>
 
         {/* 02 where */}
         <section id="where" className="flex min-h-dvh flex-col justify-between px-5 py-24 md:px-10">
-          <div className="max-w-xl">
+          <div className={`max-w-xl ${panel}`}>
             <p className="font-mono text-sm text-saffron">02</p>
-            <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.whereTitle}</h2>
+            <h2 className="mt-2 font-display text-3xl font-semibold leading-tight md:text-5xl">{t.landing.whereTitle}</h2>
             <p className="mt-3 text-dim">{t.landing.whereBody}</p>
+            <div className="mt-4 max-w-xs text-xs text-dim">
+              <div className="h-2.5 rounded-full" style={{ background: gradientCss(RISK_RAMP) }} aria-hidden="true" />
+              <div className="mt-1 flex justify-between"><span>{t.landing.keyLow}</span><span>{t.landing.keyHigh}</span></div>
+              <p className="mt-2">{t.landing.keyColour} · {t.landing.keyHeight}</p>
+            </div>
           </div>
-          <div>
-            <p className="font-mono text-6xl font-light tabular-nums text-lavender md:text-8xl">{medicinal?.toLocaleString(locale) ?? "—"}</p>
-            <p className="mt-1 text-dim">{t.landing.speciesCount}</p>
+          <div className={`self-start ${panel}`}>
+            <p className="font-sans text-[26vw] font-black leading-none tabular-nums text-saffron md:text-[11rem]" style={NUMERAL}>{medicinal?.toLocaleString(locale) ?? "—"}</p>
+            <p className="mt-1 text-text">{t.landing.speciesCount}</p>
           </div>
         </section>
 
         {/* 03 risk */}
         <section id="risk" className="flex min-h-dvh flex-col justify-between px-5 py-24 md:px-10">
-          <div className="max-w-xl rounded-[14px] bg-ink/60 p-1 backdrop-blur-sm">
-            <p className="font-mono text-sm text-risk-high-line">03</p>
-            <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.riskTitle}</h2>
+          <div className={`max-w-xl ${panel}`}>
+            <p className="font-mono text-sm text-saffron">03</p>
+            <h2 className="mt-2 font-display text-3xl font-semibold leading-tight md:text-5xl">{t.landing.riskTitle}</h2>
             <p className="mt-3 text-dim">{t.landing.riskBody}</p>
           </div>
-          <div className="rounded-[14px] bg-ink/60 p-1 backdrop-blur-sm">
-            <p className="font-mono text-6xl font-light tabular-nums text-risk-high-line md:text-8xl">{atRisk ?? "—"}</p>
-            <p className="mt-1 text-dim">{t.landing.atRiskCount}</p>
-            {hotspotsKnown && <p className="mt-1 font-mono text-sm text-dim">{hotspots} {t.map.hotspots.toLowerCase()}</p>}
+          <div className={`self-start ${panel}`}>
+            <p className="font-sans text-[26vw] font-black leading-none tabular-nums text-saffron md:text-[11rem]" style={NUMERAL}>{atRisk ?? "—"}</p>
+            <p className="mt-1 text-text">{t.landing.atRiskCount}</p>
+            {hotspotsKnown && <p className="mt-1 font-mono text-sm text-dim">{hotspots} {t.map.modes.hotspots.toLowerCase()}</p>}
           </div>
         </section>
 
@@ -181,14 +179,14 @@ export function Landing() {
         <section id="keep" className="min-h-dvh py-24">
           <div className="px-5 md:px-10">
             <p className="font-mono text-sm text-saffron">04</p>
-            <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.keepTitle}</h2>
+            <h2 className="mt-2 font-display text-3xl font-semibold md:text-5xl">{t.landing.keepTitle}</h2>
           </div>
           <ul className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-10" tabIndex={0} aria-label={t.landing.keepTitle}>
             {t.landing.keep.map((k) => (
               <li key={k.n} className="flex h-[22rem] w-[78vw] max-w-sm shrink-0 snap-start flex-col justify-between rounded-[14px] border border-line bg-surface/90 p-6 backdrop-blur">
-                <span className="font-mono text-6xl font-light text-saffron">{k.n}</span>
+                <span className="font-sans text-7xl font-black text-saffron" style={NUMERAL}>{k.n}</span>
                 <div>
-                  <h3 className="font-serif text-2xl font-semibold">{k.t}</h3>
+                  <h3 className="font-display text-2xl font-semibold">{k.t}</h3>
                   <p className="mt-2 text-dim">{k.d}</p>
                 </div>
               </li>
@@ -201,13 +199,13 @@ export function Landing() {
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
               <p className="font-mono text-sm text-saffron">05</p>
-              <h2 className="mt-2 font-serif text-3xl font-semibold md:text-5xl">{t.landing.installTitle}</h2>
+              <h2 className="mt-2 font-display text-3xl font-semibold md:text-5xl">{t.landing.installTitle}</h2>
               <p className="mt-3 max-w-md text-dim">{t.landing.installBody}</p>
               <ul className="mt-4 space-y-1 text-sm text-dim"><li>{t.landing.ios}</li><li>{t.landing.android}</li></ul>
               <Link href="/map" className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-saffron px-6 py-3 font-semibold text-ink">{t.landing.openApp}</Link>
             </div>
             <div className="justify-self-start rounded-[14px] bg-paper p-4 md:justify-self-center">
-              {siteUrl && <QRCodeSVG value={siteUrl} size={176} bgColor="#F1EBDD" fgColor="#2A2418" title={siteUrl} />}
+              {siteUrl && <QRCodeSVG value={siteUrl} size={176} bgColor="#F4EFE6" fgColor="#1A2036" title={siteUrl} />}
               <p className="mt-2 max-w-[11rem] break-all text-center font-mono text-[10px] text-paper-ink">{siteUrl}</p>
             </div>
           </div>
