@@ -17,6 +17,14 @@ export function interpolateExpr(prop: string, stops: Stop[]): unknown[] {
   return ["interpolate", ["linear"], ["get", prop], ...clean.flat()];
 }
 
+/** Same as interpolateExpr but over any numeric expression (used for cluster averages). */
+export function interpolateOn(input: unknown, stops: Stop[]): unknown[] {
+  const clean: Stop[] = [];
+  for (const s of stops) if (!clean.length || s[0] > clean[clean.length - 1][0]) clean.push(s);
+  if (clean.length === 1) clean.push([clean[0][0] + 1, clean[0][1]]);
+  return ["interpolate", ["linear"], input, ...clean.flat()];
+}
+
 export function gradientCss(colors: readonly string[]): string {
   return `linear-gradient(90deg, ${colors.join(", ")})`;
 }

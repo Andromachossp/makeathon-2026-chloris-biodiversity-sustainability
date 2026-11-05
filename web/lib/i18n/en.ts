@@ -117,6 +117,11 @@ export const en = {
     highRisk: "Higher",
     noData: "Fewer than 5 species: not enough to average",
     notHotspot: "Not a hotspot",
+    generalised: "Locations are generalised to about 10 km to protect plants.",
+    legendNote: "Each flower marks one 10 km square (about 10 km across). Badges group nearby squares; zoom in to split them.",
+    pinsHotspot: "Hotspot",
+    speciesGone: "Present then, not now",
+    pinsFewSpecies: "Fewer than 5 species",
     hotspotShort: "Hotspot",
     threeD: "3D",
     flat: "Flat",
@@ -173,7 +178,12 @@ export const en = {
     keyLow: "Lower",
     keyHigh: "Higher",
   },
-  notMedicalAdvice: "Chloris is not medical advice. Documented uses are shown for information only.",
+  credits: {
+    title: "Map and data credits",
+    terrain: "Terrain: Mapzen / AWS Terrain Tiles (open data on AWS). Elevation from Copernicus EU-DEM (produced using Copernicus data and information funded by the European Union), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and ETOPO1 (U.S. National Oceanic and Atmospheric Administration).",
+    vectors: "Basemap vectors: OpenFreeMap, OpenMapTiles, © OpenStreetMap contributors (ODbL).",
+    library: "Map rendering: MapLibre GL JS (BSD-3-Clause).",
+  },  notMedicalAdvice: "Chloris is not medical advice. Documented uses are shown for information only.",
 } as const;
 
 type Widen<T> = T extends string ? string : T extends readonly (infer U)[] ? readonly Widen<U>[] : { [K in keyof T]: Widen<T[K]> };

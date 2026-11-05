@@ -78,11 +78,18 @@ Load with `next/font/google`, subsets `latin` + `greek`, `display: swap`.
 
 ## Map (`/map`)
 
-- Slate-blue basemap built from OpenFreeMap vector tiles: land `#2A3552` is slightly lighter than sea `#131A2E`; roads are omitted, labels are muted (`#8590B0`). No cell outlines.
-- One layer at a time, chosen with chips: **Risk** (average risk score of the species recorded in a square, magma ramp, only squares with at least 5 species; others are muted slate with a legend note), **Richness** (species per square, cool ramp) and **Medicinal hotspots** (at-risk species and under 50% protected: poppy with a hatch pattern, never colour alone).
-- Natura 2000 is an Aegean-blue dashed outline (toggle).
-- **3D** toggle: pitch 48°, fill-extrusion columns, height = number of species (Risk, Richness) or at-risk species (Hotspots). Flat by default on low-end devices (fewer than 6 cores, under 4 GB memory, data saver or reduced motion). Choosing a species always switches to flat so its cells stay visible.
-- Legend shows the active ramp with its real numeric range. **Cell list** is a keyboard- and screen-reader-friendly alternative to the map: every square as a button.
+A 3D terrain map with flower pins. The map is deliberately light and natural (sand land, blue-grey sea) so the data colours read; the app chrome around it stays ink-navy.
+
+- **Basemap:** OpenFreeMap vector tiles restyled in sand `#D9CEB7` land, blue-grey `#9DB3C2` sea, quiet labels, dashed boundaries. No roads, no cell grid, no extruded columns.
+- **Terrain:** MapLibre `terrain` with the open AWS "Terrarium" elevation tiles (`s3.amazonaws.com/elevation-tiles-prod/terrarium`, `encoding: "terrarium"`, CORS open), exaggeration 1.3, a multidirectional hillshade layer under the water, MapLibre `sky` for a soft haze (the horizon itself shows once the user tilts past about 70°). Default pitch 60° with a slow 6.5 s intro move.
+- **Low-end devices** (under 6 cores, under 4 GB, data saver or reduced motion): no terrain, no hillshade, flat map, no intro move, and no elevation tiles are requested. The "3D" chip lets anyone turn terrain on or off.
+- **Attribution (required by the data licence):** Mapzen / AWS Terrain Tiles with Copernicus EU-DEM, USGS (SRTM, GMTED2010) and NOAA ETOPO1; short form in the map attribution control, full text on `/about`. Basemap: OpenFreeMap, OpenMapTiles, © OpenStreetMap contributors.
+- **Pins:** one flower per occupied 0.1° cell, at the exact cell centre (never jittered or offset), drawn by a GPU symbol layer from SVG icons registered with `map.addImage`. The stem's foot is the anchor, so pins stand on the terrain. Size grows with species count (small to medium).
+- **Colour and shape by layer:** **Risk** = magma ramp (average risk of the species in the cell; fewer than 5 species = small muted slate bud). **Richness** = cool ramp. **Medicinal hotspots** = poppy starburst (a different silhouette, never colour alone) against muted buds.
+- **Clusters:** zoomed out (below zoom 8), pins are grouped into round badges with the count; the ring takes the active ramp colour of the group's average. Tap a badge to zoom in and split it.
+- **Selection:** the cell's square outline is drawn, the pin is enlarged, and the bottom sheet lists the species (name, risk, IUCN) with the note "Locations are generalised to about 10 km to protect plants."
+- **Species mode (`?species=`):** only that species' cells (Then/Now), the camera flies to them.
+- **Legend:** the active ramp with its real numeric range, plus an "about 10 km" note. **Cell list** is the keyboard- and screen-reader-friendly alternative: every square as a button.
 
 ## Landing page `/` (WebGL)
 

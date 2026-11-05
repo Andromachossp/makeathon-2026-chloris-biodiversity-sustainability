@@ -39,6 +39,7 @@ export function CellSheet({ cell, size, species, onClose }: { cell: Cell; size: 
           <CloseIcon className="h-5 w-5" />
         </button>
       </header>
+      <p className="mx-4 mb-2 rounded-lg border border-dashed border-line px-3 py-2 text-xs text-dim">{t.map.generalised}</p>
       <div ref={scroller} className="min-h-0 flex-1 overflow-y-auto px-3 pb-3" role="list">
         <div style={{ height: virt.getTotalSize(), position: "relative" }}>
           {virt.getVirtualItems().map((v) => {

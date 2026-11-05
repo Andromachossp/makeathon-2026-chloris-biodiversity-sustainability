@@ -119,6 +119,11 @@ export const el: Dictionary = {
     highRisk: "Υψηλότερος",
     noData: "Λιγότερα από 5 είδη: ανεπαρκή για μέσο όρο",
     notHotspot: "Όχι εστία",
+    generalised: "Οι τοποθεσίες γενικεύονται στα 10 χλμ περίπου για την προστασία των φυτών.",
+    legendNote: "Κάθε λουλούδι σημαδεύει ένα τετράγωνο 10 χλμ (περίπου 10 χλμ πλάτος). Τα εικονίδια με αριθμό ομαδοποιούν κοντινά τετράγωνα· μεγεθύνετε για να χωριστούν.",
+    pinsHotspot: "Εστία",
+    speciesGone: "Υπήρχε τότε, όχι τώρα",
+    pinsFewSpecies: "Λιγότερα από 5 είδη",
     hotspotShort: "Εστία",
     threeD: "3D",
     flat: "Επίπεδο",
@@ -175,5 +180,10 @@ export const el: Dictionary = {
     keyLow: "Χαμηλότερος",
     keyHigh: "Υψηλότερος",
   },
-  notMedicalAdvice: "Το Chloris δεν αποτελεί ιατρική συμβουλή. Οι καταγεγραμμένες χρήσεις παρουσιάζονται μόνο ως πληροφορία.",
+  credits: {
+    title: "Πιστώσεις χάρτη και δεδομένων",
+    terrain: "Ανάγλυφο: Mapzen / AWS Terrain Tiles (ανοικτά δεδομένα στο AWS). Υψομετρικά δεδομένα από Copernicus EU-DEM (παράγονται με δεδομένα και πληροφορίες Copernicus που χρηματοδοτούνται από την Ευρωπαϊκή Ένωση), SRTM και GMTED2010 (ευγενική παραχώρηση της U.S. Geological Survey) και ETOPO1 (U.S. National Oceanic and Atmospheric Administration).",
+    vectors: "Διανυσματικός χάρτης: OpenFreeMap, OpenMapTiles, © συνεισφέροντες του OpenStreetMap (ODbL).",
+    library: "Απεικόνιση χάρτη: MapLibre GL JS (BSD-3-Clause).",
+  },  notMedicalAdvice: "Το Chloris δεν αποτελεί ιατρική συμβουλή. Οι καταγεγραμμένες χρήσεις παρουσιάζονται μόνο ως πληροφορία.",
 };
