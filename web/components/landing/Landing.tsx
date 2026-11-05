@@ -130,7 +130,7 @@ export function Landing() {
                 className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>{l}</button>
             ))}
           </div>
-          <Link href="/map" className="flex min-h-[44px] items-center rounded-full bg-saffron px-5 text-sm font-semibold text-ink">{t.landing.openApp}</Link>
+          <Link href="/home" className="flex min-h-[44px] items-center rounded-full bg-saffron px-5 text-sm font-semibold text-ink">{t.landing.openApp}</Link>
         </div>
       </header>
 
@@ -202,7 +202,7 @@ export function Landing() {
               <h2 className="mt-2 font-display text-3xl font-semibold md:text-5xl">{t.landing.installTitle}</h2>
               <p className="mt-3 max-w-md text-dim">{t.landing.installBody}</p>
               <ul className="mt-4 space-y-1 text-sm text-dim"><li>{t.landing.ios}</li><li>{t.landing.android}</li></ul>
-              <Link href="/map" className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-saffron px-6 py-3 font-semibold text-ink">{t.landing.openApp}</Link>
+              <Link href="/home" className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-saffron px-6 py-3 font-semibold text-ink">{t.landing.openApp}</Link>
             </div>
             <div className="justify-self-start rounded-[14px] bg-paper p-4 md:justify-self-center">
               {siteUrl && <QRCodeSVG value={siteUrl} size={176} bgColor="#F4EFE6" fgColor="#1A2036" title={siteUrl} />}

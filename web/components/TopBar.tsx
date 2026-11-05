@@ -13,7 +13,7 @@ export function TopBar() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-ink/95 backdrop-blur md:pl-24">
       <div className="flex h-14 items-center justify-between px-4">
-        <Link href="/map" className="font-sans text-lg font-extrabold tracking-wide text-text">
+        <Link href="/home" className="font-sans text-lg font-extrabold tracking-wide text-text">
           {t.appName}
         </Link>
         <div role="group" aria-label={t.language} className="flex rounded-full border border-line p-0.5">

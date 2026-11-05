@@ -1,5 +1,5 @@
 import { Placeholder } from "@/components/Placeholder";
 
 export default function Page() {
-  return <Placeholder page="search" />;
+  return <Placeholder page="near" />;
 }

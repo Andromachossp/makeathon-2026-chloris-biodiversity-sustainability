@@ -35,7 +35,7 @@ function Card({ slug }: { slug: string }) {
     return (
       <section className="mx-auto max-w-2xl p-4">
         <p>{t.species.notFound}</p>
-        <Link href="/priorities" className="mt-4 inline-block text-saffron underline">{t.species.back}</Link>
+        <Link href="/plants" className="mt-4 inline-block text-saffron underline">{t.species.back}</Link>
       </section>
     );
   }
@@ -53,7 +53,7 @@ function Card({ slug }: { slug: string }) {
 
   return (
     <article className="mx-auto flex max-w-2xl flex-col gap-4 px-4 py-4">
-      <Link href="/priorities" className="min-h-[44px] self-start py-3 text-sm text-dim hover:text-text">← {t.species.back}</Link>
+      <Link href="/plants" className="min-h-[44px] self-start py-3 text-sm text-dim hover:text-text">← {t.species.back}</Link>
 
       {/* 1. verdict and one plain reason */}
       <VerdictBanner verdict={verdict} species={s} />

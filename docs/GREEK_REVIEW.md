@@ -7,7 +7,7 @@ Notes for the reviewer:
 - `{n}`, `{cat}`, `{level}` are placeholders filled by the app.
 - Terms chosen on purpose: *Φυτά* (Plants), *Φυτρώνει μόνο στην Ελλάδα* (Only grows in Greece), *Απειλούμενο* (Threatened), *Δεν έχει αξιολογηθεί ακόμη* (Not assessed yet), *Πρωτότυπος βαθμός* (Prototype score).
 
-218 strings.
+228 strings.
 
 | Key | English | Greek (to review) |
 | --- | --- | --- |
@@ -17,18 +17,16 @@ Notes for the reviewer:
 | `offlineBanner` | Offline — identification will run when you're back online. | Εκτός σύνδεσης — η αναγνώριση θα γίνει όταν επανέλθει το δίκτυο. |
 | `language` | Language | Γλώσσα |
 | `nav.label` | Main navigation | Κύρια πλοήγηση |
-| `nav.map` | Map | Χάρτης |
+| `nav.home` | Home | Αρχική |
 | `nav.scan` | Scan | Σάρωση |
-| `nav.priorities` | Plants | Φυτά |
-| `nav.search` | Search | Αναζήτηση |
+| `nav.map` | Map | Χάρτης |
+| `nav.plants` | Plants | Φυτά |
 | `pages.map.title` | Map | Χάρτης |
 | `pages.map.placeholder` | The map of Greece's medicinal plants arrives in Phase 3. | Ο χάρτης των φαρμακευτικών φυτών της Ελλάδας έρχεται στη Φάση 3. |
 | `pages.scan.title` | Scan a plant | Σάρωση φυτού |
 | `pages.scan.placeholder` | Photo identification arrives in Phase 4. | Η αναγνώριση από φωτογραφία έρχεται στη Φάση 4. |
-| `pages.priorities.title` | Plants | Φυτά |
-| `pages.priorities.placeholder` | Species ranked by risk arrive in Phase 3. | Τα είδη κατά σειρά κινδύνου έρχονται στη Φάση 3. |
-| `pages.search.title` | Search | Αναζήτηση |
-| `pages.search.placeholder` | Search by Greek, English or scientific name arrives in Phase 3. | Η αναζήτηση με ελληνικό, αγγλικό ή επιστημονικό όνομα έρχεται στη Φάση 3. |
+| `pages.near.title` | What's near me | Τι υπάρχει κοντά μου |
+| `pages.near.placeholder` | Plants recorded near you arrive in the next step. | Τα φυτά που έχουν καταγραφεί κοντά σου έρχονται στο επόμενο βήμα. |
 | `pages.sightings.title` | My sightings | Οι παρατηρήσεις μου |
 | `pages.sightings.placeholder` | Your queued and synced sightings arrive in Phase 4. | Οι παρατηρήσεις σου έρχονται στη Φάση 4. |
 | `pages.about.title` | About the data | Σχετικά με τα δεδομένα |
@@ -124,16 +122,28 @@ Notes for the reviewer:
 | `species.flags.gbif_no_match` | No usable GBIF match, so there are no records. | Δεν βρέθηκε αντιστοίχιση στο GBIF, άρα δεν υπάρχουν καταγραφές. |
 | `species.flags.name_only_match` | The medicinal flag was linked to this species by name, not by identifier. Waiting for review. | Η φαρμακευτική σήμανση συνδέθηκε με αυτό το είδος μέσω ονόματος και όχι κωδικού. Αναμένει έλεγχο. |
 | `species.flags.native_status_check` | Native status or inclusion needs a decision by our science lead. | Το αυτόχθονο καθεστώς ή η συμπερίληψη χρειάζεται απόφαση της επιστημονικής μας υπεύθυνης. |
-| `priorities.sub` | Plants ranked by our prototype risk score. Open one to see why. | Φυτά κατά τον πρωτότυπο βαθμό κινδύνου μας. Άνοιξε ένα για να δεις γιατί. |
-| `priorities.filters` | Filters | Φίλτρα |
-| `priorities.atRisk` | Protect it | Προστάτεψέ το |
-| `priorities.endemic` | Only grows in Greece | Φυτρώνουν μόνο στην Ελλάδα |
-| `priorities.featured` | Reviewed | Ελεγμένα |
-| `priorities.family` | Family | Οικογένεια |
-| `priorities.allFamilies` | All families | Όλες οι οικογένειες |
-| `priorities.count` | plants | φυτά |
-| `priorities.empty` | No plants match these filters. | Κανένα φυτό δεν ταιριάζει με αυτά τα φίλτρα. |
-| `priorities.score` | Score | Βαθμός |
+| `plants.sub` | Plants ranked by our prototype risk score. Open one to see why. | Φυτά κατά τον πρωτότυπο βαθμό κινδύνου μας. Άνοιξε ένα για να δεις γιατί. |
+| `plants.searchLabel` | Search plants | Αναζήτηση φυτών |
+| `plants.searchPlaceholder` | Greek, English or Latin name | Ελληνικό, αγγλικό ή λατινικό όνομα |
+| `plants.clear` | Clear search | Καθαρισμός αναζήτησης |
+| `plants.filters` | Filters | Φίλτρα |
+| `plants.threatened` | Threatened | Απειλούμενα |
+| `plants.endemic` | Only grows in Greece | Φυτρώνουν μόνο στην Ελλάδα |
+| `plants.count` | plants | φυτά |
+| `plants.results` | {n} results | {n} αποτελέσματα |
+| `plants.empty` | No plants match these filters. | Κανένα φυτό δεν ταιριάζει με αυτά τα φίλτρα. |
+| `plants.noMatch` | No plant matches “{q}”. | Κανένα φυτό δεν ταιριάζει με «{q}». |
+| `plants.noGreekMatch` | We have Greek names for only some plants. Try the English or Latin name. | Έχουμε ελληνικά ονόματα μόνο για μερικά φυτά. Δοκίμασε το αγγλικό ή το λατινικό όνομα. |
+| `plants.notEnoughTitle` | Not enough data yet | Δεν υπάρχουν ακόμη αρκετά δεδομένα |
+| `plants.notEnoughHelp` | These {n} plants have fewer than {min} records, so we do not rank them. | Αυτά τα {n} φυτά έχουν λιγότερες από {min} καταγραφές, γι' αυτό δεν τα κατατάσσουμε. |
+| `plants.mySightings` | My sightings | Οι παρατηρήσεις μου |
+| `home.sentence` | Chloris shows where Greece's medicinal plants grow and which ones may be in trouble. | Το Chloris δείχνει πού φυτρώνουν τα φαρμακευτικά φυτά της Ελλάδας και ποια ίσως κινδυνεύουν. |
+| `home.scan` | Scan a plant | Σάρωσε ένα φυτό |
+| `home.scanSub` | Take a photo and see what we know | Βγάλε μια φωτογραφία και δες τι ξέρουμε |
+| `home.near` | What's near me | Τι υπάρχει κοντά μου |
+| `home.nearSub` | Plants recorded around you | Φυτά που έχουν καταγραφεί γύρω σου |
+| `home.map` | Explore the map | Εξερεύνησε τον χάρτη |
+| `home.mapSub` | See where plants grow and which need protecting | Δες πού φυτρώνουν τα φυτά και ποια χρειάζονται προστασία |
 | `map.layers` | Layers | Επίπεδα |
 | `map.diversity` | Medicinal diversity | Φαρμακευτική ποικιλότητα |
 | `map.hotspots` | Risk hotspots | Εστίες κινδύνου |

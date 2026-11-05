@@ -12,17 +12,19 @@ Check the installed Next.js version against Serwist's docs. If Serwist needs web
 | `/map` | Map with layers + cell bottom sheet | `cells.json`, `natura.geojson`, `fires.geojson`, `occ/<slug>.json`, Firestore | P0 |
 | `/scan` | Camera → identify → result | `/api/identify`, `names.json`, `species.json` | P0 |
 | `/species/[slug]` | Species card (herbarium specimen) | `species.json`, `occ/<slug>.json` | P0 |
-| `/priorities` | Ranked list + filters | `species.json` | P0 |
-| `/search` | Full-text search (also a sheet on `/map`) | `species.json`, `names.json` | P0 |
+| `/home` | First tab: one sentence and three big buttons (Scan a plant, What's near me, Explore the map) | none | P0 |
+| `/plants` | Plants tab: type-ahead search (Greek, English, Latin; accent-insensitive) on top, ranked list below with Threatened / Only grows in Greece filters; plants with fewer than `min_records` records (verdicts.yaml) sit under "Not enough data yet" | `species.json`, `meta.json` | P0 |
+| `/near` | What's near me: plants recorded in the user's generalised 10 km square (device-only location) | `cells.json`, `species.json` | P0 |
+| `/priorities`, `/search` | Redirect to `/plants` | | |
 | `/sightings` | My queued and synced sightings | IndexedDB, Firestore | P1 |
 | `/about` | Data, method, scoring, limitations, credits, "not medical advice" | `meta.json` | P0 |
 | `/api/identify` | Server route → Pl@ntNet | env `PLANTNET_API_KEY` | P0 |
 
-`manifest.start_url = "/map"` so the installed app skips the landing page.
+`manifest.start_url = "/home"` so the installed app skips the landing page.
 
 ## App shell
 
-- Bottom tab bar on phones: **Map · Scan · Priorities · Search**; Scan is the raised centre button. Side rail on desktop.
+- Bottom tab bar on phones: **Home · Scan · Map · Plants**; Scan is the raised button. Side rail on desktop. `/sightings` is reached from a small "My sightings" link under Plants and from the scan result.
 - Top bar: language switch (EL/EN), offline indicator ("Offline — identification will run when you're back online").
 - All data loaded through one cached client store (`lib/data.ts`) that fetches each file once, keeps it in memory and relies on the service worker for offline.
 

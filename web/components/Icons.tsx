@@ -52,3 +52,9 @@ export const CloseIcon = ({ className }: P) => (
 export const ShieldIcon = ({ className }: P) => (
   <svg {...base} className={className}><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" /><path d="M12 8v4M12 15h.01" /></svg>
 );
+export const HomeIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M4 11.5 12 5l8 6.5" /><path d="M6 10v9h12v-9" /><path d="M10 19v-5h4v5" /></svg>
+);
+export const PinIcon = ({ className }: P) => (
+  <svg {...base} className={className}><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.4" /></svg>
+);
