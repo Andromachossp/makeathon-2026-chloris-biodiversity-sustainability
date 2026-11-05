@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useI18n } from "@/lib/i18n";
 import { MapIcon, PinIcon, ScanIcon } from "./Icons";
+import { SafetyNotice } from "./SafetyNotice";
 
 /** First tab: one sentence and three big buttons. */
 export function HomeView() {
@@ -28,7 +29,7 @@ export function HomeView() {
           </li>
         ))}
       </ul>
-      <p className="text-xs text-dim">{t.notMedicalAdvice}</p>
+      <SafetyNotice />
     </section>
   );
 }

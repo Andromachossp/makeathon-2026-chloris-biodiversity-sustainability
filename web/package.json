@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "validate-data": "tsx scripts/validate-data.ts",
+    "validate-data": "tsx scripts/validate-data.ts && tsx scripts/check-safety.ts",
     "predev": "node scripts/copy-maplibre-worker.mjs",
     "prebuild": "node scripts/copy-maplibre-worker.mjs",
-    "greek-review": "tsx scripts/greek-review.ts"
+    "greek-review": "tsx scripts/greek-review.ts",
+    "check-safety": "tsx scripts/check-safety.ts"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.2",

@@ -94,6 +94,11 @@ export const en = {
     powo: "Plants of the World Online",
     sources: "Sources: Kew WCVP and WCUPS, GBIF (records and IUCN category).",
     enTag: "EN",
+    prepTitle: "Traditional preparations",
+    prepNotReviewed: "Not reviewed yet",
+    prepReviewedBy: "Reviewed by {name}",
+    prepNotSpecialist: "Not yet reviewed by a specialist",
+    greekNameNotReviewed: "Greek name: not reviewed yet",
     dataNote: "Data note",
     review: "Under review",
     flags: {
@@ -261,6 +266,8 @@ export const en = {
     errBadImage: "That file is too big or is not an image.",
     noPlant: "We could not recognise a plant in this photo. Try a closer photo of a leaf or flower.",
     sampleCredit: "Sample photo",
+    cachedExample: "Cached example result",
+    cachedExampleDetail: "This result was identified earlier by Pl@ntNet and saved in the app, so it did not use the identification service. Fetched {date}, Pl@ntNet API version {version}.",
   },
   sightings: {
     empty: "No sightings saved on this device yet. Scan a plant and tap Save this sighting.",
@@ -303,7 +310,11 @@ export const en = {
     samples: "Sample photos (Wikimedia Commons; licence and author as listed):",
     evidence: "Evidence cards: PubMed (US National Library of Medicine) and European Medicines Agency (EMA) herbal monographs. Each card links to its original source.",
     plantnet: "Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors.",
-  },  notMedicalAdvice: "Chloris is not medical advice. Documented uses are shown for information only.",
+  },
+  safety: {
+    title: "Information only",
+    notice: "Chloris is for information only. It is not medical advice and does not replace a doctor or prescribed medicine. We give no doses. Take extra care in pregnancy, while breastfeeding, and with children. Ask a pharmacist or doctor before using any wild plant.",
+  },
 } as const;
 
 type Widen<T> = T extends string ? string : T extends readonly (infer U)[] ? readonly Widen<U>[] : { [K in keyof T]: Widen<T[K]> };

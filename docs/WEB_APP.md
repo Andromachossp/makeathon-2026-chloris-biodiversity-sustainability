@@ -98,6 +98,13 @@ Order on the page:
 
 - `lib/i18n/{el,en}.ts` dictionaries + a small context provider; default from `navigator.language`, persisted in `localStorage` (wrapped in try/catch). Every UI string goes through it. Species content uses `nameEl`/`usesEl` when present, else English with a small "EN" tag.
 
+## Safety and placement rules (enforced by `npm run check-safety`, part of `npm run validate-data`)
+
+1. **One standard notice**, `t.safety.notice` (EN and EL), rendered by `<SafetyNotice />`: "Chloris is for information only. It is not medical advice and does not replace a doctor or prescribed medicine. We give no doses. Take extra care in pregnancy, while breastfeeding, and with children. Ask a pharmacist or doctor before using any wild plant." Shown wherever uses or evidence appear (the species page evidence section, scan results, near-me results), on Home, on `/about` and in the landing footer. There is no other "not medical advice" wording.
+2. **Placement:** uses, traditional preparations, studies and evidence cards appear only on their species page, each card with its kind label. They are never shown in lists, search, map sheets, scan or near-me results, and search indexes names only. No screen pairs a plant with a health condition outside its own page.
+3. **Sample-photo results** are labelled "Cached example result" with where and when the Pl@ntNet response was fetched (date and API version) and a Pl@ntNet credit, plus the photo's own licence credit.
+4. **Featured species** (chosen by the science lead): Greek name and traditional preparations are shown when filled in (`featured_species.csv`), otherwise "Not reviewed yet".
+
 ## Quality bar
 
 - TypeScript strict, ESLint clean, no `any` in data types.

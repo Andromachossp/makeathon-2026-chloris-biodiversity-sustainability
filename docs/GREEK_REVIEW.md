@@ -7,7 +7,7 @@ Notes for the reviewer:
 - `{n}`, `{cat}`, `{level}` are placeholders filled by the app.
 - Terms chosen on purpose: *Φυτά* (Plants), *Φυτρώνει μόνο στην Ελλάδα* (Only grows in Greece), *Απειλούμενο* (Threatened), *Δεν έχει αξιολογηθεί ακόμη* (Not assessed yet), *Πρωτότυπος βαθμός* (Prototype score).
 
-313 strings.
+321 strings.
 
 | Key | English | Greek (to review) |
 | --- | --- | --- |
@@ -115,6 +115,11 @@ Notes for the reviewer:
 | `species.powo` | Plants of the World Online | Plants of the World Online ⚠ same as English |
 | `species.sources` | Sources: Kew WCVP and WCUPS, GBIF (records and IUCN category). | Πηγές: Kew WCVP και WCUPS, GBIF (καταγραφές και κατηγορία IUCN). |
 | `species.enTag` | EN | EN ⚠ same as English |
+| `species.prepTitle` | Traditional preparations | Παραδοσιακές παρασκευές |
+| `species.prepNotReviewed` | Not reviewed yet | Δεν έχουν ελεγχθεί ακόμη |
+| `species.prepReviewedBy` | Reviewed by {name} | Έλεγχος από {name} |
+| `species.prepNotSpecialist` | Not yet reviewed by a specialist | Δεν έχει ελεγχθεί ακόμη από ειδικό |
+| `species.greekNameNotReviewed` | Greek name: not reviewed yet | Ελληνική ονομασία: δεν έχει ελεγχθεί ακόμη |
 | `species.dataNote` | Data note | Σημείωση δεδομένων |
 | `species.review` | Under review | Υπό έλεγχο |
 | `species.flags.gbif_synonym_match` | GBIF treats this name as a synonym of another species, so its records follow GBIF's species and may not match Kew's. | Το GBIF θεωρεί αυτό το όνομα συνώνυμο άλλου είδους, οπότε οι καταγραφές ακολουθούν το είδος του GBIF και μπορεί να διαφέρουν από του Kew. |
@@ -280,6 +285,8 @@ Notes for the reviewer:
 | `scan.errBadImage` | That file is too big or is not an image. | Το αρχείο είναι πολύ μεγάλο ή δεν είναι εικόνα. |
 | `scan.noPlant` | We could not recognise a plant in this photo. Try a closer photo of a leaf or flower. | Δεν αναγνωρίσαμε φυτό σε αυτή τη φωτογραφία. Δοκίμασε πιο κοντινή φωτογραφία ενός φύλλου ή λουλουδιού. |
 | `scan.sampleCredit` | Sample photo | Δοκιμαστική φωτογραφία |
+| `scan.cachedExample` | Cached example result | Αποθηκευμένο παράδειγμα αποτελέσματος |
+| `scan.cachedExampleDetail` | This result was identified earlier by Pl@ntNet and saved in the app, so it did not use the identification service. Fetched {date}, Pl@ntNet API version {version}. | Αυτό το αποτέλεσμα αναγνωρίστηκε νωρίτερα από το Pl@ntNet και αποθηκεύτηκε στην εφαρμογή, οπότε δεν χρησιμοποίησε την υπηρεσία αναγνώρισης. Λήψη {date}, έκδοση API Pl@ntNet {version}. |
 | `sightings.empty` | No sightings saved on this device yet. Scan a plant and tap Save this sighting. | Δεν υπάρχουν ακόμη παρατηρήσεις σε αυτή τη συσκευή. Σάρωσε ένα φυτό και πάτα Αποθήκευση παρατήρησης. |
 | `sightings.deviceOnly` | Saved on this device only. | Αποθηκεύτηκε μόνο σε αυτή τη συσκευή. |
 | `sightings.area` | Area | Περιοχή |
@@ -323,4 +330,5 @@ Notes for the reviewer:
 | `credits.samples` | Sample photos (Wikimedia Commons; licence and author as listed): | Δοκιμαστικές φωτογραφίες (Wikimedia Commons· άδεια και δημιουργός όπως αναφέρονται): |
 | `credits.evidence` | Evidence cards: PubMed (US National Library of Medicine) and European Medicines Agency (EMA) herbal monographs. Each card links to its original source. | Κάρτες τεκμηρίωσης: PubMed (Εθνική Βιβλιοθήκη Ιατρικής των ΗΠΑ) και μονογραφίες βοτάνων του Ευρωπαϊκού Οργανισμού Φαρμάκων (EMA). Κάθε κάρτα παραπέμπει στην αρχική της πηγή. |
 | `credits.plantnet` | Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors. | Αναγνώριση φυτών: Pl@ntNet (plantnet.org). Οι φωτογραφίες αναφοράς που εμφανίζονται με ένα αποτέλεσμα αναφέρουν τους δημιουργούς τους. |
-| `notMedicalAdvice` | Chloris is not medical advice. Documented uses are shown for information only. | Το Chloris δεν αποτελεί ιατρική συμβουλή. Οι καταγεγραμμένες χρήσεις παρουσιάζονται μόνο ως πληροφορία. |
+| `safety.title` | Information only | Μόνο για ενημέρωση |
+| `safety.notice` | Chloris is for information only. It is not medical advice and does not replace a doctor or prescribed medicine. We give no doses. Take extra care in pregnancy, while breastfeeding, and with children. Ask a pharmacist or doctor before using any wild plant. | Το Chloris είναι μόνο για ενημέρωση. Δεν αποτελεί ιατρική συμβουλή και δεν αντικαθιστά τον γιατρό ή τα συνταγογραφούμενα φάρμακα. Δεν δίνουμε δόσεις. Πρόσεχε ιδιαίτερα στην εγκυμοσύνη, κατά τον θηλασμό και με παιδιά. Ρώτα φαρμακοποιό ή γιατρό πριν χρησιμοποιήσεις οποιοδήποτε άγριο φυτό. |

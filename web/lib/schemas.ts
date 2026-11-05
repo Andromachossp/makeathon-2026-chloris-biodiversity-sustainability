@@ -63,6 +63,8 @@ export const SpeciesSchema = z
       .object({
         usesEn: z.string(),
         usesEl: z.string(),
+        prepEn: z.string(), // traditional preparations, written by the science lead; "" = not reviewed yet
+        prepEl: z.string(),
         ema: EmaStatus,
         emaUrl: z.string().nullable(),
         harvest: Harvest,

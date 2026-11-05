@@ -51,6 +51,7 @@ interface Species {
   featured: boolean;
   curated?: {                // only when featured
     usesEn: string; usesEl: string;
+    prepEn: string; prepEl: string;   // traditional preparations (science lead); "" = not reviewed yet
     ema: EmaStatus; emaUrl: string | null;
     harvest: Harvest;
     substitutes: string[];   // slugs

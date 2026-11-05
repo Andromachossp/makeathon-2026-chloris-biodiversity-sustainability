@@ -211,7 +211,7 @@ export function Landing() {
           </div>
           <footer className="mt-16 text-xs text-dim">
             <p>{t.landing.credits}</p>
-            <p className="mt-1">{t.notMedicalAdvice}</p>
+            <p className="mt-1">{t.safety.notice}</p>
           </footer>
         </section>
       </main>

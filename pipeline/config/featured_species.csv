@@ -1,13 +1,13 @@
-scientific_name,name_el,name_en,uses_en,uses_el,ema_status,ema_url,harvest,substitutes,reviewed_by,notes
-Sideritis scardica,Τσάι του βουνού,Greek mountain tea,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Sideritis raeseri,Τσάι του βουνού,Mountain tea,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Origanum vulgare,Ρίγανη,Oregano,,,unknown,,unknown,,,DRAFT - Greek oregano is subsp. hirtum; science lead to verify
-Origanum dictamnus,Δίκταμο,Cretan dittany,,,unknown,,unknown,,,DRAFT - Cretan endemic; science lead to verify
-Salvia fruticosa,Φασκόμηλο,Greek sage,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Thymbra capitata,Θυμάρι,Conehead thyme,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Matricaria chamomilla,Χαμομήλι,Chamomile,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Hypericum perforatum,Βαλσαμόχορτο,St John's wort,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Mentha pulegium,Φλησκούνι,Pennyroyal,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Lavandula stoechas,Αγριολεβάντα,French lavender,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Pistacia lentiscus,Σχίνος,Mastic tree,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
-Orchis mascula,Σαλέπι,Early purple orchid,,,unknown,,unknown,,,DRAFT - salep orchids are linked to illegal trade; science lead to verify
+scientific_name,name_el,name_en,uses_en,uses_el,traditional_prep_en,traditional_prep_el,ema_status,ema_url,harvest,substitutes,reviewed_by,notes
+Sideritis scardica,Τσάι του βουνού,Greek mountain tea,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Sideritis raeseri,Τσάι του βουνού,Mountain tea,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Origanum vulgare,Ρίγανη,Oregano,,,,,unknown,,unknown,,,DRAFT - Greek oregano is subsp. hirtum; science lead to verify
+Origanum dictamnus,Δίκταμο,Cretan dittany,,,,,unknown,,unknown,,,DRAFT - Cretan endemic; science lead to verify
+Salvia fruticosa,Φασκόμηλο,Greek sage,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Thymbra capitata,Θυμάρι,Conehead thyme,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Matricaria chamomilla,Χαμομήλι,Chamomile,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Hypericum perforatum,Βαλσαμόχορτο,St John's wort,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Mentha pulegium,Φλησκούνι,Pennyroyal,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Lavandula stoechas,Αγριολεβάντα,French lavender,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Pistacia lentiscus,Σχίνος,Mastic tree,,,,,unknown,,unknown,,,DRAFT - science lead to verify and complete
+Orchis mascula,Σαλέπι,Early purple orchid,,,,,unknown,,unknown,,,DRAFT - salep orchids are linked to illegal trade; science lead to verify

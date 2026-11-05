@@ -6,12 +6,15 @@ import { loadJson } from "@/lib/data";
 import type { EvidenceEntry, EvidenceFile } from "@/lib/types";
 import { fillText } from "@/lib/verdict";
 import { CheckIcon, ClockIcon, DocIcon, FlaskIcon, HelpIcon, LeafIcon, ListIcon, ShieldIcon, UserIcon, WarnIcon } from "./Icons";
+import { SafetyNotice } from "./SafetyNotice";
 import { Skeleton, SkeletonScreen } from "./Skeleton";
 
 const KIND_ICON = { traditional_use: LeafIcon, human_research: UserIcon, animal_or_lab: FlaskIcon, review: ListIcon, regulatory_monograph: DocIcon } as const;
 
 /** "What has been studied": evidence cards for featured species. Not medical advice; no dosing; text comes only from reviewed config. */
-export function EvidenceSection({ slug, hasEvidence, version, counts, legacyUses }: { slug: string; hasEvidence: boolean; version: string; counts?: { entries: number; safetyNotes: number }; legacyUses?: string }) {
+export interface Preparations { en: string; el: string; reviewedBy: string | null }
+
+export function EvidenceSection({ slug, hasEvidence, version, counts, legacyUses, prep }: { slug: string; hasEvidence: boolean; version: string; counts?: { entries: number; safetyNotes: number }; legacyUses?: string; prep?: Preparations | null }) {
   const { t } = useI18n();
   return (
     <section aria-labelledby="evidence-title" className="mt-6">
@@ -19,7 +22,8 @@ export function EvidenceSection({ slug, hasEvidence, version, counts, legacyUses
         <h2 id="evidence-title" className="font-display text-xl font-semibold">{t.evidence.title}</h2>
         {hasEvidence && <span className="rounded-full border border-paper-ink/40 px-2 py-0.5 font-mono text-[11px]">{t.evidence.version}: {version}</span>}
       </div>
-      <p className="mt-2 rounded-[10px] bg-paper-ink/10 p-3 text-xs">{t.notMedicalAdvice}</p>
+      <div className="mt-2"><SafetyNotice tone="paper" /></div>
+      {prep && <TraditionalPreparations prep={prep} />}
       {hasEvidence ? (
         <Boundary fallback={<p className="mt-3 text-sm">{t.evidence.loadFailed}</p>}>
           <Suspense fallback={<EvidenceSkeleton entries={counts?.entries ?? 1} safety={counts?.safetyNotes ?? 0} />}>
@@ -34,6 +38,30 @@ export function EvidenceSection({ slug, hasEvidence, version, counts, legacyUses
         </div>
       )}
     </section>
+  );
+}
+
+/** Traditional preparations for the featured species (written by the science lead). Filled in: shown; otherwise "Not reviewed yet". */
+function TraditionalPreparations({ prep }: { prep: Preparations }) {
+  const { t, locale } = useI18n();
+  const text = locale === "el" ? prep.el || prep.en : prep.en || prep.el;
+  const tag = text && locale === "el" && !prep.el && prep.en ? "EN" : text && locale === "en" && !prep.en && prep.el ? "EL" : null;
+  return (
+    <div className="mt-3 rounded-[12px] border border-paper-ink/30 bg-white/40 p-4">
+      <p className="text-xs font-semibold"><span className="inline-flex items-center gap-1.5 rounded-full border border-paper-ink/50 px-2.5 py-1"><LeafIcon className="h-4 w-4" />{t.evidence.kinds.traditional_use}</span></p>
+      <h3 className="mt-2 font-display text-lg font-semibold">{t.species.prepTitle}</h3>
+      {text ? (
+        <>
+          <p className="mt-2 font-serif leading-relaxed">{text}{tag && <span className="ml-1 rounded border border-paper-ink/40 px-1 font-mono text-[10px]">{tag}</span>}</p>
+          <p className="mt-2 flex items-center gap-1.5 text-xs">
+            {prep.reviewedBy ? <CheckIcon className="h-4 w-4 shrink-0" /> : <ClockIcon className="h-4 w-4 shrink-0" />}
+            {prep.reviewedBy ? fillText(t.species.prepReviewedBy, { name: prep.reviewedBy }) : t.species.prepNotSpecialist}
+          </p>
+        </>
+      ) : (
+        <p className="mt-2">{t.species.prepNotReviewed}</p>
+      )}
+    </div>
   );
 }
 

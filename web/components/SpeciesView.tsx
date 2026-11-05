@@ -64,6 +64,7 @@ function Card({ slug }: { slug: string }) {
           {name.enTag && <span className="ml-2 rounded border border-line px-1 align-middle font-mono text-[10px] text-dim">{t.species.enTag}</span>}
         </h1>
         {!name.isFallback && <p className="mt-1 font-serif text-xl italic text-dim">{s.name}</p>}
+        {s.featured && locale === "el" && (name.isFallback || name.enTag) && <p className="mt-1 text-xs text-dim">{t.species.greekNameNotReviewed}</p>}
         <div className="mt-3 flex flex-wrap gap-2">
           {s.endemic && <span className="rounded-full border border-lavender px-3 py-1 text-xs text-lavender">★ {t.species.endemic}</span>}
           <IucnBadge code={s.iucn} />
@@ -106,7 +107,7 @@ function Card({ slug }: { slug: string }) {
           {s.stats.cells > 0 ? <MiniMap slug={s.slug} /> : <p className="text-sm opacity-80">{t.species.noRecords}</p>}
         </div>
 
-        <EvidenceSection slug={s.slug} hasEvidence={meta.evidenceSlugs.includes(s.slug)} version={meta.evidenceVersion} counts={meta.evidenceCounts[s.slug]} legacyUses={uses ? uses : undefined} />
+        <EvidenceSection slug={s.slug} hasEvidence={meta.evidenceSlugs.includes(s.slug)} version={meta.evidenceVersion} counts={meta.evidenceCounts[s.slug]} prep={s.featured && s.curated ? { en: s.curated.prepEn, el: s.curated.prepEl, reviewedBy: s.curated.reviewedBy } : null} legacyUses={uses ? uses : undefined} />
 
         {/* the prototype score is a small detail, tucked away */}
         <details className="mt-6 rounded-[10px] border border-paper-ink/30 p-3">

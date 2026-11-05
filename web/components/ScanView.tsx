@@ -14,13 +14,14 @@ import { useOnline } from "@/lib/useOnline";
 import { ClientOnly } from "./ClientOnly";
 import { CheckIcon, HelpIcon, WarnIcon } from "./Icons";
 import { HarvestBanner } from "./Risk";
+import { SafetyNotice } from "./SafetyNotice";
 import { ScanSkeleton, Skeleton, SkeletonScreen } from "./Skeleton";
 import { VerdictBanner } from "./Verdict";
 
 type View =
   | { kind: "idle" }
   | { kind: "working"; preview: string }
-  | { kind: "result"; preview: string; candidates: ScanCandidate[]; sample?: SampleDef }
+  | { kind: "result"; preview: string; candidates: ScanCandidate[]; sample?: SampleDef; cache?: { fetchedAt: string; apiVersion: string } }
   | { kind: "error"; code: "offline" | "failed" | "rate_limited" | "bad_image" };
 
 const subscribeCoarse = (cb: () => void) => {
@@ -87,7 +88,7 @@ function Scan() {
     try {
       const res = await fetch(sample.result);
       const data = (await res.json()) as IdentifyResponse; // cached once from Pl@ntNet: no API call, no quota
-      setView({ kind: "result", preview: sample.file, candidates: data.candidates, sample });
+      setView({ kind: "result", preview: sample.file, candidates: data.candidates, sample, cache: { fetchedAt: data.fetchedAt ?? "", apiVersion: data.apiVersion ?? "" } });
     } catch {
       setView({ kind: "error", code: "failed" });
     }
@@ -201,6 +202,15 @@ function Result({ view, onReset }: { view: Extract<View, { kind: "result" }>; on
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={view.preview} alt={t.scan.yourPhoto} className="max-h-60 w-full rounded-[14px] object-cover" />
       {view.sample && (
+        <div role="note" className="rounded-[12px] border border-dashed border-saffron p-3">
+          <p className="font-semibold text-saffron">{t.scan.cachedExample}</p>
+          <p className="mt-1 text-xs text-dim">
+            {fillText(t.scan.cachedExampleDetail, { date: view.cache?.fetchedAt ? new Date(`${view.cache.fetchedAt}T00:00:00`).toLocaleDateString(locale) : "—", version: view.cache?.apiVersion || "—" })}{" "}
+            <a className="underline" href="https://plantnet.org" target="_blank" rel="noreferrer">Pl@ntNet ↗</a>
+          </p>
+        </div>
+      )}
+      {view.sample && (
         <p className="text-xs text-dim">
           {t.scan.sampleCredit}: <a className="underline" href={view.sample.source} target="_blank" rel="noreferrer">{view.sample.title}</a>, {view.sample.author},{" "}
           <a className="underline" href={view.sample.licenceUrl} target="_blank" rel="noreferrer">{view.sample.licence}</a>
@@ -281,6 +291,7 @@ function Result({ view, onReset }: { view: Extract<View, { kind: "result" }>; on
 
       {/* always */}
       <p role="note" className="rounded-[14px] border border-risk-moderate-line bg-risk-moderate-line/10 p-3 text-sm text-text">{t.scan.warning}</p>
+      <SafetyNotice />
 
       <div className="flex flex-wrap gap-3">
         {matched && tier !== "unsure" && <Link href={`/species/${matched.slug}`} className="flex min-h-[48px] items-center rounded-full border border-saffron px-5 text-saffron">{t.scan.seeFull}</Link>}

@@ -200,7 +200,7 @@ def run() -> None:
             sp["nameEn"] = blank(r.name_en_gbif)
         if f:
             row = f["row"]
-            sp["curated"] = {"usesEn": row.uses_en, "usesEl": row.uses_el, "ema": row.ema_status,
+            sp["curated"] = {"usesEn": row.uses_en, "usesEl": row.uses_el, "prepEn": row.traditional_prep_en, "prepEl": row.traditional_prep_el, "ema": row.ema_status,
                              "emaUrl": blank(row.ema_url), "harvest": row.harvest, "substitutes": f["subs"],
                              "reviewedBy": blank(row.reviewed_by)}
         species.append(sp)

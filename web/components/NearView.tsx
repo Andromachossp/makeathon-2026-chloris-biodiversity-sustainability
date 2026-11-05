@@ -9,6 +9,7 @@ import { fillText, verdictFor, type VerdictKey } from "@/lib/verdict";
 import { cellLabel } from "./CellSheet";
 import { ClientOnly } from "./ClientOnly";
 import { PinIcon } from "./Icons";
+import { SafetyNotice } from "./SafetyNotice";
 import { PlantRow } from "./PlantRow";
 import { RowsSkeleton, Skeleton, SkeletonScreen } from "./Skeleton";
 
@@ -125,7 +126,7 @@ function Result({ cell, outside, onAgain }: { cell: string | null; outside: bool
               <li key={s.slug} className="min-h-[112px]"><PlantRow s={s} verdict={v} /></li>
             ))}
           </ul>
-          <p className="text-xs text-dim">{t.notMedicalAdvice}</p>
+          <SafetyNotice />
         </>
       )}
       <button type="button" onClick={onAgain} className="min-h-[48px] self-start rounded-full border border-line px-5">{t.near.tryAgain}</button>
