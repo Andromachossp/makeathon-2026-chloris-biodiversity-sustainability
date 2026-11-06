@@ -75,7 +75,9 @@ function pick(records: GbifRecord[]): PhotoResponse | null {
 }
 
 async function search(taxonKey: number, dataset: string | null, signal: AbortSignal): Promise<PhotoResponse | null> {
-  const q = new URLSearchParams({ taxonKey: String(taxonKey), mediaType: "StillImage", basisOfRecord: "HUMAN_OBSERVATION", occurrenceStatus: "PRESENT", limit: "20" });
+  // GBIF returns every media item in each occurrence; a 20-record response can exceed
+  // the five-second budget on Vercel. Five records still allow skipping unsuitable media.
+  const q = new URLSearchParams({ taxonKey: String(taxonKey), mediaType: "StillImage", basisOfRecord: "HUMAN_OBSERVATION", occurrenceStatus: "PRESENT", limit: "5" });
   q.append("license", "CC0_1_0");
   q.append("license", "CC_BY_4_0");
   if (dataset) q.set("datasetKey", dataset);
