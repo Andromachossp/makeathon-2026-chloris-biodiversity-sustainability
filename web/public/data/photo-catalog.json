@@ -953,6 +953,12 @@
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
+  "galanthus-ikariae": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/174945713/medium.jpeg",
+    "creator": "Thanasis Papanikolaou",
+    "licence": "CC BY-NC 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
+  },
   "hypericum-perforatum": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605419038/medium.jpg",
     "creator": "謝麗霦",

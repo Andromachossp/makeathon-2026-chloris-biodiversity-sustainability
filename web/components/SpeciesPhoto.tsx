@@ -9,12 +9,6 @@ import { Skeleton } from "./Skeleton";
 
 type State = { slug: string; photo: PhotoResponse | null; done: boolean };
 
-/** The credit template up to the licence, so the licence itself can be rendered as a link. */
-function creditPrefix(photo: PhotoResponse, p: { credit: string; creditNoName: string }): string {
-  const template = photo.creator ? p.credit : p.creditNoName;
-  return fillText(template.split("{licence}")[0], { creator: photo.creator });
-}
-
 /**
  * Header photo for the species page only. The frame has a fixed aspect ratio and the caption
  * area is a fixed height, so skeleton, photo and flower-icon states never shift the page.
@@ -69,13 +63,20 @@ export function SpeciesPhoto({ slug, alt, powoId }: { slug: string; alt: string;
         {photo && loadedUrl === photo.url && (
           <>
             <span className="block">
-              {creditPrefix(photo, p)}
+              {photo.creator ? (
+                <>
+                  {p.credit.split("{creator}")[0]}
+                  <a className="underline" href={photo.url} target="_blank" rel="noreferrer">{photo.creator}</a>
+                  {p.credit.split("{creator}")[1].split("{licence}")[0]}
+                </>
+              ) : fillText(p.creditNoName.split("{licence}")[0], {})}
               <a className="underline" href={photo.licenceUrl} target="_blank" rel="noreferrer license">{photo.licence}</a>
             </span>
           </>
         )}
         {pending && <Skeleton className="h-3 w-2/3" />}
         <span className="mt-0.5 block">{p.note}</span>
+        {photo?.licence === "CC BY-NC 4.0" && loadedUrl === photo.url && <span className="block">{p.nonCommercial}</span>}
         {current.done && !photo && powoId && (
           <span className="mt-1 block">
             <a className="font-medium text-saffron underline" href={`https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:${encodeURIComponent(powoId)}/images`} target="_blank" rel="noreferrer">{p.kewImages} ↗</a>

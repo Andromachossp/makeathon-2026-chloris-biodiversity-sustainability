@@ -27,10 +27,10 @@ _This README is a template. Claude Code completes every section in Phase 6 using
 The species page shows one header photo, fetched on demand by the server route `/api/photo/[slug]` from the [GBIF occurrence API](https://www.gbif.org/developer/occurrence). Photos are never shown in the Plants list, on the landing page or on the map.
 
 Rules the route enforces:
-- **Licence: CC0 or CC BY only** (any version), checked on the photo itself, not just the record. Non-commercial (NC), NoDerivatives, ShareAlike and all-rights-reserved photos are never used.
+- **Licence: CC0 or CC BY** (any version), checked on the photo itself, not just the record. NoDerivatives, ShareAlike and all-rights-reserved photos are not used. **One explicit exception:** the *Galanthus ikariae* photo by Thanasis Papanikolaou is CC BY-NC 4.0 and may be used only for this non-commercial prototype. Replace or remove it before any commercial use.
 - **Human observations only.** No preserved specimens or herbarium sheets.
 - **Research-grade iNaturalist first** (GBIF dataset `50c9509d-22c7-4a22-a47d-8c48425ef4a7`), then any other human observation that passes the licence check.
-- **Attribution as the licence requires:** every displayed photo shows "Photo: creator, licence" with the licence name linking to its legal text. CC BY photos without a named creator are skipped. `/about` explains the source and licence rules.
+- **Attribution as the licence requires:** every displayed photo shows "Photo: creator, licence" with the creator linking to the image and the licence name linking to its legal text. CC BY photos without a named creator are skipped. `/about` explains the source and licence rules.
 - **Privacy:** the route returns only `{ url, creator, licence, licenceUrl }`. Coordinates, record IDs and occurrence or photo page links are stripped on the server and are never returned, stored or linked.
 - Photos come from many contributors and may occasionally show a similar plant; the species page says so.
 - Responses are cached (`s-maxage` 30 days) so each species is looked up about once. Lookups time out after 5 seconds. If nothing suitable exists, the request fails or the user is offline, a neutral flower icon is shown instead.

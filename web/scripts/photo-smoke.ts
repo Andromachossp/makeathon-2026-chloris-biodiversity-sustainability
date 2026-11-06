@@ -21,6 +21,14 @@ try {
   const catalogued = await GET(new Request("http://localhost"), context("origanum-dictamnus"));
   assert.equal(catalogued.status, 200);
   assert.equal((await catalogued.json()).creator, "Skjold Søndergaard");
+  const snowdrop = await GET(new Request("http://localhost"), context("galanthus-ikariae"));
+  assert.equal(snowdrop.status, 200);
+  assert.deepEqual(await snowdrop.json(), {
+    url: "https://inaturalist-open-data.s3.amazonaws.com/photos/174945713/medium.jpeg",
+    creator: "Thanasis Papanikolaou",
+    licence: "CC BY-NC 4.0",
+    licenceUrl: "https://creativecommons.org/licenses/by-nc/4.0/",
+  });
   const offline = await GET(new Request("http://localhost"), context("soda-inermis"));
   assert.equal(offline.status, 504);
   assert.equal(offline.headers.get("Cache-Control"), "no-store");

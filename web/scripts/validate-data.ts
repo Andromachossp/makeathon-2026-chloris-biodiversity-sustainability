@@ -26,14 +26,16 @@ const slugs = new Set(species?.map((s) => s.slug));
 const PhotoSchema = z.strictObject({
   url: z.url().refine((value) => value.startsWith("https://"), "image URL must be HTTPS"),
   creator: z.string().max(120),
-  licence: z.string().regex(/^CC0 1\.0$|^CC BY \d\.\d$/),
+  licence: z.string().regex(/^CC0 1\.0$|^CC BY \d\.\d$|^CC BY-NC 4\.0$/),
   licenceUrl: z.url(),
 });
 const photos = check("photo-catalog.json", z.record(z.string(), PhotoSchema), read("photo-catalog.json"));
 if (photos) for (const [slug, photo] of Object.entries(photos)) {
   if (!slugs.has(slug)) errors.push(`photo-catalog.json: unknown species ${slug}`);
   if (photo.licence.startsWith("CC BY") && !photo.creator) errors.push(`photo-catalog.json: ${slug} lacks creator`);
+  if (photo.licence.includes("-NC") && slug !== "galanthus-ikariae") errors.push(`photo-catalog.json: NC exception is only approved for Galanthus ikariae`);
   const expected = photo.licence === "CC0 1.0" ? "https://creativecommons.org/publicdomain/zero/1.0/"
+    : photo.licence === "CC BY-NC 4.0" ? "https://creativecommons.org/licenses/by-nc/4.0/"
     : `https://creativecommons.org/licenses/by/${photo.licence.slice(6)}/`;
   if (photo.licenceUrl !== expected) errors.push(`photo-catalog.json: ${slug} has mismatched licence URL`);
 }
