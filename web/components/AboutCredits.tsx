@@ -14,6 +14,7 @@ export function AboutCredits() {
         <li>{t.credits.vectors}</li>
         <li>{t.credits.library}</li>
         <li>{t.credits.plantnet}</li>
+        <li>{t.credits.photos} <a className="underline" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0 ↗</a> · <a className="underline" href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noreferrer">CC0 1.0 ↗</a></li>
         <li>{t.credits.evidence} <a className="underline" href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noreferrer">PubMed ↗</a> · <a className="underline" href="https://www.ema.europa.eu/en/human-regulatory-overview/herbal-medicinal-products" target="_blank" rel="noreferrer">EMA ↗</a></li>
         <li>
           {t.credits.samples}

@@ -70,3 +70,7 @@ export const FlaskIcon = ({ className }: P) => (
 export const DocIcon = ({ className }: P) => (
   <svg {...base} className={className}><path d="M7 3.5h7l4 4V20.5H7Z" /><path d="M14 3.5v4h4M9.5 12h6M9.5 15.5h6" /></svg>
 );
+
+export const FlowerIcon = ({ className }: P) => (
+  <svg {...base} className={className}><circle cx="12" cy="12" r="2.2" /><path d="M12 9.8c-2.4-1-2.4-5.6 0-6.8 2.4 1.2 2.4 5.8 0 6.8Z" /><path d="M12 14.2c2.4 1 2.4 5.6 0 6.8-2.4-1.2-2.4-5.8 0-6.8Z" /><path d="M9.8 12c-1 2.4-5.6 2.4-6.8 0 1.2-2.4 5.8-2.4 6.8 0Z" /><path d="M14.2 12c1-2.4 5.6-2.4 6.8 0-1.2 2.4-5.8 2.4-6.8 0Z" /></svg>
+);

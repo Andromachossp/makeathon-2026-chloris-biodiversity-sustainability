@@ -93,6 +93,13 @@ export const en = {
     emaStatus: { "well-established": "Well-established use", traditional: "Traditional use", none: "No monograph", unknown: "Not reviewed yet" },
     powo: "Plants of the World Online",
     sources: "Sources: Kew WCVP and WCUPS, GBIF (records and IUCN category).",
+    photo: {
+      alt: "Photo of {name}",
+      credit: "Photo: {creator}, {licence}",
+      creditNoName: "Photo: {licence}",
+      note: "Photos come from GBIF contributors and may occasionally show a similar plant.",
+      none: "No photo available",
+    },
     enTag: "EN",
     prepTitle: "Traditional preparations",
     prepNotReviewed: "Not reviewed yet",
@@ -310,6 +317,7 @@ export const en = {
     samples: "Sample photos (Wikimedia Commons; licence and author as listed):",
     evidence: "Evidence cards: PubMed (US National Library of Medicine) and European Medicines Agency (EMA) herbal monographs. Each card links to its original source.",
     plantnet: "Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors.",
+    photos: "Species photos: contributors to GBIF (gbif.org), mostly iNaturalist research-grade observations. Only photos licensed CC0 or CC BY are used (never non-commercial ones), and only from human observations, not museum specimens. Each photo is credited to its photographer with a link to its licence. Locations and observation pages are never shown. Photos may occasionally show a similar plant.",
   },
   safety: {
     title: "Information only",

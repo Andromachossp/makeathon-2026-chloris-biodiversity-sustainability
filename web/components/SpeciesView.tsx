@@ -10,6 +10,7 @@ import { fillText, verdictFor } from "@/lib/verdict";
 import { ClientOnly } from "./ClientOnly";
 import { IucnBadge } from "./IucnBadge";
 import { MiniMap } from "./MiniMap";
+import { SpeciesPhoto } from "./SpeciesPhoto";
 import { EvidenceSection } from "./EvidenceSection";
 import { HarvestBanner } from "./Risk";
 import { SpeciesSkeleton } from "./Skeleton";
@@ -59,6 +60,7 @@ function Card({ slug }: { slug: string }) {
 
       {/* 2. names: common name first, Latin second */}
       <header>
+        <SpeciesPhoto slug={s.slug} alt={fillText(t.species.photo.alt, { name: name.isFallback ? s.name : `${name.title} (${s.name})` })} />
         <h1 className={`font-display text-4xl font-semibold leading-tight ${name.isFallback ? "italic" : ""}`}>
           {name.title}
           {name.enTag && <span className="ml-2 rounded border border-line px-1 align-middle font-mono text-[10px] text-dim">{t.species.enTag}</span>}
