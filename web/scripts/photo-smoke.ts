@@ -18,10 +18,13 @@ try {
   assert.equal(missing.status, 404);
 
   globalThis.fetch = async () => { throw new Error("offline"); };
+  const catalogued = await GET(new Request("http://localhost"), context("origanum-dictamnus"));
+  assert.equal(catalogued.status, 200);
+  assert.equal((await catalogued.json()).creator, "Skjold Søndergaard");
   const offline = await GET(new Request("http://localhost"), context("acanthus-mollis"));
   assert.equal(offline.status, 504);
   assert.equal(offline.headers.get("Cache-Control"), "no-store");
-  console.log("Photo route: licensed image, missing key, offline fallback passed.");
+  console.log("Photo route: licensed image, missing key, catalogued image, offline fallback passed.");
 } finally {
   globalThis.fetch = originalFetch;
 }

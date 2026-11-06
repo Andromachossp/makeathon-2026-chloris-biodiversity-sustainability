@@ -34,6 +34,7 @@ Rules the route enforces:
 - **Privacy:** the route returns only `{ url, creator, licence, licenceUrl }`. Coordinates, record IDs and occurrence or photo page links are stripped on the server and are never returned, stored or linked.
 - Photos come from many contributors and may occasionally show a similar plant; the species page says so.
 - Responses are cached (`s-maxage` 30 days) so each species is looked up about once. Lookups time out after 5 seconds. If nothing suitable exists, the request fails or the user is offline, a neutral flower icon is shown instead.
+- Featured species use a checked photo catalogue generated from GBIF ahead of deployment (`cd web && node scripts/build-photo-catalog.mjs`). This avoids a slow live lookup for those species. `--all` extends the catalogue to other species; entries without a qualifying photo remain absent. The catalogue stores only image URL, creator, licence and licence URL.
 
 ## Reproduce
 `TODO: pipeline setup, raw downloads, run steps, notebook; web app setup and env vars`

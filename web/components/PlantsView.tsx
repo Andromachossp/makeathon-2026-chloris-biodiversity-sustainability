@@ -113,7 +113,7 @@ function Plants() {
               }
               return (
                 <div key={it.s.slug} role="listitem" style={pos} className="pb-2">
-                  <PlantRow s={it.s} verdict={verdictFor(it.s, vcfg)} />
+                  <PlantRow s={it.s} verdict={verdictFor(it.s, vcfg)} native={!hasEnoughData(it.s, vcfg)} />
                 </div>
               );
             })}

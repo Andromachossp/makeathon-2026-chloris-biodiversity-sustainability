@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { PhotoResponse } from "@/lib/photo";
+import photoCatalog from "@/public/data/photo-catalog.json";
 
 // Server route: finds one openly licensed photo of a species from GBIF.
 // Privacy: only { url, creator, licence, licenceUrl } leaves this file. Coordinates, record IDs
@@ -99,6 +100,11 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
     return new Response(null, { status: 500, headers: { "Cache-Control": "no-store" } });
   }
   if (!taxonKey) return miss();
+
+  // Verified at build time from the same GBIF search, so featured plants do not
+  // depend on GBIF's response time when someone opens the page.
+  const catalogued = (photoCatalog as Record<string, PhotoResponse>)[slug];
+  if (catalogued) return Response.json(catalogued, { headers: { "Cache-Control": OK_CACHE } });
 
   try {
     const signal = AbortSignal.timeout(TIMEOUT_MS); // one 5 s budget for both lookups

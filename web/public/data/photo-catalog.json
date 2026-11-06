@@ -1,0 +1,68 @@
+{
+  "hypericum-perforatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605419038/medium.jpg",
+    "creator": "謝麗霦",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "lavandula-stoechas": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604494110/medium.jpg",
+    "creator": "Michael D. Pirie",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "matricaria-chamomilla": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606151018/medium.jpg",
+    "creator": "Cody Hinchliff",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "mentha-pulegium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610225393/medium.jpg",
+    "creator": "Peter de Lange",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "orchis-mascula": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618146253/medium.jpg",
+    "creator": "Patrick Le Mao",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "origanum-dictamnus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/312489588/medium.jpeg",
+    "creator": "Skjold Søndergaard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "origanum-vulgare": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604533226/medium.jpg",
+    "creator": "Daniel Cahen",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pistacia-lentiscus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605405633/medium.jpg",
+    "creator": "Riccardo Riva",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "salvia-fruticosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618918419/medium.jpg",
+    "creator": "adrian-syros",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sideritis-raeseri": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/153437241/medium.jpeg",
+    "creator": "George Papademetriou",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "thymbra-capitata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610628069/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}
