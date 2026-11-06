@@ -37,6 +37,11 @@ Rules the route enforces:
 - Species with a checked photo use a catalogue generated from GBIF ahead of deployment (`cd web && node scripts/build-photo-catalog.mjs`, or `--all` for the entire list). This avoids a slow live lookup for those species. Entries without a qualifying photo remain absent; the rest use the live lookup and Kew reference-image fallback. The catalogue stores only image URL, creator, licence and licence URL. A bulk refresh must respect GBIF rate limits and can be resumed; existing entries are skipped.
 - When no qualifying photo can be displayed, the species page links to the matching Kew Plants of the World Online reference-image page. These images stay on Kew's site; Chloris does not copy or embed them.
 
+### Add a photo you own
+1. Export a correctly identified photo without GPS/EXIF metadata into `web/public/photos/<species-slug>.jpg`. For example, with Pillow: `python3 -c 'from PIL import Image; import sys; Image.open(sys.argv[1]).convert("RGB").save(sys.argv[2], quality=85)' /path/to/your-photo.jpg web/public/photos/galanthus-ikariae.jpg`.
+2. In `web/public/data/photo-catalog.json`, set that species' four fields: `url` to `/photos/<species-slug>.jpg`, `creator` to the photographer's name, `licence` to `CC BY 4.0` (or `CC0 1.0`), and `licenceUrl` to the matching Creative Commons URL. Only choose a licence if you own the copyright or have the photographer's permission.
+3. Run `cd web && npm run validate-data && npm run build`. Then commit both the image and catalogue and push `main`. Bump the `v=` token in `web/components/SpeciesPhoto.tsx` if replacing a previously cached photo.
+
 ## Reproduce
 `TODO: pipeline setup, raw downloads, run steps, notebook; web app setup and env vars`
 
