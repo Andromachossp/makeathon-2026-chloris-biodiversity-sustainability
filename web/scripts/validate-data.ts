@@ -25,7 +25,7 @@ const meta = check("meta.json", MetaSchema, read("meta.json"));
 const slugs = new Set(species?.map((s) => s.slug));
 const PhotoSchema = z.strictObject({
   url: z.string().refine((value) => /^https:\/\//.test(value) || /^\/photos\/[a-z0-9-]+\.(?:jpe?g|png|webp)$/.test(value), "image URL must be HTTPS or a local /photos/ image"),
-  creator: z.string().max(120),
+  creator: z.string().max(500),
   licence: z.string().regex(/^CC0 1\.0$|^CC BY \d\.\d$|^CC BY-NC 4\.0$/),
   licenceUrl: z.url(),
 });
@@ -33,6 +33,7 @@ const photos = check("photo-catalog.json", z.record(z.string(), PhotoSchema), re
 if (photos) for (const [slug, photo] of Object.entries(photos)) {
   if (!slugs.has(slug)) errors.push(`photo-catalog.json: unknown species ${slug}`);
   if (photo.url.startsWith("/photos/") && !existsSync(join(dir, "..", photo.url.slice(1)))) errors.push(`photo-catalog.json: missing local photo ${photo.url}`);
+  if (photo.url.includes("wikimedia.org") && /(?:gbif|inaturalist)[_ -]*(?:occurrence[_ -]*)?\d{5,}/i.test(decodeURIComponent(photo.url))) errors.push(`photo-catalog.json: ${slug} image URL includes an occurrence ID`);
   if (photo.licence.startsWith("CC BY") && !photo.creator) errors.push(`photo-catalog.json: ${slug} lacks creator`);
   if (photo.licence.includes("-NC") && slug !== "galanthus-ikariae") errors.push(`photo-catalog.json: NC exception is only approved for Galanthus ikariae`);
   const expected = photo.licence === "CC0 1.0" ? "https://creativecommons.org/publicdomain/zero/1.0/"

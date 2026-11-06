@@ -93,6 +93,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
   const miss = () => new Response(null, { status: 404, headers: { "Cache-Control": MISS_CACHE } });
   if (!/^[a-z0-9-]{1,120}$/.test(slug)) return miss();
 
+  // Curated GBIF and Commons entries can exist even when GBIF has no taxon match.
+  const catalogued = (photoCatalog as Record<string, PhotoResponse>)[slug];
+  if (catalogued) return Response.json(catalogued, { headers: { "Cache-Control": OK_CACHE } });
+
   let taxonKey: number | undefined;
   try {
     taxonKey = (await gbifKeys()).get(slug);
@@ -100,11 +104,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
     return new Response(null, { status: 500, headers: { "Cache-Control": "no-store" } });
   }
   if (!taxonKey) return miss();
-
-  // Verified at build time from the same GBIF search, so featured plants do not
-  // depend on GBIF's response time when someone opens the page.
-  const catalogued = (photoCatalog as Record<string, PhotoResponse>)[slug];
-  if (catalogued) return Response.json(catalogued, { headers: { "Cache-Control": OK_CACHE } });
 
   try {
     const signal = AbortSignal.timeout(TIMEOUT_MS); // one 5 s budget for both lookups

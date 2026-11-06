@@ -22,7 +22,7 @@ export function SpeciesPhoto({ slug, alt, powoId }: { slug: string; alt: string;
   useEffect(() => {
     const ctrl = new AbortController();
     // Version the URL so a browser's older cached 404 cannot hide a newly catalogued photo.
-    fetch(`/api/photo/${encodeURIComponent(slug)}?v=photo-catalog-2026-11-06`, { signal: ctrl.signal })
+    fetch(`/api/photo/${encodeURIComponent(slug)}?v=photo-catalog-2026-11-06-commons`, { signal: ctrl.signal })
       .then((r) => (r.ok ? (r.json() as Promise<PhotoResponse>) : null))
       .then((photo) => setState({ slug, photo, done: true }))
       .catch((e) => {

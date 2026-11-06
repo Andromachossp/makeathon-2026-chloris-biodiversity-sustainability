@@ -97,7 +97,7 @@ export const en = {
       alt: "Photo of {name}",
       credit: "Photo: {creator}, {licence}",
       creditNoName: "Photo: {licence}",
-      note: "Photos come from GBIF contributors and may occasionally show a similar plant.",
+      note: "Photos come from GBIF and Wikimedia Commons contributors and may occasionally show a similar plant.",
       none: "No photo available",
       kewImages: "View reference images at Kew",
       identificationCaution: "A photo alone cannot confirm a threatened plant's identity.",
@@ -320,7 +320,7 @@ export const en = {
     samples: "Sample photos (Wikimedia Commons; licence and author as listed):",
     evidence: "Evidence cards: PubMed (US National Library of Medicine) and European Medicines Agency (EMA) herbal monographs. Each card links to its original source.",
     plantnet: "Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors.",
-    photos: "Species photos: contributors to GBIF (gbif.org), mostly iNaturalist research-grade observations. Photos use CC0 or CC BY, with one approved CC BY-NC 4.0 exception for Galanthus ikariae (non-commercial use only). All are human observations, not museum specimens. Each photo links to its image source and licence. Locations and observation pages are never shown. Photos may occasionally show a similar plant.",
+    photos: "Species photos: GBIF (gbif.org) human observations and exact-name Wikimedia Commons (commons.wikimedia.org) files. Commons is used only when the file title, species category and licence metadata match; herbarium specimens and illustrations are excluded. Photos use CC0 or CC BY, with one approved CC BY-NC 4.0 exception for Galanthus ikariae (non-commercial use only). Each photo links to its image and licence. Locations and observation pages are never shown. A photo can occasionally show a similar plant.",
   },
   safety: {
     title: "Information only",
