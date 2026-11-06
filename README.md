@@ -34,7 +34,7 @@ Rules the route enforces:
 - **Privacy:** the route returns only `{ url, creator, licence, licenceUrl }`. Coordinates, record IDs and occurrence or photo page links are stripped on the server and are never returned, stored or linked.
 - Photos come from many contributors and may occasionally show a similar plant; the species page says so.
 - Responses are cached (`s-maxage` 30 days) so each species is looked up about once. Lookups time out after 5 seconds. If nothing suitable exists, the request fails or the user is offline, a neutral flower icon is shown instead.
-- Featured species use a checked photo catalogue generated from GBIF ahead of deployment (`cd web && node scripts/build-photo-catalog.mjs`). This avoids a slow live lookup for those species. `--all` extends the catalogue to other species; entries without a qualifying photo remain absent. The catalogue stores only image URL, creator, licence and licence URL.
+- Species with a checked photo use a catalogue generated from GBIF ahead of deployment (`cd web && node scripts/build-photo-catalog.mjs`, or `--all` for the entire list). This avoids a slow live lookup for those species. Entries without a qualifying photo remain absent; the rest use the live lookup and Kew reference-image fallback. The catalogue stores only image URL, creator, licence and licence URL. A bulk refresh must respect GBIF rate limits and can be resumed; existing entries are skipped.
 - When no qualifying photo can be displayed, the species page links to the matching Kew Plants of the World Online reference-image page. These images stay on Kew's site; Chloris does not copy or embed them.
 
 ## Reproduce

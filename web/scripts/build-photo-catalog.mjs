@@ -6,7 +6,10 @@ import { readFile, writeFile } from "node:fs/promises";
 const species = JSON.parse(await readFile("public/data/species.json", "utf8"));
 const file = "public/data/photo-catalog.json";
 const catalog = JSON.parse(await readFile(file, "utf8"));
-const targets = species.filter((s) => s.gbifKey && (process.argv.includes("--all") || s.featured));
+const topArg = process.argv.find((arg) => arg.startsWith("--top="));
+const topCount = topArg ? Number(topArg.slice(6)) : null;
+const targets = (topCount ? [...species].sort((a, b) => b.risk.score - a.risk.score).slice(0, topCount)
+  : species.filter((s) => process.argv.includes("--all") || s.featured)).filter((s) => s.gbifKey);
 const dataset = "50c9509d-22c7-4a22-a47d-8c48425ef4a7";
 
 function choose(results) {
@@ -32,12 +35,18 @@ function choose(results) {
   return null;
 }
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 async function lookup(key, inat) {
   const q = new URLSearchParams({ taxonKey: String(key), mediaType: "StillImage", basisOfRecord: "HUMAN_OBSERVATION", occurrenceStatus: "PRESENT", limit: "5" });
   q.append("license", "CC0_1_0");
   q.append("license", "CC_BY_4_0");
   if (inat) q.set("datasetKey", dataset);
-  const response = await fetch(`https://api.gbif.org/v1/occurrence/search?${q}`, { signal: AbortSignal.timeout(15000) });
+  let response = await fetch(`https://api.gbif.org/v1/occurrence/search?${q}`, { signal: AbortSignal.timeout(15000) });
+  if (response.status === 429) {
+    await sleep(30000);
+    response = await fetch(`https://api.gbif.org/v1/occurrence/search?${q}`, { signal: AbortSignal.timeout(15000) });
+  }
   if (!response.ok) throw new Error(`GBIF ${response.status}`);
   return choose((await response.json()).results ?? []);
 }
@@ -51,8 +60,10 @@ async function fill(s) {
 }
 
 // Limit load on GBIF. A failed lookup stays absent; the app can still try live.
-for (let i = 0; i < targets.length; i += 3) {
-  await Promise.all(targets.slice(i, i + 3).map(fill));
+const batchSize = process.argv.includes("--all") || topCount ? 1 : 3;
+for (let i = 0; i < targets.length; i += batchSize) {
+  await Promise.all(targets.slice(i, i + batchSize).map(fill));
   await writeFile(file, `${JSON.stringify(Object.fromEntries(Object.entries(catalog).sort()), null, 2)}\n`);
-  console.log(`${Math.min(i + 3, targets.length)}/${targets.length}; ${Object.keys(catalog).length} photos`);
+  if (i % (batchSize * 10) === 0 || i + batchSize >= targets.length) console.log(`${Math.min(i + batchSize, targets.length)}/${targets.length}; ${Object.keys(catalog).length} photos`);
+  if (batchSize === 1) await sleep(750);
 }

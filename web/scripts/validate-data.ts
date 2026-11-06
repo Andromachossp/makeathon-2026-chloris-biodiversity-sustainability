@@ -23,6 +23,20 @@ const cells = check("cells.json", CellsSchema, read("cells.json"));
 const meta = check("meta.json", MetaSchema, read("meta.json"));
 
 const slugs = new Set(species?.map((s) => s.slug));
+const PhotoSchema = z.strictObject({
+  url: z.url().refine((value) => value.startsWith("https://"), "image URL must be HTTPS"),
+  creator: z.string().max(120),
+  licence: z.string().regex(/^CC0 1\.0$|^CC BY \d\.\d$/),
+  licenceUrl: z.url(),
+});
+const photos = check("photo-catalog.json", z.record(z.string(), PhotoSchema), read("photo-catalog.json"));
+if (photos) for (const [slug, photo] of Object.entries(photos)) {
+  if (!slugs.has(slug)) errors.push(`photo-catalog.json: unknown species ${slug}`);
+  if (photo.licence.startsWith("CC BY") && !photo.creator) errors.push(`photo-catalog.json: ${slug} lacks creator`);
+  const expected = photo.licence === "CC0 1.0" ? "https://creativecommons.org/publicdomain/zero/1.0/"
+    : `https://creativecommons.org/licenses/by/${photo.licence.slice(6)}/`;
+  if (photo.licenceUrl !== expected) errors.push(`photo-catalog.json: ${slug} has mismatched licence URL`);
+}
 if (species) {
   if (slugs.size !== species.length) errors.push("species.json: duplicate slugs");
   if (new Set(species.map((s) => s.cat)).size !== species.length) errors.push("species.json: duplicate catalogue numbers");

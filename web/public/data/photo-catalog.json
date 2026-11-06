@@ -1,7 +1,1039 @@
 {
+  "acanthus-hirsutus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/665160202/medium.jpg",
+    "creator": "M. B.",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "acanthus-mollis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605369309/medium.jpg",
+    "creator": "Ellyne Geurts",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "achillea-clypeolata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/654874297/medium.jpg",
+    "creator": "Skjold Søndergaard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "achillea-crithmifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/370662386/medium.jpg",
+    "creator": "stolbovsky",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "achillea-nobilis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627612703/medium.jpg",
+    "creator": "Илья Руденко",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "adonis-aestivalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/633281986/medium.jpg",
+    "creator": "Jorge Íñiguez",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "aesculus-hippocastanum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609716878/medium.jpg",
+    "creator": "Pto",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "agrimonia-procera": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/682595180/medium.jpg",
+    "creator": "DDutrey",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "aira-cupaniana": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/573707709/medium.jpg",
+    "creator": "Kym Nicolson",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "ajuga-salicifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/444259041/medium.jpg",
+    "creator": "Joey Bom",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "alisma-lanceolatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/634295327/medium.jpg",
+    "creator": "Christoph Moning",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "alisma-plantago-aquatica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607407900/medium.jpg",
+    "creator": "Анна Митрошенкова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "allium-ampeloprasum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604658140/medium.jpg",
+    "creator": "insiderelic",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "allium-roseum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/622446968/medium.jpg",
+    "creator": "funky_kong",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "allium-rotundum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605081940/medium.jpg",
+    "creator": "Stanislav Murashkin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "allium-schoenoprasum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/678798374/medium.jpg",
+    "creator": "謝麗霦",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "allium-sphaerocephalon": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/658160105/medium.jpg",
+    "creator": "Eric Weissgerber",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "allium-ursinum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609683457/medium.jpg",
+    "creator": "Martin Wood-Weatherill",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "allium-vineale": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605433987/medium.jpg",
+    "creator": "Conway Hawn",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "alyssoides-utriculata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/648506373/medium.jpg",
+    "creator": "Federico Biguzzi",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "alyssum-alyssoides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624559750/medium.jpg",
+    "creator": "Noé Fleury Frouart",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "amaranthus-graecizans": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/732987584/medium.jpg",
+    "creator": "Michael Andresek",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "ampelodesmos-mauritanicus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620252012/medium.jpg",
+    "creator": "etrusko25",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anacyclus-clavatus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/632089062/medium.jpg",
+    "creator": "Katrin Simon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anchusa-arvensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/612148333/medium.jpg",
+    "creator": "Alex Press",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anchusa-strigosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/619547495/medium.jpg",
+    "creator": "shachar8",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "anchusa-undulata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625051630/medium.jpg",
+    "creator": "David Pereira",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "angelica-sylvestris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604464114/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anthemis-cretica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/633752194/medium.jpg",
+    "creator": "Christoph Moning",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anthemis-pseudocotula": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/268149494/medium.jpg",
+    "creator": "Eleftherios Katsillis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anthriscus-nemorosus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605341754/medium.jpg",
+    "creator": "spoonbilling",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "anthriscus-sylvestris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605341754/medium.jpg",
+    "creator": "spoonbilling",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "apium-graveolens": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609845153/medium.jpg",
+    "creator": "W Rao",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "arctium-nemorosum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/691911983/medium.jpg",
+    "creator": "Morten Rosenvold Villadsen",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "arctium-tomentosum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605944600/medium.jpg",
+    "creator": "Fyodor Pudovikov",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "arenaria-serpyllifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607528794/medium.jpg",
+    "creator": "Joe Dillon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "argyrolobium-zanonii": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609008755/medium.jpg",
+    "creator": "Augustin Soulard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "artemisia-vulgaris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605656556/medium.jpg",
+    "creator": "Maria Kohanovskaya",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "arthrocaulon-macrostachyum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610784360/medium.jpg",
+    "creator": "Mehdi Chetibi",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asparagus-maritimus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/569111522/medium.jpg",
+    "creator": "W Rao",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asperugo-procumbens": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626315980/medium.jpg",
+    "creator": "Evgenij Samarin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asphodeline-lutea": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618192994/medium.jpg",
+    "creator": "Daniel Cahen",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asphodelus-fistulosus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605394102/medium.jpg",
+    "creator": "Pennyinsole",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "asphodelus-ramosus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605432797/medium.jpg",
+    "creator": "Ruslan Salimgareev",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asplenium-adiantum-nigrum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605392397/medium.jpg",
+    "creator": "Patrick Le Mao",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "asplenium-ceterach": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605129475/medium.jpg",
+    "creator": "Marc Riera",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asplenium-obovatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605480816/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "asplenium-scolopendrium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605146555/medium.jpg",
+    "creator": "Paul Cook",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "aster-amellus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635538973/medium.jpg",
+    "creator": "Bobo-X",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "astragalus-creticus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/106916355/medium.jpeg",
+    "creator": "Felicia Seichter",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "astrantia-major": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661866505/medium.jpg",
+    "creator": "Ondřej Křivan",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "athyrium-filix-femina": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605921684/medium.jpg",
+    "creator": "Mary E. Macaulay, P.Eng.",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "atriplex-halimus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610680844/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "atriplex-patula": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605371429/medium.jpg",
+    "creator": "Karen Fry",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "atriplex-prostrata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604961166/medium.jpg",
+    "creator": "Arnim Littek",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "atriplex-rosea": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/648924465/medium.jpg",
+    "creator": "Alfredo F. Fuentes Claros",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "atriplex-sagittata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652115152/medium.jpg",
+    "creator": "Milan Chytrý",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "atriplex-tatarica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656730510/medium.jpg",
+    "creator": "Екатерина Гущина",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bellis-perennis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605035840/medium.jpg",
+    "creator": "maxmarengo",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "beta-vulgaris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605386667/medium.jpg",
+    "creator": "Shane Austin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "betonica-officinalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605092377/medium.jpg",
+    "creator": "Stanislav Murashkin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "blitum-bonus-henricus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624858954/medium.jpg",
+    "creator": "guywallbanks",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "blitum-virgatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607424954/medium.jpg",
+    "creator": "Peter Ngolo",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bongardia-chrysogonum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/660282539/medium.jpg",
+    "creator": "Marios Thoma",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "borago-officinalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610680965/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "brassica-rapa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605529570/medium.jpg",
+    "creator": "mel letterman",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bryonia-alba": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607417132/medium.jpg",
+    "creator": "Анна Митрошенкова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "buglossoides-tenuiflora": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/660285932/medium.jpg",
+    "creator": "Marios Thoma",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bunium-bulbocastanum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/486827682/medium.jpeg",
+    "creator": "Jason Grant",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "bupleurum-rotundifolium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/641300855/medium.jpg",
+    "creator": "i_c_riddell",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "camphorosma-monspeliaca": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606858241/medium.jpg",
+    "creator": "Léo Souillard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "capsella-bursa-pastoris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604514756/medium.jpg",
+    "creator": "Daniel Cahen",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cardamine-hirsuta": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605563792/medium.jpg",
+    "creator": "Markus Krieger",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cardamine-impatiens": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/619678146/medium.jpg",
+    "creator": "jamie bee",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "carduus-acanthoides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607162961/medium.jpg",
+    "creator": "Анна Митрошенкова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "carlina-acaulis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609685247/medium.jpg",
+    "creator": "FloraJenensis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "centaurea-melitensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604971779/medium.jpg",
+    "creator": "Cody Hinchliff",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "centaurea-scabiosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605086360/medium.jpg",
+    "creator": "Stanislav Murashkin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "centaurea-solstitialis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604941227/medium.jpg",
+    "creator": "Irina Mitine",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cerinthe-major": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613397953/medium.jpg",
+    "creator": "Bob",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chaerophyllum-bulbosum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/666660992/medium.jpg",
+    "creator": "Katrin Simon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chamaecytisus-albus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/665812312/medium.jpg",
+    "creator": "Conrad Altmann",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chenopodiastrum-hybridum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/667331275/medium.jpg",
+    "creator": "Katrin Simon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chenopodiastrum-murale": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605235008/medium.jpg",
+    "creator": "mel letterman",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chenopodium-album": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605728404/medium.jpg",
+    "creator": "nebrooks",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chenopodium-opulifolium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/709794462/medium.jpg",
+    "creator": "Vladimír Fuka",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "chenopodium-vulvaria": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/648162141/medium.jpg",
+    "creator": "G'ofurova Gulxayo",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cichorium-pumilum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/653547970/medium.jpg",
+    "creator": "prodewald",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "cicuta-virosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/654172045/medium.jpg",
+    "creator": "Eliass Tāre",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cirsium-arvense": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604770130/medium.jpg",
+    "creator": "Clive Freedman",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cirsium-eriophorum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607655698/medium.jpg",
+    "creator": "padinature",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "cirsium-vulgare": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605021405/medium.jpg",
+    "creator": "Tyler Anthony",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cistanche-phelypaea": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618731855/medium.jpg",
+    "creator": "Christoph Moning",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cistus-salviifolius": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605472048/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "citrullus-colocynthis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607436628/medium.jpg",
+    "creator": "North Ross",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "cladanthus-mixtus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605609601/medium.jpg",
+    "creator": "Eliana Walker",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "corrigiola-litoralis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613919384/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cota-tinctoria": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/648441381/medium.jpg",
+    "creator": "Марина Садыкова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cotinus-coggygria": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613462623/medium.jpg",
+    "creator": "Shanze Yoell",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cotoneaster-nummularius": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/733750047/medium.jpg",
+    "creator": "Ruslan Salimgareev",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "crambe-hispanica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/651664789/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "crepis-vesicaria": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606717623/medium.jpg",
+    "creator": "Karim Haddad",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cressa-cretica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/616955016/medium.jpg",
+    "creator": "Mehdi Chetibi",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "crocus-sativus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/745860044/medium.jpg",
+    "creator": "Julia Henning",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "cuscuta-planiflora": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/639077782/medium.jpg",
+    "creator": "Piermario Maculan",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "cyperus-difformis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613856086/medium.jpg",
+    "creator": "Robert H. Wardell",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "dactyloctenium-aegyptium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605225243/medium.jpg",
+    "creator": "Dan Johnson",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dactylorhiza-majalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/647923903/medium.jpg",
+    "creator": "Jason Grant",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "delphinium-hispanicum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/201912965/medium.jpg",
+    "creator": "Felix Seebauer",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "descurainia-sophia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624698476/medium.jpg",
+    "creator": "Deb Kemp",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "diplotaxis-erucoides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604522202/medium.jpg",
+    "creator": "Louis Aureglia",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "diplotaxis-tenuifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607227657/medium.jpg",
+    "creator": "Roland Godon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dipsacus-fullonum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605664320/medium.jpg",
+    "creator": "Andrew Fielding",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dittrichia-graveolens": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606271303/medium.jpg",
+    "creator": "insiderelic",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "dittrichia-viscosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605476453/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dryopteris-expansa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605160388/medium.jpg",
+    "creator": "Liam Steele",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dysphania-botrys": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/693026211/medium.jpg",
+    "creator": "Sam Turner",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "echinops-ritro": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635043354/medium.jpg",
+    "creator": "Christoph Moning",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "echinops-spinosissimus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620770936/medium.jpg",
+    "creator": "avocat",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "erica-multiflora": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610715344/medium.jpg",
+    "creator": "Louis Aureglia",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "erigeron-acris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626384773/medium.jpg",
+    "creator": "Svitlana Kyiak",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "erigeron-alpinus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/681100416/medium.jpg",
+    "creator": "Loris Petit Deroeck",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "erigeron-uniflorus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/679017492/medium.jpg",
+    "creator": "Antoine MARNAT",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "eryngium-campestre": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605078232/medium.jpg",
+    "creator": "Christoph Moning",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "eryngium-maritimum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605614174/medium.jpg",
+    "creator": "Giorgio Zavattoni",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "erysimum-cheiri": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605392872/medium.jpg",
+    "creator": "Patrick Le Mao",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "erysimum-cuspidatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/701516580/medium.jpg",
+    "creator": "Oleksandr Shynder",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "eupatorium-cannabinum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604471526/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "euphorbia-bivonae": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/266487623/medium.jpg",
+    "creator": "Petr Harant",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "euphorbia-hirsuta": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627315854/medium.jpg",
+    "creator": "Piermario Maculan",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "euphorbia-illirica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/497253871/medium.jpeg",
+    "creator": "Christian Berg",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "euphorbia-terracina": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610678234/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "falcaria-vulgaris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627734131/medium.jpg",
+    "creator": "Michael Grundner",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "ferula-glauca": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609262902/medium.jpg",
+    "creator": "froggymum",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "ferula-tingitana": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/619022006/medium.jpg",
+    "creator": "Eleftherios Katsillis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "filago-arvensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/670122302/medium.jpg",
+    "creator": "Llydia",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "fraxinus-excelsior": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604773149/medium.jpg",
+    "creator": "Marek Hrušovský",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "galanthus-elwesii": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604620574/medium.jpg",
+    "creator": "Bethany Milam",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "galanthus-nivalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604803105/medium.jpg",
+    "creator": "Heather Alice-Grace Orchard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "galeopsis-ladanum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/692232879/medium.jpg",
+    "creator": "Алёна Осипова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "genista-monspessulana": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609254087/medium.jpg",
+    "creator": "Hannah Whittall",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "glebionis-coronaria": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607606176/medium.jpg",
+    "creator": "James",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "glebionis-segetum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613923397/medium.jpg",
+    "creator": "Patrick Le Mao",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "gnaphalium-uliginosum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/630423958/medium.jpg",
+    "creator": "Alex Press",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "gypsophila-vaccaria": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/644062355/medium.jpg",
+    "creator": "salicacious",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "haplophyllum-buxbaumii": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/395652734/medium.jpg",
+    "creator": "Eleftherios Katsillis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "helianthemum-salicifolium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610760746/medium.jpg",
+    "creator": "Daniel Heras González",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "helichrysum-italicum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652708244/medium.jpg",
+    "creator": "Marios Thoma",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "helichrysum-stoechas": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609009392/medium.jpg",
+    "creator": "Augustin Soulard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "heliotropium-supinum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/659826714/medium.jpg",
+    "creator": "Santiago Martín-Bravo",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "helleborus-orientalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606423502/medium.jpg",
+    "creator": "Holly Hodges",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "helminthotheca-echioides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605368574/medium.jpg",
+    "creator": "Karen Fry",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "herniaria-glabra": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627026610/medium.jpg",
+    "creator": "Alexis Tinker-Tsavalas",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "herniaria-hirsuta": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626140372/medium.jpg",
+    "creator": "Noé Fleury Frouart",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "hesperis-matronalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613695536/medium.jpg",
+    "creator": "Hugo Hulsberg",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "hieracium-murorum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/646309747/medium.jpg",
+    "creator": "Сергей",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "hieracium-umbellatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/660981107/medium.jpg",
+    "creator": "Stanislav Murashkin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "holosteum-umbellatum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/616477295/medium.jpg",
+    "creator": "Daniel S.",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "hyoscyamus-aureus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/617993755/medium.jpg",
+    "creator": "Marios Thoma",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
   "hypericum-perforatum": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605419038/medium.jpg",
     "creator": "謝麗霦",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "hypochaeris-glabra": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613973083/medium.jpg",
+    "creator": "Deb Kemp",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "hypochaeris-radicata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604531742/medium.jpg",
+    "creator": "Daniel Cahen",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "inula-helenium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605580879/medium.jpg",
+    "creator": "Stanislav Murashkin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "jacobaea-erucifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/634333389/medium.jpg",
+    "creator": "Joss Carr",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "jacobaea-maritima": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604802764/medium.jpg",
+    "creator": "Denis Bastianelli",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "jacobaea-othonnae": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/513059047/medium.jpg",
+    "creator": "Наталья Пикалова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "jacobaea-vulgaris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604765488/medium.jpg",
+    "creator": "R Mitchell",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "knautia-arvensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/614459264/medium.jpg",
+    "creator": "Crystal Rimmer",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "lactuca-muralis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605416558/medium.jpg",
+    "creator": "Elliot Greiner",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "lactuca-serriola": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605049132/medium.jpg",
+    "creator": "Analía Belaus",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "lactuca-virosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604907347/medium.jpg",
+    "creator": "Mike Bowie",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "lappula-squarrosa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604427606/medium.jpg",
+    "creator": "Евгений Маринкин",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "lapsana-communis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605052198/medium.jpg",
+    "creator": "guywallbanks",
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
@@ -11,9 +1043,87 @@
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
+  "lemna-trisulca": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/615237639/medium.jpg",
+    "creator": "Charles F Gunn",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "lepidium-coronopus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606159085/medium.jpg",
+    "creator": "Piermario Maculan",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "lepidium-draba": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618785490/medium.jpg",
+    "creator": "Piermario Maculan",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "leucojum-aestivum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/607305704/medium.jpg",
+    "creator": "Matthew Vosper",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "ligusticum-lucidum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/684170807/medium.jpg",
+    "creator": "Flavien Saboureau",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "limbarda-crithmoides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605934510/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "liquidambar-orientalis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618772543/medium.jpg",
+    "creator": "Eleftherios Katsillis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "lonicera-periclymenum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604508348/medium.jpg",
+    "creator": "Eleanor Reece",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "malva-pusilla": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/668239421/medium.jpg",
+    "creator": "Илья Руденко",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "marrubium-anisodon": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/665524504/medium.jpg",
+    "creator": "G'ofurova Gulxayo",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
   "matricaria-chamomilla": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606151018/medium.jpg",
     "creator": "Cody Hinchliff",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "matthiola-longipetala": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/623811526/medium.jpg",
+    "creator": "Eleftherios Katsillis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "melampyrum-arvense": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/635539423/medium.jpg",
+    "creator": "Bobo-X",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "mentha-piperita": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/641418843/medium.jpg",
+    "creator": "Евгений Маринкин",
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
@@ -22,6 +1132,48 @@
     "creator": "Peter de Lange",
     "licence": "CC0 1.0",
     "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "mesembryanthemum-nodiflorum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605552642/medium.jpg",
+    "creator": "Aaron Kreisberg",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "micromeria-myrtifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610381891/medium.jpg",
+    "creator": "Umut Nuri Erdoğan",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "moricandia-arvensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611677631/medium.jpg",
+    "creator": "Alejandro Rodríguez Zapata",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "narcissus-poeticus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/626889752/medium.jpg",
+    "creator": "Jose Gutierrez Higa",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "narcissus-tazetta": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606407880/medium.jpg",
+    "creator": "Flora_DUMO",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "oenanthe-aquatica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/649952630/medium.jpg",
+    "creator": "jhatfield",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "onopordum-acanthium": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604947738/medium.jpg",
+    "creator": "Daughter Dad",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
   "orchis-mascula": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618146253/medium.jpg",
@@ -35,9 +1187,81 @@
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
+  "origanum-microphyllum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/106915595/medium.jpeg",
+    "creator": "Felicia Seichter",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
   "origanum-vulgare": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604533226/medium.jpg",
     "creator": "Daniel Cahen",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pancratium-maritimum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611940349/medium.jpg",
+    "creator": "Karim Haddad",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pastinaca-sativa": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604397680/medium.jpg",
+    "creator": "John Barkla",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "peganum-harmala": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620724655/medium.jpg",
+    "creator": "avocat",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pentanema-germanicum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656077219/medium.jpg",
+    "creator": "Stanislav Murashkin",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "periploca-graeca": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618982183/medium.jpg",
+    "creator": "Наталья Пикалова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "persicaria-minor": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/677876566/medium.jpg",
+    "creator": "Bob",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "persicaria-mitis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/708320137/medium.jpg",
+    "creator": "Llydia",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "petasites-albus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/616455978/medium.jpg",
+    "creator": "Ben Deed",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pimpinella-peregrina": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/482766828/medium.jpeg",
+    "creator": "ahabo",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pimpinella-saxifraga": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/629228834/medium.jpg",
+    "creator": "Philokretes",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pistacia-atlantica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/628700078/medium.jpg",
+    "creator": "Andrew Dudley",
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
@@ -47,9 +1271,147 @@
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
+  "pistacia-terebinthus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608654202/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "plantago-albicans": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608419238/medium.jpg",
+    "creator": "Karim Haddad",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "plantago-amplexicaulis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/653328918/medium.jpg",
+    "creator": "Nolan Exe",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "polycarpon-tetraphyllum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604518588/medium.jpg",
+    "creator": "Daniel Cahen",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "polygonatum-odoratum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/629122876/medium.jpg",
+    "creator": "Celestino Quintela Sabarís",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "prospero-autumnale": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/719098355/medium.jpg",
+    "creator": "Mikel Etxeberria Okariz",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "pulicaria-vulgaris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/697241233/medium.jpg",
+    "creator": "Pto",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "reichardia-tingitana": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611379416/medium.jpg",
+    "creator": "Michael Bakker Paiva",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "retama-monosperma": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606867487/medium.jpg",
+    "creator": "Léo Souillard",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "rumex-spinosus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609975491/medium.jpg",
+    "creator": "Quentin Groom",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "ruscus-aculeatus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605099345/medium.jpg",
+    "creator": "Patrick Le Mao",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "ruscus-hypoglossum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605314409/medium.jpg",
+    "creator": "ivica_cvrtila",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "ruta-montana": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605024867/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sagina-saginoides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/683221564/medium.jpg",
+    "creator": "Johannes",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "sagittaria-sagittifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/664816388/medium.jpg",
+    "creator": "Alexis Tinker-Tsavalas",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "salsola-kali": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609975991/medium.jpg",
+    "creator": "Quentin Groom",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "salsola-tragus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605505450/medium.jpg",
+    "creator": "Megan Blackmore",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
   "salvia-fruticosa": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618918419/medium.jpg",
     "creator": "adrian-syros",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "schenkia-spicata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/700185675/medium.jpg",
+    "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "scilla-hyacinthoides": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/632541405/medium.jpg",
+    "creator": "yelena_antipova",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "scrophularia-auriculata": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604399497/medium.jpg",
+    "creator": "John Barkla",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sedum-album": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604472837/medium.jpg",
+    "creator": "Jere Kahanpää",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "senecio-doronicum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/668920078/medium.jpg",
+    "creator": "Roland Godon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "senecio-leucanthemifolius": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/611949498/medium.jpg",
+    "creator": "Karim Haddad",
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
@@ -59,9 +1421,171 @@
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   },
+  "silene-flos-cuculi": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604867180/medium.jpg",
+    "creator": "Susan Marley",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "silene-latifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608209922/medium.jpg",
+    "creator": "olmagon",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "silene-noctiflora": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/622810134/medium.jpg",
+    "creator": "Анна Митрошенкова",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sinapis-alba": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608426980/medium.jpg",
+    "creator": "Karim Haddad",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sisymbrium-loeselii": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613285876/medium.jpg",
+    "creator": "Kallum McDonald",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "sium-sisarum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/692633121/medium.jpg",
+    "creator": "Dmitriy Bochkov",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sonchus-asper": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604770523/medium.jpg",
+    "creator": "Clive Freedman",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sonchus-oleraceus": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604866839/medium.jpg",
+    "creator": "Stephen James McWilliam",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "spergula-arvensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/604789177/medium.jpg",
+    "creator": "harrier",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "spirodela-polyrhiza": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606376696/medium.jpg",
+    "creator": "Robert H. Wardell",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "stachys-angustifolia": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/404483486/medium.jpeg",
+    "creator": "Salza Palpurina",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "stachys-arvensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/609149076/medium.jpg",
+    "creator": "Harry Rose",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "stellaria-nemorum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/630821329/medium.jpg",
+    "creator": "Maria Kohanovskaya",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "sternbergia-lutea": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/733215447/medium.jpg",
+    "creator": "James Weaver",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "suaeda-maritima": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608309792/medium.jpg",
+    "creator": "趙珮珽",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "succisa-pratensis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613485184/medium.jpg",
+    "creator": "Scott Shanks",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "takhtajaniantha-austriaca": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624896290/medium.jpg",
+    "creator": "Paolo Zucca",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "thalictrum-simplex": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/660175419/medium.jpg",
+    "creator": "Полина Полежанкина",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "thlaspi-arvense": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/606284238/medium.jpg",
+    "creator": "Sandy Wolkenberg",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
   "thymbra-capitata": {
     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610628069/medium.jpg",
     "creator": "Duarte Frade",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "torilis-japonica": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/614967201/medium.jpg",
+    "creator": "Radosław Puchałka",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "tragopogon-dubius": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605206636/medium.jpg",
+    "creator": "Daryl Nolan",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "tragopogon-porrifolius": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605152878/medium.jpg",
+    "creator": "moater",
+    "licence": "CC0 1.0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
+  "trifolium-globosum": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/645487697/medium.jpg",
+    "creator": "Eleftherios Katsillis",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "triglochin-palustris": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625184124/medium.jpg",
+    "creator": "Lucas Carbone",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "trigonella-caerulea": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/288547815/medium.jpeg",
+    "creator": "KAnatoliy",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "vinca-herbacea": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/630066695/medium.jpg",
+    "creator": "Roman",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "viola-suavis": {
+    "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/622390139/medium.jpg",
+    "creator": "Vladimír Fuka",
     "licence": "CC BY 4.0",
     "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
   }
