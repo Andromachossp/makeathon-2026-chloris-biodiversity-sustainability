@@ -19,7 +19,7 @@ function creditPrefix(photo: PhotoResponse, p: { credit: string; creditNoName: s
  * Header photo for the species page only. The frame has a fixed aspect ratio and the caption
  * area is a fixed height, so skeleton, photo and flower-icon states never shift the page.
  */
-export function SpeciesPhoto({ slug, alt }: { slug: string; alt: string }) {
+export function SpeciesPhoto({ slug, alt, powoId }: { slug: string; alt: string; powoId: string | null }) {
   const { t } = useI18n();
   const [state, setState] = useState<State>({ slug, photo: null, done: false });
   const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
@@ -65,7 +65,7 @@ export function SpeciesPhoto({ slug, alt }: { slug: string; alt: string }) {
           </div>
         )}
       </div>
-      <figcaption className="mt-2 min-h-[2.75rem] text-xs text-dim">
+      <figcaption className="mt-2 min-h-[5rem] text-xs text-dim">
         {photo && loadedUrl === photo.url && (
           <>
             <span className="block">
@@ -76,6 +76,12 @@ export function SpeciesPhoto({ slug, alt }: { slug: string; alt: string }) {
         )}
         {pending && <Skeleton className="h-3 w-2/3" />}
         <span className="mt-0.5 block">{p.note}</span>
+        {current.done && !photo && powoId && (
+          <span className="mt-1 block">
+            <a className="font-medium text-saffron underline" href={`https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:${encodeURIComponent(powoId)}/images`} target="_blank" rel="noreferrer">{p.kewImages} ↗</a>
+            <span className="block">{p.identificationCaution}</span>
+          </span>
+        )}
       </figcaption>
     </figure>
   );

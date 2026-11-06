@@ -99,6 +99,8 @@ export const en = {
       creditNoName: "Photo: {licence}",
       note: "Photos come from GBIF contributors and may occasionally show a similar plant.",
       none: "No photo available",
+      kewImages: "View reference images at Kew",
+      identificationCaution: "A photo alone cannot confirm a threatened plant's identity.",
     },
     enTag: "EN",
     prepTitle: "Traditional preparations",
