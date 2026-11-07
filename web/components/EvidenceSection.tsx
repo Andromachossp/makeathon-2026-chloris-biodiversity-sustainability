@@ -3,6 +3,7 @@
 import { Component, Suspense, use, type ReactNode } from "react";
 import { useI18n } from "@/lib/i18n";
 import { loadJson } from "@/lib/data";
+import { evidenceEl, localizeEvidence } from "@/lib/evidence-el";
 import type { EvidenceEntry, EvidenceFile } from "@/lib/types";
 import { fillText } from "@/lib/verdict";
 import { CheckIcon, ClockIcon, DocIcon, FlaskIcon, HelpIcon, LeafIcon, ListIcon, ShieldIcon, UserIcon, WarnIcon } from "./Icons";
@@ -68,18 +69,20 @@ function TraditionalPreparations({ prep }: { prep: Preparations }) {
 function Cards({ slug }: { slug: string }) {
   const { t, locale } = useI18n();
   const file = use(loadJson<EvidenceFile>(`evidence/${slug}.json`));
-  const safety = [...new Set(file.entries.flatMap((e) => (e.safetyNote ? [e.safetyNote] : [])))];
+  const entries = file.entries.map((e) => localizeEvidence(e, locale));
+  const safety = [...new Set(entries.flatMap((e) => (e.safetyNote ? [e.safetyNote] : [])))];
+  const untranslated = locale === "el" && file.entries.some((e) => !evidenceEl[e.sourceId]);
   return (
     <div className="mt-3 flex flex-col gap-4">
       {safety.map((text) => (
         <aside key={text} role="note" className="rounded-[12px] border-2 border-[#B3262E] bg-[#B3262E]/10 p-4">
           <p className="flex items-center gap-2 font-semibold"><ShieldIcon className="h-5 w-5 shrink-0 text-[#B3262E]" />{t.evidence.safetyTitle}</p>
           <p className="mt-1 text-sm">{text}</p>
-          {locale === "el" && <p className="mt-1 text-[11px] opacity-70">{t.evidence.sourceEnglish}</p>}
+          {untranslated && <p className="mt-1 text-[11px] opacity-70">{t.evidence.sourceEnglish}</p>}
         </aside>
       ))}
       <ol className="flex flex-col gap-4">
-        {file.entries.map((e) => <li key={`${e.sourceType}-${e.sourceId}`}><Card e={e} /></li>)}
+        {entries.map((e) => <li key={`${e.sourceType}-${e.sourceId}`}><Card e={e} /></li>)}
       </ol>
     </div>
   );
@@ -100,7 +103,7 @@ function Card({ e }: { e: EvidenceEntry }) {
     <article className="rounded-[12px] border border-paper-ink/30 bg-white/40 p-4">
       <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-paper-ink/50 px-2.5 py-1"><KindIcon className="h-4 w-4" />{t.evidence.kinds[e.kind]}</span>
-        {locale === "el" && <span className="font-normal opacity-70">{t.evidence.sourceEnglish}</span>}
+        {locale === "el" && !evidenceEl[e.sourceId] && <span className="font-normal opacity-70">{t.evidence.sourceEnglish}</span>}
       </p>
       <h3 className="mt-2 font-display text-lg font-semibold leading-snug">{e.title}</h3>
       <p className="mt-2 font-serif leading-relaxed">{e.finding}</p>
@@ -116,7 +119,7 @@ function Card({ e }: { e: EvidenceEntry }) {
           <Detail label={t.evidence.design}>{val(e.design)}</Detail>
           <Detail label={t.evidence.plantPart}>{val(e.plantPart)}</Detail>
           <Detail label={t.evidence.preparation}>{val(e.preparation)}</Detail>
-          <Detail label={t.evidence.source}>{t.evidence.sourceTypes[e.sourceType]} · <span className="font-mono text-xs">{val(e.sourceId)}</span></Detail>
+          <Detail label={t.evidence.source}>{t.evidence.sourceTypes[e.sourceType]} · <span className="font-mono text-xs">{val(locale === "el" ? e.sourceId.split(" (")[0] : e.sourceId)}</span></Detail>
           <Detail label={t.evidence.verification}>
             <span className="inline-flex items-start gap-1.5">{verified ? <CheckIcon className="mt-0.5 h-4 w-4 shrink-0" /> : <HelpIcon className="mt-0.5 h-4 w-4 shrink-0" />}{verified ? fillText(t.evidence.verifiedOn, { date }) : t.evidence.unverified}</span>
           </Detail>

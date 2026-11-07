@@ -10,7 +10,7 @@ export function AboutCredits() {
     <section className="mx-auto max-w-2xl px-4 pb-8">
       <h2 className="font-display text-2xl font-semibold">{t.credits.title}</h2>
       <ul className="mt-3 space-y-3 text-sm text-dim">
-        <li>{t.credits.terrain} <a className="underline" href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noreferrer">Attribution ↗</a></li>
+        <li>{t.credits.terrain} <a className="underline" href="https://github.com/tilezen/joerd/blob/master/docs/attribution.md" target="_blank" rel="noreferrer">{t.credits.attribution} ↗</a></li>
         <li>{t.credits.vectors}</li>
         <li>{t.credits.library}</li>
         <li>{t.credits.plantnet}</li>

@@ -3,6 +3,7 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { CellsSchema, EvidenceFileSchema, MetaSchema, NamesSchema, OccSchema, SpeciesSchema } from "../lib/schemas";
+import { evidenceEl } from "../lib/evidence-el";
 import { z } from "zod";
 
 const dir = join(__dirname, "..", "public", "data");
@@ -74,6 +75,9 @@ for (const slug of evOnDisk) {
   const want = meta?.evidenceCounts[slug];
   if (file && (!want || want.entries !== file.entries.length || want.safetyNotes !== new Set(file.entries.flatMap((e) => (e.safetyNote ? [e.safetyNote] : []))).size)) errors.push(`evidence/${slug}.json: meta.json evidenceCounts does not match the file`);
   if (file && file.slug !== slug) errors.push(`evidence/${slug}.json: slug inside the file is ${file.slug}`);
+  if (file) for (const entry of file.entries) {
+    if (!evidenceEl[entry.sourceId]) errors.push(`evidence/${slug}.json: missing Greek translation for ${entry.sourceId}`);
+  }
   const sp = species?.find((s) => s.slug === slug);
   if (!sp) errors.push(`evidence/${slug}.json: no such species`);
   else if (!sp.featured) errors.push(`evidence/${slug}.json: evidence is only allowed for featured species`);

@@ -199,6 +199,7 @@ export const en = {
     mapLabel: "Map of medicinal plant diversity in Greece",
   },
   landing: {
+    skip: "Skip",
     loader: "Cataloguing the flora of Greece",
     menu: { flora: "Flora", where: "Where", risk: "Risk", keep: "Keep", install: "Install" },
     scroll: "Scroll",
@@ -243,6 +244,7 @@ export const en = {
     exploreMap: "Explore the map",
   },
   scan: {
+    sampleLabels: { "salvia-fruticosa": "Greek sage", "hypericum-perforatum": "St John's wort", "origanum-dictamnus": "Cretan dittany" },
     title: "Scan a plant",
     intro: "Take a photo of one plant. A leaf, a flower or the whole plant works best.",
     takePhoto: "Take a photo",
@@ -313,6 +315,7 @@ export const en = {
     loadFailed: "We could not load this section. Please try again later.",
   },
   credits: {
+    attribution: "Attribution",
     title: "Map and data credits",
     terrain: "Terrain: Mapzen / AWS Terrain Tiles (open data on AWS). Elevation from Copernicus EU-DEM (produced using Copernicus data and information funded by the European Union), SRTM and GMTED2010 (courtesy of the U.S. Geological Survey) and ETOPO1 (U.S. National Oceanic and Atmospheric Administration).",
     vectors: "Basemap vectors: OpenFreeMap, OpenMapTiles, © OpenStreetMap contributors (ODbL).",

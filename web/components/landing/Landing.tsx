@@ -51,7 +51,7 @@ function Loader({ ready, onDone }: { ready: boolean; onDone: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col justify-between bg-ink p-6" role="status">
-      <button type="button" onClick={onDone} className="min-h-[44px] self-end rounded-full border border-line px-4 text-sm text-dim">Skip</button>
+      <button type="button" onClick={onDone} className="min-h-[44px] self-end rounded-full border border-line px-4 text-sm text-dim">{t.landing.skip}</button>
       <div>
         <p className="font-mono text-7xl font-light tabular-nums text-saffron md:text-9xl">{String(Math.round(n)).padStart(3, "0")}</p>
         <p className="mt-3 font-mono text-sm uppercase tracking-widest text-dim">{t.landing.loader}</p>

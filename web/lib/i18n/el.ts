@@ -201,6 +201,7 @@ export const el: Dictionary = {
     mapLabel: "Χάρτης φαρμακευτικής ποικιλότητας φυτών στην Ελλάδα",
   },
   landing: {
+    skip: "Παράλειψη",
     loader: "Καταγράφοντας τη χλωρίδα της Ελλάδας",
     menu: { flora: "Χλωρίδα", where: "Πού", risk: "Κίνδυνος", keep: "Προστασία", install: "Εγκατάσταση" },
     scroll: "Κύλιση",
@@ -221,7 +222,7 @@ export const el: Dictionary = {
     installBody: "Σάρωσε τον κωδικό και πρόσθεσε το Chloris στην αρχική οθόνη. Δουλεύει και χωρίς σύνδεση στο πεδίο.",
     ios: "iPhone: πάτησε Κοινοποίηση και μετά Προσθήκη στην αρχική οθόνη.",
     android: "Android: πάτησε Εγκατάσταση όταν το προτείνει ο Chrome.",
-    credits: "Δεδομένα: Kew WCVP & WCUPS · GBIF · IUCN · Natura 2000 (EEA) · OpenStreetMap contributors",
+    credits: "Δεδομένα: Kew WCVP & WCUPS · GBIF · IUCN · Natura 2000 (EEA) · συνεισφέροντες του OpenStreetMap",
     openApp: "Άνοιγμα Chloris",
     poster: "Στατικός χάρτης κινδύνου φαρμακευτικών φυτών στην Ελλάδα",
     keyHeight: "Ύψος: καταγεγραμμένα είδη",
@@ -245,6 +246,7 @@ export const el: Dictionary = {
     exploreMap: "Εξερεύνησε τον χάρτη",
   },
   scan: {
+    sampleLabels: { "salvia-fruticosa": "Ελληνικό φασκόμηλο", "hypericum-perforatum": "Υπερικό", "origanum-dictamnus": "Δίκταμο Κρήτης" },
     title: "Σάρωση φυτού",
     intro: "Βγάλε φωτογραφία ενός φυτού. Ένα φύλλο, ένα λουλούδι ή ολόκληρο το φυτό δουλεύουν καλύτερα.",
     takePhoto: "Βγάλε φωτογραφία",
@@ -315,6 +317,7 @@ export const el: Dictionary = {
     loadFailed: "Δεν μπορέσαμε να φορτώσουμε αυτή την ενότητα. Δοκίμασε ξανά αργότερα.",
   },
   credits: {
+    attribution: "Αναφορά πηγής",
     title: "Πιστώσεις χάρτη και δεδομένων",
     terrain: "Ανάγλυφο: Mapzen / AWS Terrain Tiles (ανοικτά δεδομένα στο AWS). Υψομετρικά δεδομένα από Copernicus EU-DEM (παράγονται με δεδομένα και πληροφορίες Copernicus που χρηματοδοτούνται από την Ευρωπαϊκή Ένωση), SRTM και GMTED2010 (ευγενική παραχώρηση της U.S. Geological Survey) και ETOPO1 (U.S. National Oceanic and Atmospheric Administration).",
     vectors: "Διανυσματικός χάρτης: OpenFreeMap, OpenMapTiles, © συνεισφέροντες του OpenStreetMap (ODbL).",

@@ -4,12 +4,11 @@ import type { Species } from "./types";
 
 const GREEK_LETTERS = /[\u0370-\u03FF\u1F00-\u1FFF]/;
 
-/** Display name: common name first (Greek in Greek mode when we have a Greek-script name, else English), Latin otherwise.
+/** In Greek mode use a verified Greek-script name, or the scientific name when no Greek name exists.
     Some GBIF "Greek" names are written in Latin letters; those are not shown as Greek. We never invent names. */
 export function displayName(s: Species, locale: Locale): { title: string; isFallback: boolean; enTag: boolean } {
   if (locale === "el") {
     if (s.nameEl && GREEK_LETTERS.test(s.nameEl)) return { title: s.nameEl, isFallback: false, enTag: false };
-    if (s.nameEn) return { title: s.nameEn, isFallback: false, enTag: true };
   } else if (s.nameEn) return { title: s.nameEn, isFallback: false, enTag: false };
   return { title: s.name, isFallback: true, enTag: false };
 }
