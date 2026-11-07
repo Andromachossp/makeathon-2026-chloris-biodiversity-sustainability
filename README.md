@@ -4,7 +4,7 @@
 
 **EthnoHack 2026 · Track 3: Biodiversity & Sustainability**
 
-[Live demo](https://makeathon-2026-chloris-biodiversity.vercel.app/) · [Pitch video script](docs/PITCH_VIDEO_SCRIPT.md) · [Method and limitations](#method-and-limitations)
+[Live demo](https://makeathon-2026-chloris-biodiversity.vercel.app/) · [Method and limitations](#method-and-limitations)
 
 ![A Chloris species page on a phone, with a plant photo, risk notice and photo credit](docs/images/species-mobile.jpg)
 
