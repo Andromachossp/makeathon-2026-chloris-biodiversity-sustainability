@@ -22,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Chloris",
   description: "Where Greece's medicinal plants grow, which are at risk, and how we keep them.",
+  icons: { icon: "/chloris-mark.png", apple: "/chloris-mark.png" },
 };
 
 export const viewport: Viewport = {

@@ -14,9 +14,9 @@ export function TopBar() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-ink/95 backdrop-blur md:pl-24">
       <div className="flex h-14 items-center justify-between px-4">
-        <Link href="/home" className="flex items-center gap-2.5 text-text" aria-label={t.appName}>
-          <Image src="/chloris-logo.png" alt="" width={40} height={40} className="rounded-lg bg-white" />
-          <span className="font-sans text-xl font-semibold tracking-tight">{t.appName}</span>
+        <Link href="/home" className="group flex items-center gap-2.5 text-text" aria-label={t.appName}>
+          <Image src="/chloris-mark.png" alt="" width={40} height={40} className="h-10 w-10 object-contain transition-transform duration-200 group-hover:scale-105" />
+          <span className="font-display text-xl font-semibold tracking-tight">{t.appName}</span>
         </Link>
         <div role="group" aria-label={t.language} className="flex rounded-full border border-line p-0.5">
           {options.map((l) => (
