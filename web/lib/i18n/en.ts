@@ -319,8 +319,18 @@ export const en = {
     library: "Map rendering: MapLibre GL JS (BSD-3-Clause).",
     samples: "Sample photos (Wikimedia Commons; licence and author as listed):",
     evidence: "Evidence cards: PubMed (US National Library of Medicine) and European Medicines Agency (EMA) herbal monographs. Each card links to its original source.",
+    humanSafety: "Human poisoning warnings: NC State Extension Gardener Plant Toolbox, linked on each flagged species page. Other species are labelled not reviewed; none is labelled safe. Specialist review is pending.",
     plantnet: "Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors.",
     photos: "Species photos: GBIF (gbif.org) human observations, research-grade iNaturalist (inaturalist.org) photos and Wikimedia Commons (commons.wikimedia.org) files matched by species title or category. The photo's own licence is checked. Herbarium specimens and illustrations are excluded. Photos use CC0 or CC BY, with one approved CC BY-NC 4.0 exception for Galanthus ikariae (non-commercial use only). Each photo links to its image and licence. Locations and observation pages are never shown. A photo can occasionally show a similar plant.",
+  },
+  humanSafety: {
+    title: "Danger to people",
+    high: "Poisonous to humans · high severity",
+    highDetail: "Eating this plant can cause serious, potentially fatal poisoning. Do not consume it. A photo match may be wrong.",
+    unknown: "Human toxicity not reviewed yet",
+    unknownDetail: "Unknown does not mean safe. Do not eat or prepare an unidentified wild plant.",
+    source: "Human poisoning source: NC State Extension",
+    pending: "Source checked; specialist review pending.",
   },
   safety: {
     title: "Information only",

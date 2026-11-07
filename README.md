@@ -55,6 +55,8 @@ Rules the route enforces:
 ## Responsible use
 Chloris is not medical advice. Documented uses are shown with their evidence level for information only. Locations of at-risk species are generalised to ~10 km.
 
+Every species page has a human danger section. High-severity poisoning warnings currently cover *Atropa bella-donna*, *Colchicum autumnale*, *Nerium oleander* and *Taxus baccata*, each linked to its species-level [NC State Extension Gardener Plant Toolbox](https://plants.ces.ncsu.edu/) source. The other 1,382 species say "Human toxicity not reviewed yet"; this is not a safe-to-eat claim. These source checks await specialist review. Ingestion toxicity is called **poisonous**, not venomous.
+
 ## AI use
 `TODO: disclosure (Claude / Claude Code for planning, code and docs; reviewed by the team)`
 

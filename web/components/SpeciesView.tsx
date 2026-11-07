@@ -13,6 +13,7 @@ import { MiniMap } from "./MiniMap";
 import { SpeciesPhoto } from "./SpeciesPhoto";
 import { EvidenceSection } from "./EvidenceSection";
 import { HarvestBanner } from "./Risk";
+import { HumanSafety } from "./HumanSafety";
 import { SpeciesSkeleton } from "./Skeleton";
 import { VerdictBanner } from "./Verdict";
 
@@ -85,6 +86,8 @@ function Card({ slug }: { slug: string }) {
           ))}
         </div>
       )}
+
+      <HumanSafety slug={s.slug} />
 
       {/* 4. details */}
       <div className="rounded-[14px] bg-paper p-5 text-paper-ink shadow-[0_0_0_1px_rgba(26,32,54,0.25)]">
