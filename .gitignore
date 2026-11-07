@@ -21,5 +21,17 @@ web/public/sw.js.map
 web/public/swe-worker-*.js
 .vercel
 
+# Local planning and pitch materials
+docs/ARCHITECTURE.md
+docs/DATA_MODEL.md
+docs/GREEK_REVIEW.md
+docs/MANGA_STORYBOARD.md
+docs/PHOTO_GAPS.md
+docs/PITCH_VIDEO_SCRIPT.md
+docs/SUBMISSION.md
+docs/TASKS.md
+docs/WEB_APP.md
+docs/manga/
+
 # OS
 .DS_Store

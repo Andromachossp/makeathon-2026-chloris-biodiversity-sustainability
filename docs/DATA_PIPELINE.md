@@ -99,6 +99,6 @@ All numbers come from `config/scoring.yaml`. Each component is a fraction 0–1 
 1c. Evidence: read and validate `config/evidence.csv` (featured species only, no dosing, verification rules above), write `evidence/<slug>.json` per species, and add `evidenceSlugs`, `evidenceVersion`, `evidenceCounts` to `meta.json`.
 2. Slug: `genus-species` lowercase ASCII (`origanum-dictamnus`). Catalogue number: `CHL-0001`… ordered by family, then name.
 3. Photos (P1, featured only): one CC0/CC BY image per species from GBIF occurrence media (`mediaType=StillImage`, licence filter); store URL, creator, licence, source link. Never use unlicensed images.
-4. Write the files described in `docs/DATA_MODEL.md`. Round floats (scores to integers, shares to 2 decimals). Minify JSON.
+4. Write the app data files matching `web/lib/types.ts` and the data validation script. Round floats (scores to integers, shares to 2 decimals). Minify JSON.
 5. Print file sizes; fail if `species.json` > 2 MB raw or any `occ/*.json` > 200 KB.
 6. Write `meta.json` with source versions, GBIF DOI, download dates, counts, weights and missing-data notes.

@@ -4,7 +4,6 @@
 
 **EthnoHack 2026 · Track 3: Biodiversity & Sustainability**
 
-_This README is a template. Claude Code completes every section in Phase 6 using `docs/SUBMISSION.md`. Remove this line when done._
 
 ## Try it
 - Live app: `TODO: production URL` (scan the QR on a phone to install)
