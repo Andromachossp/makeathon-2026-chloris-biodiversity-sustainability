@@ -140,13 +140,15 @@ export function Landing() {
       <main className="relative z-10">
         {/* 01 hero */}
         <section id="flora" className="flex min-h-dvh flex-col justify-end px-5 pb-8 md:px-10">
-          <div className="relative mb-5 h-28 w-28 md:h-36 md:w-36">
-            <span aria-hidden="true" className="absolute inset-4 rounded-full bg-ok/20 blur-2xl" />
-            <Image src="/chloris-mark.png" alt="" width={144} height={144} priority className="relative h-full w-full object-contain" />
-          </div>
           <p className="max-w-md rounded-[14px] bg-ink/55 p-2 text-base text-text backdrop-blur-sm md:text-lg">{t.tagline}</p>
-          <h1 className="mt-4 select-none font-display font-semibold leading-[0.95] tracking-tight text-text"
-            style={{ fontSize: "clamp(3.5rem, 17vw, 14rem)" }}>{t.appName}</h1>
+          <div className="mt-4 flex items-center gap-3 md:gap-6">
+            <div className="relative h-[clamp(3.5rem,11vw,10rem)] w-[clamp(3.5rem,11vw,10rem)] shrink-0">
+              <span aria-hidden="true" className="absolute inset-2 rounded-full bg-ok/20 blur-2xl" />
+              <Image src="/chloris-mark.png" alt="" width={160} height={160} priority className="relative h-full w-full object-contain" />
+            </div>
+            <h1 className="select-none whitespace-nowrap font-display font-semibold leading-[0.95] tracking-tight text-text"
+              style={{ fontSize: "clamp(3.3rem, 13vw, 12rem)" }}>{t.appName}</h1>
+          </div>
           <p className="mt-4 font-sans text-xs font-semibold uppercase tracking-wide text-dim">↓ {t.landing.scroll}</p>
         </section>
 
