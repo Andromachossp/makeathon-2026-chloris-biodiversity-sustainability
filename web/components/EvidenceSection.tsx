@@ -35,7 +35,7 @@ export function EvidenceSection({ slug, hasEvidence, version, counts, legacyUses
         <div className="mt-3">
           <p className="text-base font-semibold">{t.evidence.notReviewed}</p>
           <p className="mt-1 text-sm opacity-80">{t.evidence.notReviewedHelp}</p>
-          {legacyUses && <p className="mt-3 font-serif leading-relaxed">{legacyUses}</p>}
+          {legacyUses && <p className="mt-3 font-sans leading-relaxed">{legacyUses}</p>}
         </div>
       )}
     </section>
@@ -53,7 +53,7 @@ function TraditionalPreparations({ prep }: { prep: Preparations }) {
       <h3 className="mt-2 font-display text-lg font-semibold">{t.species.prepTitle}</h3>
       {text ? (
         <>
-          <p className="mt-2 font-serif leading-relaxed">{text}{tag && <span className="ml-1 rounded border border-paper-ink/40 px-1 font-mono text-[10px]">{tag}</span>}</p>
+          <p className="mt-2 font-sans leading-relaxed">{text}{tag && <span className="ml-1 rounded border border-paper-ink/40 px-1 font-mono text-[10px]">{tag}</span>}</p>
           <p className="mt-2 flex items-center gap-1.5 text-xs">
             {prep.reviewedBy ? <CheckIcon className="h-4 w-4 shrink-0" /> : <ClockIcon className="h-4 w-4 shrink-0" />}
             {prep.reviewedBy ? fillText(t.species.prepReviewedBy, { name: prep.reviewedBy }) : t.species.prepNotSpecialist}
@@ -106,7 +106,7 @@ function Card({ e }: { e: EvidenceEntry }) {
         {locale === "el" && !evidenceEl[e.sourceId] && <span className="font-normal opacity-70">{t.evidence.sourceEnglish}</span>}
       </p>
       <h3 className="mt-2 font-display text-lg font-semibold leading-snug">{e.title}</h3>
-      <p className="mt-2 font-serif leading-relaxed">{e.finding}</p>
+      <p className="mt-2 font-sans leading-relaxed">{e.finding}</p>
 
       <div className="mt-3 rounded-[10px] border-l-4 border-[#8A5A00] bg-[#F6B93B]/25 p-3">
         <p className="flex items-center gap-2 text-sm font-semibold"><WarnIcon className="h-4 w-4 shrink-0" />{t.evidence.limitations}</p>

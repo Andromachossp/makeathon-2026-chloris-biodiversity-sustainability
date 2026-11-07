@@ -17,7 +17,6 @@ import { Poster } from "./Poster";
 const LandscapeScene = dynamic(() => import("./Landscape"), { ssr: false });
 
 const SECTIONS = ["flora", "where", "risk", "keep", "install"] as const;
-const NUMERAL = { fontStretch: "30%" } as const;
 
 function useLandingData() {
   const [data, setData] = useState<{ cells: CellsFile; meta: Meta; species: Species[] } | null>(null);
@@ -161,7 +160,7 @@ export function Landing() {
             </div>
           </div>
           <div className={`self-start ${panel}`}>
-            <p className="font-sans text-[26vw] font-black leading-none tabular-nums text-saffron md:text-[11rem]" style={NUMERAL}>{medicinal?.toLocaleString(locale) ?? "—"}</p>
+            <p className="font-sans text-[26vw] font-black leading-none tabular-nums text-saffron md:text-[11rem]">{medicinal?.toLocaleString(locale) ?? "—"}</p>
             <p className="mt-1 text-text">{t.landing.speciesCount}</p>
           </div>
         </section>
@@ -174,7 +173,7 @@ export function Landing() {
             <p className="mt-3 text-dim">{t.landing.riskBody}</p>
           </div>
           <div className={`self-start ${panel}`}>
-            <p className="font-sans text-[26vw] font-black leading-none tabular-nums text-saffron md:text-[11rem]" style={NUMERAL}>{atRisk ?? "—"}</p>
+            <p className="font-sans text-[26vw] font-black leading-none tabular-nums text-saffron md:text-[11rem]">{atRisk ?? "—"}</p>
             <p className="mt-1 text-text">{t.landing.atRiskCount}</p>
             {hotspotsKnown && <p className="mt-1 font-mono text-sm text-dim">{hotspots} {t.map.modes.hotspots.toLowerCase()}</p>}
           </div>
@@ -189,7 +188,7 @@ export function Landing() {
           <ul className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:px-10" tabIndex={0} aria-label={t.landing.keepTitle}>
             {t.landing.keep.map((k) => (
               <li key={k.n} className="flex h-[22rem] w-[78vw] max-w-sm shrink-0 snap-start flex-col justify-between rounded-[14px] border border-line bg-surface/90 p-6 backdrop-blur">
-                <span className="font-sans text-7xl font-black text-saffron" style={NUMERAL}>{k.n}</span>
+                <span className="font-sans text-7xl font-black text-saffron">{k.n}</span>
                 <div>
                   <h3 className="font-display text-2xl font-semibold">{k.t}</h3>
                   <p className="mt-2 text-dim">{k.d}</p>

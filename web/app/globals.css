@@ -72,8 +72,8 @@
   --color-c-decline: var(--c-decline);
   --color-c-unprotected: var(--c-unprotected);
   --color-c-fire: var(--c-fire);
-  --font-sans: var(--font-roboto-flex), system-ui, sans-serif;
-  --font-display: var(--font-noto-display), Georgia, serif;
+  --font-sans: var(--font-roboto), system-ui, sans-serif;
+  --font-display: var(--font-roboto), system-ui, sans-serif;
   --font-serif: var(--font-literata), Georgia, serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
   --radius-card: 14px;
@@ -86,7 +86,7 @@ html {
 body {
   background: var(--ink);
   color: var(--text);
-  font-family: var(--font-roboto-flex), system-ui, sans-serif;
+  font-family: var(--font-roboto), system-ui, sans-serif;
 }
 
 ::selection {
