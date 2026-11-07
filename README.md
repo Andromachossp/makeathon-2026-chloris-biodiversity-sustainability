@@ -55,6 +55,8 @@ Rules the route enforces:
 ## Responsible use
 Chloris is not medical advice. Documented uses are shown with their evidence level for information only. Locations of at-risk species are generalised to ~10 km.
 
+Map flowers mark occupied 0.1° cells, not individual plants. To keep island and coastal flowers on land, `pipeline/build_land_anchors.py` derives one representative point per occupied cell from the [geoBoundaries Greece ADM0 boundary](https://www.geoboundaries.org/api/current/gbOpen/GRC/ADM0/) (EuroGeoGraphics, Regional IM Working Group - Europe, 2016, CC BY 4.0). No occurrence coordinates are used. Cells without mapped land have no flower but remain in the cell list; the boundary may omit tiny islands.
+
 Every species page has a human danger section. High-severity ingestion warnings cover *Atropa bella-donna*, *Colchicum autumnale*, *Nerium oleander* and *Taxus baccata*. Skin warnings cover *Dittrichia graveolens*, *Urtica dioica* and *Ruta chalepensis*. A pollen-allergy warning covers *Parietaria judaica*. Each links to a species-level [NC State Extension Gardener Plant Toolbox](https://plants.ces.ncsu.edu/) entry or a [published report](https://pubmed.ncbi.nlm.nih.gov/12646120/). The other 1,378 species say "Human toxicity not reviewed yet"; this does not establish that they are safe from poisoning, rashes or allergies. These source checks await specialist review. Ingestion toxicity is called **poisonous**, not venomous.
 
 ## AI use

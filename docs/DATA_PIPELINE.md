@@ -93,6 +93,10 @@ All numbers come from `config/scoring.yaml`. Each component is a fraction 0–1 
 
 ## Step 9 — Curation merge and export (`export.py` → `web/public/data/`)
 
+### Map flower positions
+
+After `cells.json` is exported, run `pipeline/.venv/bin/python pipeline/build_land_anchors.py` from the repo root. This downloads a checksum-pinned Greece ADM0 boundary from geoBoundaries (EuroGeoGraphics, Regional IM Working Group - Europe; 2016; CC BY 4.0) and writes `web/public/data/land-anchors.json`. Every position is calculated solely from the boundary and one public 0.1° cell. It is never taken from an occurrence. Occupied cells without land in the boundary keep their records and list row but get no flower marker. Use `--boundary PATH` to regenerate from a previously downloaded copy.
+
 1. Merge `featured_species.csv` (uses, EMA status/link, harvest, substitutes, names). Validate: unknown slugs in `substitutes`, invalid enums → error.
 1b. Carry `work/species_flags.parquet` (from `chloris/flags.py`) into `dataQuality`, `review`, `reviewNote`; write `iucnLabel` from `config.IUCN_LABELS` (NE → "Not assessed", never blank or "Low"); put the flag legend and IUCN labels in `meta.json`.
 1b2. `featured_species.csv` also carries `traditional_prep_en` / `traditional_prep_el` (empty until the science lead fills them in); the app shows them for the 12 featured species, and "Not reviewed yet" otherwise. Greek names for featured species come from `name_el`; GBIF Greek names fill gaps only for the app's name display, and the page says "Greek name: not reviewed yet" when a featured species has none in Greek letters.

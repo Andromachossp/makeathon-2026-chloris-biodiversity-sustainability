@@ -21,6 +21,7 @@ const check = <T extends z.ZodTypeAny>(label: string, schema: T, data: unknown):
 const species = check("species.json", z.array(SpeciesSchema), read("species.json"));
 const names = check("names.json", NamesSchema, read("names.json"));
 const cells = check("cells.json", CellsSchema, read("cells.json"));
+const landAnchors = check("land-anchors.json", z.record(z.string(), z.tuple([z.number(), z.number()])), read("land-anchors.json"));
 const meta = check("meta.json", MetaSchema, read("meta.json"));
 
 const slugs = new Set(species?.map((s) => s.slug));
@@ -55,6 +56,16 @@ if (names) for (const [k, v] of [...Object.entries(names.byName), ...Object.entr
 }
 if (cells && species) for (const c of cells.cells) {
   if (c.s.some((i) => i >= species.length)) { errors.push(`cells.json: ${c.id} has an index out of range`); break; }
+}
+if (cells && landAnchors) {
+  const ids = new Set(cells.cells.map((c) => c.id));
+  for (const [id, [lng, lat]] of Object.entries(landAnchors)) {
+    if (!ids.has(id)) { errors.push(`land-anchors.json: ${id} is not an occupied cell`); continue; }
+    const [i, j] = id.split("_").map(Number);
+    const s = cells.size, epsilon = 1e-6;
+    if (lng < j * s - epsilon || lng > (j + 1) * s + epsilon || lat < i * s - epsilon || lat > (i + 1) * s + epsilon) errors.push(`land-anchors.json: ${id} anchor is outside its cell`);
+  }
+  if (Object.keys(landAnchors).length === 0) errors.push("land-anchors.json: no land anchors");
 }
 let occFiles = 0;
 if (existsSync(join(dir, "occ"))) {
