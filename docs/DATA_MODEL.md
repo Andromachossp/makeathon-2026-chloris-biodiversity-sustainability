@@ -154,8 +154,8 @@ interface Sighting {
   scientificName: string | null;    // from Pl@ntNet or user
   confidence: number | null;        // 0–1
   note: string | null;              // max 280 chars
-  lat: number; lng: number;         // rounded: 0.1 for at-risk species, 0.001 otherwise
-  generalised: boolean;
+  lat: number; lng: number;         // any Firestore write must be rounded to 0.1°
+  generalised: boolean;            // true for every Firestore write
   uid: string;                      // anonymous auth uid
   createdAt: Timestamp;             // serverTimestamp()
   capturedAt: string;               // ISO, device time (may differ when synced later)
@@ -164,8 +164,8 @@ interface Sighting {
 ```
 
 **Security rules (must be deployed):**
-- read: anyone.
-- create: signed-in (anonymous) users only, `uid == request.auth.uid`, `verified == false`, lat within 34.5–42.0 and lng within 19.0–30.0, `note` ≤ 280 chars, only the fields above.
+- read: authenticated owner only (`resource.data.uid == request.auth.uid`).
+- create: signed-in (anonymous) users only, `uid == request.auth.uid`, `verified == false`, lat within 34.5–42.0 and lng within 19.0–30.0, both coordinates on the 0.1° grid, `generalised == true`, `note` ≤ 280 chars, only the fields above. Client-side `atRisk` is not trusted by Firestore. Device-only sightings may retain 0.001° positions for non-risk species; any future sync must first reduce them to 0.1°.
 - update, delete: nobody (verification is done by hand in the console for the hackathon).
 
 ## Device storage (offline)
