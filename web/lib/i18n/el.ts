@@ -6,6 +6,7 @@ export const el: Dictionary = {
   loading: "Φόρτωση…",
   offlineBanner: "Εκτός σύνδεσης — η αναγνώριση θα γίνει όταν επανέλθει το δίκτυο.",
   language: "Γλώσσα",
+  copyright: "© 2026 Andromachossp και η ομάδα Chloris. Με επιφύλαξη παντός δικαιώματος.",
   nav: {
     label: "Κύρια πλοήγηση",
     home: "Αρχική",

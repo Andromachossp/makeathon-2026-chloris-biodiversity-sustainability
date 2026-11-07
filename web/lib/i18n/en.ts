@@ -4,6 +4,7 @@ export const en = {
   loading: "Loading…",
   offlineBanner: "Offline — identification will run when you're back online.",
   language: "Language",
+  copyright: "© 2026 Andromachossp and the Chloris team. All rights reserved.",
   nav: {
     label: "Main navigation",
     home: "Home",
