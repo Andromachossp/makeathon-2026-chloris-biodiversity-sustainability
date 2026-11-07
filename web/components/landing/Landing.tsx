@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Image from "next/image";
 import { QRCodeSVG } from "qrcode.react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { canWebGL, deviceIsCapable, prefersReducedMotion } from "@/lib/device";
@@ -54,7 +55,7 @@ function Loader({ ready, onDone }: { ready: boolean; onDone: () => void }) {
       <button type="button" onClick={onDone} className="min-h-[44px] self-end rounded-full border border-line px-4 text-sm text-dim">{t.landing.skip}</button>
       <div>
         <p className="font-mono text-7xl font-light tabular-nums text-saffron md:text-9xl">{String(Math.round(n)).padStart(3, "0")}</p>
-        <p className="mt-3 font-mono text-sm uppercase tracking-widest text-dim">{t.landing.loader}</p>
+        <p className="mt-3 font-sans text-sm font-medium tracking-wide text-dim">{t.landing.loader}</p>
       </div>
     </div>
   );
@@ -117,12 +118,15 @@ export function Landing() {
 
       {/* nav */}
       <header className="fixed inset-x-0 top-0 z-30 flex items-center justify-between gap-2 px-4 py-3">
-        <nav aria-label={t.nav.label} className="hidden gap-5 font-mono text-xs uppercase tracking-widest md:flex">
+        <nav aria-label={t.nav.label} className="hidden gap-5 font-sans text-xs font-semibold uppercase tracking-wide md:flex">
           {SECTIONS.map((s, i) => (
             <a key={s} href={`#${s}`} className="text-dim hover:text-saffron"><span className="text-saffron">{String(i + 1).padStart(2, "0")}</span> {t.landing.menu[s]}</a>
           ))}
         </nav>
-        <span className="font-sans text-lg font-extrabold tracking-wide md:hidden">{t.appName}</span>
+        <span className="flex items-center gap-2 md:hidden">
+          <Image src="/chloris-logo.png" alt="" width={40} height={40} className="rounded-lg bg-white" />
+          <span className="font-sans text-lg font-semibold tracking-tight">{t.appName}</span>
+        </span>
         <div className="flex items-center gap-2">
           <div role="group" aria-label={t.language} className="flex rounded-full border border-line bg-ink/70 p-0.5 backdrop-blur">
             {locales.map((l) => (
@@ -137,10 +141,11 @@ export function Landing() {
       <main className="relative z-10">
         {/* 01 hero */}
         <section id="flora" className="flex min-h-dvh flex-col justify-end px-5 pb-8 md:px-10">
+          <Image src="/chloris-logo.png" alt="Chloris logo" width={128} height={128} priority className="mb-5 h-24 w-24 rounded-2xl bg-white md:h-32 md:w-32" />
           <p className="max-w-md rounded-[14px] bg-ink/55 p-2 text-base text-text backdrop-blur-sm md:text-lg">{t.tagline}</p>
-          <h1 className="mt-4 select-none font-sans font-black uppercase leading-[0.8] tracking-tighter text-text"
-            style={{ fontSize: "clamp(4rem, 24vw, 20rem)", ...NUMERAL }}>{t.appName}</h1>
-          <p className="mt-4 font-mono text-xs uppercase tracking-widest text-dim">↓ {t.landing.scroll}</p>
+          <h1 className="mt-4 select-none font-display font-semibold leading-[0.95] tracking-tight text-text"
+            style={{ fontSize: "clamp(3.5rem, 17vw, 14rem)" }}>{t.appName}</h1>
+          <p className="mt-4 font-sans text-xs font-semibold uppercase tracking-wide text-dim">↓ {t.landing.scroll}</p>
         </section>
 
         {/* 02 where */}
