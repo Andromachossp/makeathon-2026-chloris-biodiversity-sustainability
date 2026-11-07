@@ -1,5 +1,6 @@
-// Fill gaps with exact-name Wikimedia Commons files carrying CC0 or CC BY.
-// Run from web/: node scripts/build-commons-photo-catalog.mjs [--limit=N]
+// Fill gaps with Wikimedia Commons files carrying CC0 or CC BY.
+// Run from web/: node scripts/build-commons-photo-catalog.mjs [--deep|--category] [--limit=N]
+// --category checks files in an exact species category even when their filename uses a common name.
 // The catalog deliberately stores only a display URL and attribution.
 import { readFile, writeFile } from "node:fs/promises";
 
@@ -19,10 +20,10 @@ function plain(html = "") {
     .replace(/\s+/g, " ").trim();
 }
 
-function choose(pages, name) {
+function choose(pages, name, categoryMode = false) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const exactName = new RegExp(`^File:${escaped}(?:[ ._(-]|$)`, "i");
-  const candidates = Object.values(pages ?? {}).filter((page) => exactName.test(page.title))
+  const candidates = Object.values(pages ?? {}).filter((page) => categoryMode || exactName.test(page.title))
     .filter((page) => /\.(jpe?g|png|webp)$/i.test(page.title));
   for (const page of candidates) {
     const info = page.imageinfo?.[0];
@@ -55,14 +56,17 @@ function choose(pages, name) {
 
 async function lookup(name) {
   const u = new URL(api);
-  for (const [key, value] of Object.entries({
-    action: "query", format: "json", generator: "search", gsrsearch: `intitle:${name}`,
-    gsrnamespace: "6", gsrlimit: process.argv.includes("--deep") ? "50" : "20",
-    prop: "imageinfo", iiprop: "url|extmetadata", iiurlwidth: "1200",
-  })) u.searchParams.set(key, value);
+  const categoryMode = process.argv.includes("--category");
+  const query = categoryMode
+    ? { action: "query", format: "json", generator: "categorymembers", gcmtitle: `Category:${name}`,
+      gcmtype: "file", gcmlimit: "50", prop: "imageinfo", iiprop: "url|extmetadata", iiurlwidth: "1200" }
+    : { action: "query", format: "json", generator: "search", gsrsearch: `intitle:${name}`,
+      gsrnamespace: "6", gsrlimit: process.argv.includes("--deep") ? "50" : "20",
+      prop: "imageinfo", iiprop: "url|extmetadata", iiurlwidth: "1200" };
+  for (const [key, value] of Object.entries(query)) u.searchParams.set(key, value);
   const response = await fetch(u, { signal: AbortSignal.timeout(10000), headers: { "User-Agent": "ChlorisPhotoCatalog/1.0 (https://github.com/Andromachossp/chloris)" } });
   if (!response.ok) throw new Error(`Commons ${response.status}`);
-  return choose((await response.json()).query?.pages, name);
+  return choose((await response.json()).query?.pages, name, categoryMode);
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

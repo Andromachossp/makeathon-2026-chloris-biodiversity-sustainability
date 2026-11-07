@@ -9,7 +9,7 @@ const catalog = JSON.parse(await readFile(file, "utf8"));
 const topArg = process.argv.find((arg) => arg.startsWith("--top="));
 const topCount = topArg ? Number(topArg.slice(6)) : null;
 const targets = (topCount ? [...species].sort((a, b) => b.risk.score - a.risk.score).slice(0, topCount)
-  : species.filter((s) => process.argv.includes("--all") || s.featured)).filter((s) => s.gbifKey);
+  : species.filter((s) => process.argv.includes("--all") || s.featured)).filter((s) => s.gbifKey && !catalog[s.slug]);
 const dataset = "50c9509d-22c7-4a22-a47d-8c48425ef4a7";
 
 function choose(results) {
