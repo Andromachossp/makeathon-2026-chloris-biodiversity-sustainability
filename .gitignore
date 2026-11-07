@@ -22,6 +22,8 @@ web/public/swe-worker-*.js
 .vercel
 
 # Local planning and pitch materials
+AGENTS.md
+web/AGENTS.md
 HANDOFF.md
 MASTER_PROMPT.md
 MASTER_PROMPT_FINAL.md
