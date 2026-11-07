@@ -326,6 +326,7 @@ export const en = {
     humanSafety: "Human poisoning and skin-reaction warnings: NC State Extension Gardener Plant Toolbox and a PubMed-indexed case report, linked on each flagged species page. Other species are labelled not reviewed; none is labelled safe. Specialist review is pending.",
     landAnchors: "Map flower placement: Greece boundary from geoBoundaries (EuroGeoGraphics, Regional IM Working Group - Europe; 2016; CC BY 4.0). A flower marks mapped land inside a public 10 km cell, never an exact sighting. Cells with no land in this boundary remain in the list.",
     plantnet: "Plant identification: Pl@ntNet (plantnet.org). Reference photos shown with a result are credited to their authors.",
+    greekNames: "Greek plant names: GBIF vernacular names plus individual, source-cited corrections from Greek Flora, the Greek Ministry of Rural Development and Food, and university forestry material. Where a Greek name is unconfirmed, the scientific name is shown.",
     photos: "Species photos: GBIF (gbif.org) human observations, research-grade iNaturalist (inaturalist.org) photos and Wikimedia Commons (commons.wikimedia.org) files matched by species title or category. The photo's own licence is checked. Herbarium specimens and illustrations are excluded. Photos use CC0 or CC BY, with one approved CC BY-NC 4.0 exception for Galanthus ikariae (non-commercial use only). Each photo links to its image and licence. Locations and observation pages are never shown. A photo can occasionally show a similar plant.",
   },
   humanSafety: {

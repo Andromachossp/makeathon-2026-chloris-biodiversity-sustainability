@@ -23,6 +23,11 @@ _This README is a template. Claude Code completes every section in Phase 6 using
 ## Data sources and licences
 `TODO: table incl. WCVP version, WCUPS citation, GBIF download DOI, IUCN via GBIF, Natura 2000, fire data, EMA monographs, Pl@ntNet, OpenFreeMap/OSM`
 
+### Greek plant names
+The pipeline uses GBIF vernacular names, then applies the individually sourced corrections in [`pipeline/config/greek_names.csv`](pipeline/config/greek_names.csv). Each row identifies an exact accepted scientific name, a Greek name and the source page. Sources include [Greek Flora](https://www.greekflora.gr/el/flowersIndex.aspx), the Greek Ministry of Rural Development and Food, and university forestry material. These are factual name citations; no source images or prose are copied. Add a name only after confirming the source names the same taxon. Run `cd pipeline && .venv/bin/python -m chloris.run --step export`, followed by `cd ../web && npm run validate-data && npm run build`. Species without a confirmed Greek name retain their scientific name in Greek mode.
+
+*Trigonella foenum-graecum* (μοσχοσίταρο, τσεμένι) is absent because [Kew lists it as introduced in Greece](https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A523957-1). It must not be confused with the catalogue's *Trigonella balansae* or *Trigonella caerulea*.
+
 ### Species photos (GBIF, iNaturalist and Wikimedia Commons contributors)
 The species page shows one header photo. The server route `/api/photo/[slug]` uses a checked catalog first and the [GBIF occurrence API](https://www.gbif.org/developer/occurrence) for uncatalogued species. The catalog also includes [Wikimedia Commons](https://commons.wikimedia.org/) files whose title or exact species category matches the accepted name and whose image metadata gives a reusable licence, plus direct [iNaturalist](https://www.inaturalist.org/pages/api+recommended+practices) research-grade photos whose taxon name maps to the same species in the Kew synonym index and whose photo-level licence is eligible. Herbarium specimens and illustrations are excluded. Photos are never shown in the Plants list, on the landing page or on the map.
 

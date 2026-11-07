@@ -61,6 +61,36 @@ def load_featured(slug_by_name: dict[str, str]) -> dict[str, dict]:
     return out
 
 
+def load_greek_names(slug_by_name: dict[str, str]) -> dict[str, str]:
+    """Small, source-cited name corrections; never infer a name from a related species."""
+    path = config.CONFIG_DIR / "greek_names.csv"
+    if not path.exists():
+        return {}
+    df = pd.read_csv(path, dtype=str, keep_default_na=False)
+    expected = ["scientific_name", "name_el", "source_url"]
+    if list(df.columns) != expected:
+        raise SystemExit(f"greek_names.csv columns must be exactly: {expected}")
+    names: dict[str, str] = {}
+    errors = []
+    for n, row in enumerate(df.to_dict("records"), start=2):
+        scientific = row["scientific_name"].strip().lower()
+        name = row["name_el"].strip()
+        if scientific not in slug_by_name:
+            errors.append(f"line {n}: unknown catalogue species '{row['scientific_name']}'")
+            continue
+        slug = slug_by_name[scientific]
+        if slug in names:
+            errors.append(f"line {n}: duplicate name for {slug}")
+        if not re.search(r"[\u0370-\u03ff\u1f00-\u1fff]", name):
+            errors.append(f"line {n}: Greek-script name required for {slug}")
+        if not row["source_url"].startswith("https://"):
+            errors.append(f"line {n}: HTTPS source URL required for {slug}")
+        names[slug] = name
+    if errors:
+        raise SystemExit("greek_names.csv errors:\n  " + "\n  ".join(errors))
+    return names
+
+
 # ---- evidence cards (featured species only; config/evidence.csv is edited by the science lead) ----
 EVIDENCE_CSV = config.CONFIG_DIR / "evidence.csv"
 EVIDENCE_META = config.CONFIG_DIR / "evidence_meta.yaml"
@@ -162,6 +192,7 @@ def run() -> None:
     df["cat"] = [f"CHL-{i + 1:04d}" for i in range(len(df))]
     slug_by_name = dict(zip(df.taxon_name.str.lower(), df.slug))
     featured = load_featured(slug_by_name)
+    greek_names = load_greek_names(slug_by_name)
     evidence_version, evidence = load_evidence(set(featured))
     index_of = {s: i for i, s in enumerate(df.slug)}
 
@@ -198,6 +229,8 @@ def run() -> None:
             sp["nameEl"] = blank(r.name_el_gbif)
         if sp["nameEn"] is None and blank(r.name_en_gbif):
             sp["nameEn"] = blank(r.name_en_gbif)
+        if not f and r.slug in greek_names:
+            sp["nameEl"] = greek_names[r.slug]
         if f:
             row = f["row"]
             sp["curated"] = {"usesEn": row.uses_en, "usesEl": row.uses_el, "prepEn": row.traditional_prep_en, "prepEl": row.traditional_prep_el, "ema": row.ema_status,
