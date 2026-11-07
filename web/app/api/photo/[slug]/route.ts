@@ -13,6 +13,19 @@ const INAT_DATASET = "50c9509d-22c7-4a22-a47d-8c48425ef4a7"; // iNaturalist Rese
 const TIMEOUT_MS = 5000;
 const OK_CACHE = "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800";
 const MISS_CACHE = "public, max-age=3600, s-maxage=86400";
+const PHOTO_VERSION = "photo-catalog-2026-11-06-inat";
+const WINDOW_MS = 60_000;
+const MAX_LOOKUPS = 20;
+const lookupHits = new Map<string, number[]>();
+
+function limited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (lookupHits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  lookupHits.set(ip, recent);
+  if (lookupHits.size > 5000) for (const [key, times] of lookupHits) if (times.every((t) => now - t >= WINDOW_MS)) lookupHits.delete(key);
+  return recent.length > MAX_LOOKUPS;
+}
 
 interface GbifMedia {
   type?: string;
@@ -88,10 +101,16 @@ async function search(taxonKey: number, dataset: string | null, signal: AbortSig
   return pick(body.results ?? []);
 }
 
-export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
+export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const miss = () => new Response(null, { status: 404, headers: { "Cache-Control": MISS_CACHE } });
   if (!/^[a-z0-9-]{1,120}$/.test(slug)) return miss();
+
+  // Collapse arbitrary cache-busting query strings to one CDN cache key.
+  const query = new URL(req.url).searchParams;
+  if (query.size !== 1 || query.get("v") !== PHOTO_VERSION) {
+    return Response.redirect(new URL(`/api/photo/${slug}?v=${PHOTO_VERSION}`, req.url), 307);
+  }
 
   // Curated GBIF and Commons entries can exist even when GBIF has no taxon match.
   const catalogued = (photoCatalog as Record<string, PhotoResponse>)[slug];
@@ -104,6 +123,10 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
     return new Response(null, { status: 500, headers: { "Cache-Control": "no-store" } });
   }
   if (!taxonKey) return miss();
+
+  // Limits uncached GBIF work in this instance. Vercel's edge rule covers all instances.
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (limited(ip)) return new Response(null, { status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "60" } });
 
   try {
     const signal = AbortSignal.timeout(TIMEOUT_MS); // one 5 s budget for both lookups
