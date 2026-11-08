@@ -63,7 +63,9 @@ export function SpeciesSkeleton() {
   return (
     <SkeletonScreen className="flex flex-col gap-4 p-4">
       <Skeleton className="h-16 w-full rounded-[14px]" />
+      <Skeleton className="h-28 w-full rounded-[14px]" />
       <div className="rounded-[14px] bg-surface p-5">
+        <Skeleton className="mb-4 aspect-[16/10] w-full rounded-[14px]" />
         <div className="flex items-start justify-between">
           <Skeleton className="h-6 w-24" />
           <Skeleton className="h-16 w-16 rounded-full" />

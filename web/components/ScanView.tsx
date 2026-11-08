@@ -133,7 +133,7 @@ function Scan() {
                   <button type="button" onClick={() => trySample(s)} className="flex min-h-[44px] w-full flex-col overflow-hidden rounded-[14px] border border-line bg-surface text-left hover:bg-surface-2">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={s.file} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
-                    <span className="px-2 py-2 text-xs">{s.label}</span>
+                    <span className="px-2 py-2 text-xs">{t.scan.sampleLabels[s.id as keyof typeof t.scan.sampleLabels]}</span>
                   </button>
                 </li>
               ))}
@@ -256,7 +256,7 @@ function Result({ view, onReset }: { view: Extract<View, { kind: "result" }>; on
           </div>
           <header>
             <h2 className="font-serif text-2xl italic">{best.name}</h2>
-            {best.commonNames.length > 0 && <p className="text-dim">{best.commonNames.join(", ")}</p>}
+            {locale === "en" && best.commonNames.length > 0 && <p className="text-dim">{best.commonNames.join(", ")}</p>}
           </header>
           {tierChip}
         </>

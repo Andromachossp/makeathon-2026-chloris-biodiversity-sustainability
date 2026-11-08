@@ -2,7 +2,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /sightings/{id} {
-      allow read: if true;
+      allow read: if request.auth != null
+        && resource.data.uid == request.auth.uid;
 
       allow create: if request.auth != null
         && request.resource.data.keys().hasOnly(
@@ -15,7 +16,11 @@ service cloud.firestore {
         && request.resource.data.lng is number
         && request.resource.data.lat >= 34.5 && request.resource.data.lat <= 42.0
         && request.resource.data.lng >= 19.0 && request.resource.data.lng <= 30.0
-        && request.resource.data.generalised is bool
+        // Cloud sightings are always coarse. Rules cannot trust the client's
+        // claim that a species is safe, so every stored coordinate is 0.1°.
+        && request.resource.data.generalised == true
+        && request.resource.data.lat * 10 == int(request.resource.data.lat * 10)
+        && request.resource.data.lng * 10 == int(request.resource.data.lng * 10)
         && (request.resource.data.note == null
             || (request.resource.data.note is string && request.resource.data.note.size() <= 280));
 

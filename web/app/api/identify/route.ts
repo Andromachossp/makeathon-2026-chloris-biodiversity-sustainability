@@ -6,7 +6,8 @@ export const runtime = "nodejs";
 const ORGANS = new Set(["auto", "leaf", "flower", "fruit", "bark", "habit", "other"]);
 const WINDOW_MS = 60_000;
 const MAX_PER_WINDOW = 10;
-const hits = new Map<string, number[]>(); // in-memory per-IP limiter (resets on deploy; enough for a prototype)
+const hits = new Map<string, number[]>(); // local fallback; production also needs an edge rate rule
+const MAX_MULTIPART_BYTES = MAX_UPLOAD_BYTES + 64 * 1024;
 
 function limited(ip: string): boolean {
   const now = Date.now();
@@ -18,6 +19,40 @@ function limited(ip: string): boolean {
 }
 
 const fail = (error: string, status: number) => Response.json({ error }, { status });
+
+async function boundedFormData(request: Request): Promise<FormData | null> {
+  const length = request.headers.get("content-length");
+  if (length !== null && (!/^\d+$/.test(length) || Number(length) > MAX_MULTIPART_BYTES)) return null;
+  if (!request.body) return null;
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_MULTIPART_BYTES) {
+        await reader.cancel();
+        return null;
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new Request(request.url, {
+    method: "POST",
+    headers: { "content-type": request.headers.get("content-type") ?? "" },
+    body: bytes,
+  }).formData();
+}
 
 interface PlantNetResult {
   score: number;
@@ -36,7 +71,9 @@ export async function POST(request: Request) {
 
   let form: FormData;
   try {
-    form = await request.formData();
+    const bounded = await boundedFormData(request);
+    if (!bounded) return fail("bad_image", 413);
+    form = bounded;
   } catch {
     return fail("bad_request", 400);
   }

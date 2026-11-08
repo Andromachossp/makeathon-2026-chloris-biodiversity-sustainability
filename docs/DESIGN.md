@@ -70,10 +70,9 @@ Radius 14 px cards, 999 px pills. Hairline borders, no heavy shadows.
 
 ## Type (all support Greek)
 
-- **Display:** Noto Serif Display (has Greek) for headings and species names; Roboto Flex condensed (`wdth` 25–40, weight 800–900) for "CHLORIS" and large numerals.
-- **Text serif:** Literata (has Greek) for long text on cards; italic for scientific names.
+- **Display and UI text:** Roboto with Greek and Latin subsets for headings, navigation and prose in both languages.
+- **Botanical serif:** Literata italic for scientific names.
 - **Specimen mono:** JetBrains Mono for catalogue numbers, coordinates, counts, labels.
-- UI text: Roboto Flex at normal width.
 Load with `next/font/google`, subsets `latin` + `greek`, `display: swap`.
 
 ## Map (`/map`)

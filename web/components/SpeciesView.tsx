@@ -10,8 +10,10 @@ import { fillText, verdictFor } from "@/lib/verdict";
 import { ClientOnly } from "./ClientOnly";
 import { IucnBadge } from "./IucnBadge";
 import { MiniMap } from "./MiniMap";
+import { SpeciesPhoto } from "./SpeciesPhoto";
 import { EvidenceSection } from "./EvidenceSection";
 import { HarvestBanner } from "./Risk";
+import { HumanSafety } from "./HumanSafety";
 import { SpeciesSkeleton } from "./Skeleton";
 import { VerdictBanner } from "./Verdict";
 
@@ -59,6 +61,7 @@ function Card({ slug }: { slug: string }) {
 
       {/* 2. names: common name first, Latin second */}
       <header>
+        <SpeciesPhoto slug={s.slug} powoId={s.powoId} alt={fillText(t.species.photo.alt, { name: name.isFallback ? s.name : `${name.title} (${s.name})` })} />
         <h1 className={`font-display text-4xl font-semibold leading-tight ${name.isFallback ? "italic" : ""}`}>
           {name.title}
           {name.enTag && <span className="ml-2 rounded border border-line px-1 align-middle font-mono text-[10px] text-dim">{t.species.enTag}</span>}
@@ -83,6 +86,8 @@ function Card({ slug }: { slug: string }) {
           ))}
         </div>
       )}
+
+      <HumanSafety slug={s.slug} />
 
       {/* 4. details */}
       <div className="rounded-[14px] bg-paper p-5 text-paper-ink shadow-[0_0_0_1px_rgba(26,32,54,0.25)]">

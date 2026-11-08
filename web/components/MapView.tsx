@@ -11,6 +11,7 @@ import { iconBucket, iconDefs, rasterise, svgDataUrl } from "@/lib/flowers";
 import { useI18n } from "@/lib/i18n";
 import { loadNatura, loadOcc, useCells, useSpecies } from "@/lib/data";
 import { terrainStyle } from "@/lib/mapStyle";
+import landAnchors from "@/public/data/land-anchors.json";
 import { AEGEAN, POPPY, RICH_RAMP, RISK_RAMP, SAFFRON, gradientCss, interpolateOn, quantile, type Stop } from "@/lib/ramps";
 import { displayName } from "@/lib/species";
 import { CellList, type CellRow } from "./CellList";
@@ -25,6 +26,7 @@ const MIN_SPECIES_FOR_RISK = 5;
 const EXAGGERATION = 1.3;
 const RING_MUTED = "#6B7694";
 const iconCache = new Map<string, ImageData>();
+const LAND_ANCHORS: Record<string, number[]> = landAnchors;
 
 /** Greece: lat 34.5 to 41.8, lng 19.3 to 28.4. The map opens framed on this box. */
 const GREECE: [[number, number], [number, number]] = [[19.3, 34.5], [28.4, 41.8]];
@@ -63,10 +65,16 @@ export default function MapView() {
 
 interface CellStat { id: string; n: number; r: number; hot: boolean; mean: number | null; }
 
-/** Exact centre of a 0.1 degree cell. Pins are never jittered or offset: this is the generalised public location. */
+/** Exact centre of a 0.1 degree cell, used for framing grid squares only. */
 function centre(id: string, size: number): [number, number] {
   const [i, j] = id.split("_").map(Number);
   return [(j + 0.5) * size, (i + 0.5) * size];
+}
+
+/** Representative point of land inside a public cell; never an occurrence location. */
+function anchor(id: string): [number, number] | undefined {
+  const point = LAND_ANCHORS[id];
+  return point ? [point[0], point[1]] : undefined;
 }
 
 function squareFeature(id: string, size: number) {
@@ -135,21 +143,23 @@ function MapInner() {
   const richStops = useMemo<Stop[]>(() => [1, 8, 30, 80, 160, maxN].map((n, i) => [n, RICH_RAMP[i]] as Stop), [maxN]);
   const [riskLo, riskHi] = [riskStops[0][0], riskStops[riskStops.length - 1][0]];
 
-  // one flower per occupied cell, exactly at the cell centre; icon (colour + shape) follows the active layer
+  // One flower per occupied cell with mapped land. Cells without mapped land remain in the list.
   const pins = useMemo(() => {
-    const features = [...stats].sort((a, b) => a.n - b.n).map((c) => {
+    const features = [...stats].sort((a, b) => a.n - b.n).flatMap((c) => {
+      const point = anchor(c.id);
+      if (!point) return [];
       let icon: string;
       if (mode === "risk") icon = c.mean === null ? "nodata" : `risk-${iconBucket((c.mean - riskLo) / Math.max(riskHi - riskLo, 1e-6))}`;
       else if (mode === "richness") icon = `rich-${iconBucket(Math.log(c.n) / Math.log(maxN))}`;
       else icon = c.hot ? "hot" : "nodata";
-      return {
+      return [{
         type: "Feature" as const,
         properties: { id: c.id, n: c.n, icon, mv: c.mean ?? 0, mc: c.mean === null ? 0 : 1, hot: c.hot ? 1 : 0 },
-        geometry: { type: "Point" as const, coordinates: centre(c.id, size) },
-      };
+        geometry: { type: "Point" as const, coordinates: point },
+      }];
     });
     return { type: "FeatureCollection" as const, features };
-  }, [stats, mode, riskLo, riskHi, maxN, size]);
+  }, [stats, mode, riskLo, riskHi, maxN]);
 
   // cluster badge: small translucent disc coloured by the active layer's average for the group
   const clusterColour = useMemo(() => {
@@ -168,17 +178,20 @@ function MapInner() {
       const present = period === "then" ? o.o > 0 : o.w > 0;
       const lost = period === "now" && o.o > 0 && o.w === 0;
       if (!present && !lost) return [];
-      return [{ type: "Feature" as const, properties: { id: o.c, icon: lost ? "lost" : period }, geometry: { type: "Point" as const, coordinates: centre(o.c, size) } }];
+      const point = anchor(o.c);
+      if (!point) return [];
+      return [{ type: "Feature" as const, properties: { id: o.c, icon: lost ? "lost" : period }, geometry: { type: "Point" as const, coordinates: point } }];
     });
     return { type: "FeatureCollection" as const, features };
-  }, [occ, period, size]);
+  }, [occ, period]);
 
   // selection: the square outline + an enlarged flower
   const selectionGeo = useMemo(() => {
     if (!selected) return { type: "FeatureCollection" as const, features: [] };
     const f = pins.features.find((p) => p.properties.id === selected);
     const icon = f?.properties.icon ?? "now";
-    return { type: "FeatureCollection" as const, features: [squareFeature(selected, size), { type: "Feature" as const, properties: { kind: "pin", icon }, geometry: { type: "Point" as const, coordinates: centre(selected, size) } }] };
+    const point = anchor(selected);
+    return { type: "FeatureCollection" as const, features: [squareFeature(selected, size), ...(point ? [{ type: "Feature" as const, properties: { kind: "pin", icon }, geometry: { type: "Point" as const, coordinates: point } }] : [])] };
   }, [selected, pins, size]);
 
   const meGeo = useMemo(() => (me ? { type: "FeatureCollection" as const, features: [{ type: "Feature" as const, properties: {}, geometry: { type: "Point" as const, coordinates: [me.lng, me.lat] } }] } : null), [me]);
@@ -260,7 +273,7 @@ function MapInner() {
   const pickFromList = (id: string) => {
     setSelected(id);
     setListOpen(false);
-    const [lng, lat] = centre(id, size);
+    const [lng, lat] = anchor(id) ?? centre(id, size);
     mapRef.current?.flyTo({ center: [lng, lat], zoom: 9, duration: 900 });
   };
 
@@ -402,6 +415,7 @@ function MapInner() {
           {legendOpen && (
             <div id="map-legend" className="mb-2 max-h-[33vh] overflow-y-auto rounded-[14px] border border-line bg-ink/92 p-3 text-xs backdrop-blur">
               <p className="text-text">{spMode ? (period === "then" ? t.species.thenHelp : t.species.nowHelp) : mode === "risk" ? t.map.legendRisk : mode === "richness" ? t.map.legendRichness : t.map.legendHotspots}</p>
+              <p className="mt-2 text-dim">{t.map.landAnchorNote}</p>
               {!spMode && mode !== "hotspots" && (
                 <>
                   <div className="mt-2 h-2 rounded-full" style={{ background: gradientCss(mode === "risk" ? RISK_RAMP : RICH_RAMP) }} aria-hidden="true" />

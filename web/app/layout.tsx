@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Literata, Noto_Serif_Display, Roboto_Flex } from "next/font/google";
+import { JetBrains_Mono, Literata, Roboto } from "next/font/google";
 import { I18nProvider } from "@/lib/i18n";
 import "./globals.css";
 
-const robotoFlex = Roboto_Flex({
-  variable: "--font-roboto-flex",
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin", "greek"],
-  axes: ["wdth"], // condensed titles (font-stretch)
-  display: "swap",
-});
-// Display face with Greek support (verified in the redesign screenshots); Literata stays for long text.
-const notoDisplay = Noto_Serif_Display({
-  variable: "--font-noto-display",
-  subsets: ["latin", "greek"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 const literata = Literata({
@@ -30,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Chloris",
   description: "Where Greece's medicinal plants grow, which are at risk, and how we keep them.",
+  icons: { icon: "/chloris-mark.png", apple: "/chloris-mark.png" },
 };
 
 export const viewport: Viewport = {
@@ -40,7 +33,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${robotoFlex.variable} ${literata.variable} ${notoDisplay.variable} ${jetbrainsMono.variable} antialiased`}>
+    <html lang="en" className={`${roboto.variable} ${literata.variable} ${jetbrainsMono.variable} antialiased`}>
       <body>
         <I18nProvider>{children}</I18nProvider>
       </body>

@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
       { source: "/search", destination: "/plants", permanent: false },
     ];
   },
+  // The photo route reads species.json at runtime to map slug -> GBIF key.
+  outputFileTracingIncludes: { "/api/photo/[slug]": ["./public/data/species.json"] },
   turbopack: {
     root: path.resolve(__dirname),
     rules: {
