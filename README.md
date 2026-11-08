@@ -6,6 +6,8 @@
 
 [Live demo](https://makeathon-2026-chloris-biodiversity.vercel.app/) · [Method and limitations](#method-and-limitations)
 
+The current atlas covers Greece. See [future plans](FUTURE_PLANS.md) for the proposed expansion of the map and plant catalogue to other countries.
+
 ![A Chloris species page on a phone, with a plant photo, risk notice and photo credit](docs/images/species-mobile.jpg)
 
 Chloris is a bilingual, mobile-friendly web prototype about plants **native to Greece** that have a medicinal-use flag in Kew's World Checklist of Useful Plant Species (WCUPS). That flag covers human **or veterinary** medicine anywhere in the world. It does not establish use in Greece, efficacy, or safety.
