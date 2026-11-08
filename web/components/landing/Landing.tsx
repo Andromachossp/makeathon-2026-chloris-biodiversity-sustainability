@@ -130,8 +130,8 @@ export function Landing() {
           <div role="group" aria-label={t.language} className="flex rounded-full border border-line bg-ink/70 p-0.5 backdrop-blur">
             {locales.map((l) => (
               <button key={l} type="button" aria-pressed={locale === l} aria-label={t.languageNames[l]} title={t.languageNames[l]} onClick={() => setLocale(l)}
-                className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-3 text-xl ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>
-                <span aria-hidden="true">{l === "el" ? "🇬🇷" : "🇬🇧"}</span>
+                className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-1.5 ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>
+                <Image src={`/flags/${l}.png`} alt="" width={32} height={32} className="h-8 w-8 object-contain" />
               </button>
             ))}
           </div>

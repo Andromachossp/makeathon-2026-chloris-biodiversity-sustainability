@@ -27,11 +27,11 @@ export function TopBar() {
               aria-pressed={locale === l}
               aria-label={t.languageNames[l]}
               title={t.languageNames[l]}
-              className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-3 text-xl ${
+              className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-1.5 ${
                 locale === l ? "bg-saffron text-ink" : "text-dim"
               }`}
             >
-              <span aria-hidden="true">{l === "el" ? "🇬🇷" : "🇬🇧"}</span>
+              <Image src={`/flags/${l}.png`} alt="" width={32} height={32} className="h-8 w-8 object-contain" />
             </button>
           ))}
         </div>
