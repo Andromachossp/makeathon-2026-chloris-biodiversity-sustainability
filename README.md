@@ -179,6 +179,5 @@ We built the Python extraction, matching, aggregation and scoring pipeline; data
 
 ## Team and reuse
 
-Confirmed names supplied so far: **Andromachossp** (code) and **Efstathios Loupas** (science lead, design and presentation). Add any other members and confirm everyone's Devpost profile before submission.
-
+Confirmed names supplied so far: **Andromachossp** (code) and **Efstathios Loupas** (science lead, design and presentation).
 Code © 2026 Andromachossp and the Chloris team. No code `LICENSE` file is currently present, so this README does not grant a separate open-source licence. Source datasets, imagery and libraries retain their own rights and attribution requirements above.
