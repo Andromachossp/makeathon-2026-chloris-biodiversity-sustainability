@@ -129,8 +129,10 @@ export function Landing() {
         <div className="flex items-center gap-2">
           <div role="group" aria-label={t.language} className="flex rounded-full border border-line bg-ink/70 p-0.5 backdrop-blur">
             {locales.map((l) => (
-              <button key={l} type="button" aria-pressed={locale === l} onClick={() => setLocale(l)}
-                className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>{l}</button>
+              <button key={l} type="button" aria-pressed={locale === l} aria-label={t.languageNames[l]} title={t.languageNames[l]} onClick={() => setLocale(l)}
+                className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-3 text-xl ${locale === l ? "bg-saffron text-ink" : "text-dim"}`}>
+                <span aria-hidden="true">{l === "el" ? "🇬🇷" : "🇬🇧"}</span>
+              </button>
             ))}
           </div>
           <Link href="/home" className="flex min-h-[44px] items-center rounded-full bg-saffron px-5 text-sm font-semibold text-ink">{t.landing.openApp}</Link>

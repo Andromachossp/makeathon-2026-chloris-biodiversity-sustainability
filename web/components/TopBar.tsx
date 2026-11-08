@@ -25,11 +25,13 @@ export function TopBar() {
               type="button"
               onClick={() => setLocale(l)}
               aria-pressed={locale === l}
-              className={`min-h-[44px] min-w-[44px] rounded-full px-3 font-mono text-xs uppercase ${
+              aria-label={t.languageNames[l]}
+              title={t.languageNames[l]}
+              className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-3 text-xl ${
                 locale === l ? "bg-saffron text-ink" : "text-dim"
               }`}
             >
-              {l}
+              <span aria-hidden="true">{l === "el" ? "🇬🇷" : "🇬🇧"}</span>
             </button>
           ))}
         </div>
